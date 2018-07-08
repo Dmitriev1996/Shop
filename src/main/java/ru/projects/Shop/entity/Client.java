@@ -9,12 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="clients")
+@NamedQuery(name="findAllClient", query="SELECT c FROM Client c"
+		+ " ORDER BY c.Client_ID DESC")
 public class Client {
 	@Id @GeneratedValue
 	private Long Client_ID;
