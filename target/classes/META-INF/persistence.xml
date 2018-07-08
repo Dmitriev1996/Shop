@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Shop">
+	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+	<class>ru.projects.Shop.entity.Buy</class>
+	<class>ru.projects.Shop.entity.City</class>
+	<class>ru.projects.Shop.entity.Country</class>
+	<class>ru.projects.Shop.entity.Delivery</class>
+	<class>ru.projects.Shop.entity.Product</class>
+	<class>ru.projects.Shop.entity.Provider</class>
+	<class>ru.projects.Shop.entity.Region</class>
+	<class>ru.projects.Shop.entity.Sex</class>
+	<class>ru.projects.Shop.entity.Shop</class>
+	<class>ru.projects.Shop.entity.TypeProduct</class>
+	<class>ru.projects.Shop.entity.TypeShop</class>
+	<class>ru.projects.Shop.entity.Warehouse</class>
+	<class>ru.projects.Shop.entity.Worker</class>
+	<class>ru.projects.Shop.entity.Comment</class>
+	<class>ru.projects.Shop.entity.Client</class>
+	<class>ru.projects.Shop.entity.Forum</class>
+	<class>ru.projects.Shop.entity.Message</class>
+	<class>ru.projects.Shop.entity.Adress</class>
+	<class>ru.projects.Shop.entity.Order</class>
+	<class>ru.projects.Shop.entity.StatusOfOrder</class>
+	<class>ru.projects.Shop.entity.Transportation</class>
+	<class>ru.projects.Shop.entity.TransportationType</class>
+	</persistence-unit>
+</persistence>
