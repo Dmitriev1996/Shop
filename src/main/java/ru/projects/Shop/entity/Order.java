@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="orders")
-class Order {
+public class Order {
 	@Id @GeneratedValue
 	private Long Order_ID;
 	@OneToOne(fetch=FetchType.EAGER)

@@ -24,5 +24,6 @@
 	<class>ru.projects.Shop.entity.StatusOfOrder</class>
 	<class>ru.projects.Shop.entity.Transportation</class>
 	<class>ru.projects.Shop.entity.TransportationType</class>
+	<class>ru.projects.Shop.entity.BonusCard</class>
 	</persistence-unit>
 </persistence>
