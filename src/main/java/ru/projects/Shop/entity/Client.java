@@ -30,6 +30,11 @@ public class Client {
 	joinColumns=@JoinColumn(name="Client_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Buy_ID"))
 	private List<Buy> BuyList;
+	@OneToMany
+	@JoinTable(name="client_order", 
+	joinColumns=@JoinColumn(name="Client_ID"), 
+	inverseJoinColumns=@JoinColumn(name="Order_ID"))
+	private List<Order> OrderList;
 	
 	public Client() {}
 
@@ -88,6 +93,16 @@ public class Client {
 	public void setBuyList(List<Buy> buyList) {
 		BuyList = buyList;
 	}
+
+	public List<Order> getOrderList() {
+		return OrderList;
+	}
+
+	public void setOrderList(List<Order> orderList) {
+		OrderList = orderList;
+	}
+	
+	
 	
 	
 
