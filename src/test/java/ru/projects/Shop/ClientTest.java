@@ -11,8 +11,8 @@ import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.entity.Sex;
 
 public class ClientTest {
-	@Inject
-	private ClientEJB clientejb;
+	//@Inject
+	private ClientEJB clientejb=new ClientEJB();
 	
 	@Test
 	public void shouldClient() throws Exception{
