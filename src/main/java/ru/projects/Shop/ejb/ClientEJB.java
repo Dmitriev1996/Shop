@@ -5,9 +5,8 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.interfaces.local.ClientLocal;
@@ -16,9 +15,9 @@ import ru.projects.Shop.interfaces.local.ClientLocal;
 @Local(ClientLocal.class)
 @LocalBean
 public class ClientEJB implements ClientLocal {
-	@Produces
-	@PersistenceContext(name="Shop")
+	@Inject
 	private EntityManager em;
+	
 
 	public List<Client> findAllClient() {
 		return em.createNamedQuery("findAllClient", Client.class).getResultList();
