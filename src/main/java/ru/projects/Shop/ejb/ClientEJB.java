@@ -5,16 +5,18 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.interfaces.local.ClientLocal;
 
+
 @Stateless
 @Local(ClientLocal.class)
+@LocalBean
 public class ClientEJB implements ClientLocal {
-	@PersistenceContext(unitName="Shop")
+	@Inject
 	private EntityManager em;
 	
 
@@ -28,7 +30,8 @@ public class ClientEJB implements ClientLocal {
 
 	public Client createClient(Client client) {
 		// TODO Auto-generated method stub
-		return null;
+		em.persist(client);
+		return client;
 	}
 
 	public Client updateClient(Client client) {

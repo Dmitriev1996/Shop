@@ -1,8 +1,10 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,14 +20,14 @@ import javax.persistence.Table;
 @Table(name="clients")
 @NamedQuery(name="findAllClient", query="SELECT c FROM Client c"
 		+ " ORDER BY c.Client_ID DESC")
-public class Client {
+public class Client implements Serializable {
 	@Id @GeneratedValue
 	private Long Client_ID;
 	private String Surname;
 	private String Name;
 	private String Patronymic;
 	private Date DateOfBirth;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Sex_ID", nullable=false)
 	private Sex Sex;
 	@OneToMany
