@@ -1,25 +1,31 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="adresses")
-public class Adress {
+@NamedQuery(name="findAllAdress", query="SELECT a FROM Adress a"
+		+ " ORDER BY a.Adress_ID DESC")
+public class Adress implements Serializable {
 	@Id @GeneratedValue
 	private Long Adress_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Country_ID", nullable=false)
 	private Country Country;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Region_ID")
 	private Region Region;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
 	private City City;
 	private String Street;

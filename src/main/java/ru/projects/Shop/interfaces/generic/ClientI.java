@@ -11,6 +11,6 @@ public interface ClientI {
 	Client findClientById(Long id);
 	Client createClient(Client client);
 	Client updateClient(Client client);
-	Client deleteClient(Long id);
+	void deleteClient(Client client);
 
 }

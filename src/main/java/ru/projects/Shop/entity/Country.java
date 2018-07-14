@@ -39,6 +39,16 @@ public class Country {
 	public void setCountry(String country) {
 		Country = country;
 	}
+
+	public List<Region> getRegionList() {
+		return RegionList;
+	}
+
+	public void setRegionList(List<Region> regionList) {
+		RegionList = regionList;
+	}
+	
+	
 	
 	
 

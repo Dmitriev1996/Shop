@@ -36,12 +36,13 @@ public class ClientEJB implements ClientLocal {
 
 	public Client updateClient(Client client) {
 		// TODO Auto-generated method stub
-		return null;
+		return em.merge(client);
 	}
 
-	public Client deleteClient(Long id) {
+	public void deleteClient(Client client) {
 		// TODO Auto-generated method stub
-		return null;
+		em.remove(em.merge(client));
 	}
+
 
 }

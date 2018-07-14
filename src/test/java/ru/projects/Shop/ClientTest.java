@@ -27,9 +27,6 @@ public class ClientTest {
 	  public static void initContainer() throws Exception {
 	    Map<String, Object> properties = new HashMap<String, Object>();
 	    properties.put(EJBContainer.MODULES, new File("target/classes"));
-	    for(Map.Entry<String, Object> obj : properties.entrySet()) {
-	    	System.out.println(obj.getKey()+"-"+obj.getValue());
-	    }
 	    ec = javax.ejb.embeddable.EJBContainer.createEJBContainer(properties);
 	    ctx = ec.getContext();
 	  }
@@ -52,13 +49,17 @@ public class ClientTest {
 		sex.setSex("Мужской");
 		client.setSex(sex);
 		ClientEJB clientejb=(ClientEJB)ctx.lookup("java:global/classes/ClientEJB!ru.projects.Shop.ejb.ClientEJB");
-		//assertEquals(null, clientejb);
 		clientejb.createClient(client);
-		int count=clientejb.findAllClient().size();
-		assertEquals(1, count);
-		List<Client> clientlist=clientejb.findAllClient();
+		assertEquals(1, clientejb.findAllClient().size());
 		Client controlclient=clientejb.findClientById(1L);
 		assertEquals("Мужской", controlclient.getSex().getSex());
+		controlclient.setSurname("Петров");
+		clientejb.updateClient(controlclient);
+		Client updated=clientejb.findClientById(1L);
+		assertEquals("Петров", updated.getSurname());
+		Client deleted=clientejb.findClientById(1L);
+		clientejb.deleteClient(deleted);
+		assertEquals(0, clientejb.findAllClient().size());
 	}
 
 }

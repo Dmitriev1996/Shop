@@ -11,6 +11,6 @@ public interface AdressI {
 	Adress findAdressById(Long id);
 	Adress createAdress(Adress adress);
 	Adress updateAdress(Adress adress);
-	Adress deleteAdress(Long id);
+	void deleteAdress(Adress adress);
 
 }

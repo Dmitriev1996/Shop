@@ -38,6 +38,15 @@ public class Region {
 	public void setRegion(String region) {
 		Region = region;
 	}
+
+	public List<City> getCityList() {
+		return CityList;
+	}
+
+	public void setCityList(List<City> cityList) {
+		CityList = cityList;
+	}
+	
 	
 	
 
