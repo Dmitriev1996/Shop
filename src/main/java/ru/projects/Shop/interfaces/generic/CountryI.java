@@ -11,6 +11,6 @@ public interface CountryI {
 	Country findCountryById(Long id);
 	Country createCountry(Country country);
 	Country updateCountry(Country country);
-	Country deleteCountry(Long id);
+	void deleteCountry(Country country);
 
 }

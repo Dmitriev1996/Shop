@@ -1,5 +1,6 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,13 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="products")
-public class Product {
+@NamedQuery(name="findAllProduct", query="SELECT p FROM Product p"
+		+ " ORDER BY p.Product_ID DESC")
+public class Product implements Serializable {
 	@Id @GeneratedValue
 	private Long Product_ID;
 	private String NameOfProduct;

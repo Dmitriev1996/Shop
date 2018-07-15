@@ -11,6 +11,6 @@ public interface OrderI {
 	Order findOrderById(Long id);
 	Order createOrder(Order order);
 	Order updateOrder(Order order);
-	Order deleteOrder(Long id);
+	void deleteOrder(Order order);
 
 }

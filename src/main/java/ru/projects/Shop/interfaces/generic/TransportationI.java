@@ -9,6 +9,6 @@ public interface TransportationI {
 	Transportation findTransportationById(Long id);
 	Transportation createTransportation(Transportation transportation);
 	Transportation updateTransportation(Transportation transportation);
-	Transportation deleteTransportation(Long id);
+	void deleteTransportation(Transportation transportation);
 
 }

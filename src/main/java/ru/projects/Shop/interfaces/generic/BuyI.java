@@ -11,6 +11,6 @@ public interface BuyI {
 	Buy findBuyById(Long id);
 	Buy createBuy(Buy buy);
 	Buy updateBuy(Buy buy);
-	Buy deleteBuy(Long id);
+	void deleteBuy(Buy buy);
 
 }

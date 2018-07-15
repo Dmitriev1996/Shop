@@ -8,9 +8,9 @@ import ru.projects.Shop.entity.City;
 
 public interface CityI {
 	List<City> findAllCity();
-	City findCityById();
+	City findCityById(Long id);
 	City createCity(City city);
 	City updateCity(City city);
-	City deleteCity(Long id);
+	void deleteCity(City city);
 
 }

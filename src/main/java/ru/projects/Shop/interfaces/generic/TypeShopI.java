@@ -9,6 +9,6 @@ public interface TypeShopI {
 	TypeShop findTypeShopById(Long id);
 	TypeShop createTypeShop(TypeShop typeshop);
 	TypeShop updateTypeShop(TypeShop typeshop);
-	TypeShop deleteTypeShop(Long id);
+	void deleteTypeShop(TypeShop typeshop);
 
 }

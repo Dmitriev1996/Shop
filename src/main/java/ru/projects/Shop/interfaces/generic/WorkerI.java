@@ -9,6 +9,6 @@ public interface WorkerI {
 	Worker findWorkerById(Long id);
 	Worker createWorker(Worker worker);
 	Worker updateWorker(Worker worker);
-	Worker deleteWorker(Long id);
+	void deleteWorker(Worker worker);
 
 }

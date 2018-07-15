@@ -1,5 +1,6 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -7,12 +8,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="workers")
-public class Worker {
+@NamedQuery(name="findAllWorker", query="SELECT w FROM Worker w"
+		+ " ORDER BY w.Worker_ID DESC")
+public class Worker implements Serializable {
 	@Id @GeneratedValue
 	private Long Worker_ID;
 	private String Surname;

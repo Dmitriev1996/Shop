@@ -9,6 +9,6 @@ public interface RegionI {
 	Region findRegionById(Long id);
 	Region createRegion(Region region);
 	Region updateRegion(Region region);
-	Region deleteRegion(Long id);
+	void deleteRegion(Region region);
 
 }

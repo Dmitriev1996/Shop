@@ -1,13 +1,18 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="type_products")
-public class TypeProduct {
+@NamedQuery(name="findAllTypeProduct", query="SELECT t FROM TypeProduct t"
+		+ " ORDER BY t.TypeProduct_ID DESC")
+public class TypeProduct implements Serializable {
 	@Id @GeneratedValue
 	private Long TypeProduct_ID;
 	private String TypeProduct;

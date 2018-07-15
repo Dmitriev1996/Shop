@@ -1,5 +1,6 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -9,13 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="deliveries")
-public class Delivery {
+@NamedQuery(name="findAllDelivery", query="SELECT d FROM Delivery d"
+		+ " ORDER BY d.Delivery_ID DESC")
+public class Delivery implements Serializable {
 	@Id @GeneratedValue
 	private Long Delivery_ID;
 	private Date DateOfDelivery;

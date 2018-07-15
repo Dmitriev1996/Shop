@@ -1,16 +1,21 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="providers")
-public class Provider {
+@NamedQuery(name="findAllProvider", query="SELECT p FROM Provider p"
+		+ " ORDER BY p.Provider_ID DESC")
+public class Provider implements Serializable {
 	@Id @GeneratedValue
 	private Long Provider_ID;
 	private String NameOfProvider;

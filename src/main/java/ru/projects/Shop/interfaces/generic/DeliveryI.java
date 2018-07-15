@@ -11,6 +11,6 @@ public interface DeliveryI {
 	Delivery findDeliveryById(Long id);
 	Delivery createDelivery(Delivery delivery);
 	Delivery updateDelivery(Delivery delivery);
-	Delivery deleteDelivery(Long id);
+	void deleteDelivery(Delivery delivery);
 
 }

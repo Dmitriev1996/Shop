@@ -9,6 +9,6 @@ public interface TypeProductI {
 	TypeProduct findTypeProductById(Long id);
 	TypeProduct createTypeProduct(TypeProduct typeproduct);
 	TypeProduct updateTypeProduct(TypeProduct typeproduct);
-	TypeProduct deleteTypeProduct(Long id);
+	void deleteTypeProduct(TypeProduct typeproduct);
 
 }

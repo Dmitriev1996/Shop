@@ -9,6 +9,6 @@ public interface ProviderI {
 	Provider findProviderById(Long id);
 	Provider createProvider(Provider provider);
 	Provider updateProvider(Provider provider);
-	Provider deleteProvider(Long id);
+	void deleteProvider(Provider provider);
 
 }

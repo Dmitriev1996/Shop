@@ -11,6 +11,6 @@ public interface ForumI {
 	Forum findForumById(Long id);
 	Forum createForum(Forum forum);
 	Forum updateForum(Forum forum);
-	Forum deleteForum(Long id);
+	void deleteForum(Forum forum);
 
 }

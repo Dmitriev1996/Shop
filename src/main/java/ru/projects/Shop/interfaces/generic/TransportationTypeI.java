@@ -7,8 +7,8 @@ import ru.projects.Shop.entity.TransportationType;
 public interface TransportationTypeI {
 	List<TransportationType> findAllTransportationType();
 	TransportationType findTransportationTypeById(Long id);
-	TransportationType createTransportationType(TransportationType transportype);
+	TransportationType createTransportationType(TransportationType transtype);
 	TransportationType updateTransportationType(TransportationType transtype);
-	TransportationType deleteTransportationType(Long id);
+	void deleteTransportationType(TransportationType transtype);
 
 }

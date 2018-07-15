@@ -11,6 +11,6 @@ public interface MessageI {
 	Message findMessageById(Long id);
 	Message createMessage(Message message);
 	Message updateMessage(Message message);
-	Message deleteMessage(Long id);
+	void deleteMessage(Message message);
 
 }

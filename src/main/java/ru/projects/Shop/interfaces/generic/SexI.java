@@ -9,6 +9,6 @@ public interface SexI {
 	Sex findSexById(Long id);
 	Sex createSex(Sex sex);
 	Sex updateSex(Sex sex);
-	Sex deleteSex(Long id);
+	void deleteSex(Sex sex);
 
 }

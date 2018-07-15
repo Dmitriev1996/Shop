@@ -1,13 +1,18 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="status_of_orders")
-public class StatusOfOrder {
+@NamedQuery(name="findAllStatus", query="SELECT s FROM StatusOfOrder s"
+		+ " ORDER BY s.Status_ID DESC")
+public class StatusOfOrder implements Serializable {
 	@Id @GeneratedValue
 	private Long Status_ID;
 	private String Status;

@@ -1,5 +1,6 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
@@ -8,12 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="buys")
-public class Buy {
+@NamedQuery(name="findAllBuy", query="SELECT b FROM Buy b"
+		+ " ORDER BY b.Buy_ID DESC")
+public class Buy implements Serializable {
 	@Id @GeneratedValue
 	private Long Buy_ID;
 	private Date DateBuy;

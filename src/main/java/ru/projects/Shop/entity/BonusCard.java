@@ -1,19 +1,25 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="bonus_cards")
-public class BonusCard {
+@NamedQuery(name="findAllBonusCard", query="SELECT c FROM BonusCard c"
+		+ " ORDER BY c.Card_ID DESC")
+public class BonusCard implements Serializable {
 	@Id @GeneratedValue
 	private Long Card_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Client_ID", nullable=false)
 	private Client Client;
 	private double SumOfBonus;

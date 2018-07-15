@@ -1,13 +1,18 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="sexes")
-public class Sex {
+@NamedQuery(name="findAllSex", query="SELECT s FROM Sex s"
+		+ " ORDER BY s.Sex_ID DESC")
+public class Sex implements Serializable {
 	@Id @GeneratedValue
 	private Long Sex_ID;
 	private String Sex;

@@ -1,5 +1,6 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,12 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="countries")
-public class Country {
+@NamedQuery(name="findAllCountry", query="SELECT c FROM Country c"
+		+ " ORDER BY c.Country_ID DESC")
+public class Country implements Serializable {
 	@Id @GeneratedValue
 	private Long Country_ID;
 	private String Country;

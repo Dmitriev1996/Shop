@@ -11,6 +11,6 @@ public interface BonusCardI {
 	BonusCard findBonusCardById(Long id);
 	BonusCard createBonusCard(BonusCard bonuscard);
 	BonusCard updateBonusCard(BonusCard bonuscard);
-	BonusCard deleteBonusCard(Long id);
+	void deleteBonusCard(BonusCard bonuscard);
 
 }

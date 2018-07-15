@@ -9,6 +9,6 @@ public interface ProductI {
 	Product findProductById(Long id);
 	Product createProduct(Product product);
 	Product updateProduct(Product product);
-	Product deleteProduct(Long id);
+	void deleteProduct(Product product);
 
 }

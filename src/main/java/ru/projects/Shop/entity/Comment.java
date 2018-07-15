@@ -1,13 +1,18 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="comments")
-public class Comment {
+@NamedQuery(name="findAllComment", query="SELECT c FROM Comment c"
+		+ " ORDER BY c.Comment_ID DESC")
+public class Comment implements Serializable {
 	@Id @GeneratedValue
 	private Long Comment_ID;
 	private String Comment;

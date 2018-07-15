@@ -11,6 +11,6 @@ public interface CommentI {
 	Comment findCommentById(Long id);
 	Comment createComment(Comment comment);
 	Comment updateComment(Comment comment);
-	Comment deleteComment(Long id);
+	void deleteComment(Comment comment);
 
 }

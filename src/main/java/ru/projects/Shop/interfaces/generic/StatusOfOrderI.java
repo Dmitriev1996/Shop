@@ -9,6 +9,6 @@ public interface StatusOfOrderI {
 	StatusOfOrder findStatusOfOrderById(Long id);
 	StatusOfOrder createStatusOfOrder(StatusOfOrder status);
 	StatusOfOrder updateStatusOfOrder(StatusOfOrder status);
-	StatusOfOrder deleteStatusOfOrder(Long id);
+	void deleteStatusOfOrder(StatusOfOrder status);
 
 }

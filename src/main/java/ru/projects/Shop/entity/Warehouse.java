@@ -1,16 +1,21 @@
 package ru.projects.Shop.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="warehouses")
-public class Warehouse {
+@NamedQuery(name="findAllWarehouse", query="SELECT w FROM Warehouse w"
+		+ " ORDER BY w.Warehouse_ID DESC")
+public class Warehouse implements Serializable {
 	@Id @GeneratedValue
 	private Long Warehouse_ID;
 	@OneToOne(fetch=FetchType.EAGER)

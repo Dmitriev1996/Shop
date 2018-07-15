@@ -9,6 +9,6 @@ public interface WarehouseI {
 	Warehouse findWarehouseById(Long id);
 	Warehouse createWarehouse(Warehouse warehouse);
 	Warehouse updateWarehouse(Warehouse warehouse);
-	Warehouse deleteWarehouse(Long id);
+	void deleteWarehouse(Warehouse warehouse);
 
 }
