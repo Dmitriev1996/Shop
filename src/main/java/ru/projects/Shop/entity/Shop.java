@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,13 +19,16 @@ import javax.persistence.Table;
 public class Shop implements Serializable {
 	@Id @GeneratedValue
 	private Long Shop_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TypeShop_ID")
 	private TypeShop TypeShop;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Country_ID")
 	private Country Country;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="Region_ID")
+	private Region Region;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
 	private City City;
 	private String Adress;
@@ -80,6 +84,25 @@ public class Shop implements Serializable {
 	public void setEmail(String email) {
 		Email = email;
 	}
+
+	public TypeShop getTypeShop() {
+		return TypeShop;
+	}
+
+	public void setTypeShop(TypeShop typeShop) {
+		TypeShop = typeShop;
+	}
+
+	public Region getRegion() {
+		return Region;
+	}
+
+	public void setRegion(Region region) {
+		Region = region;
+	}
+	
+	
+	
 	
 	
 

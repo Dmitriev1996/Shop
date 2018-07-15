@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Region implements Serializable {
 	@Id @GeneratedValue
 	private Long Region_ID;
 	private String Region;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="region_city", 
 	joinColumns=@JoinColumn(name="Region_ID"), 
 	inverseJoinColumns=@JoinColumn(name="City_ID"))

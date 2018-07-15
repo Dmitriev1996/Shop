@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class City implements Serializable {
 	@Id @GeneratedValue
 	private Long City_ID;
 	private String City;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="city_shops", 
 	joinColumns=@JoinColumn(name="City_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Shop_ID"))
@@ -42,6 +43,15 @@ public class City implements Serializable {
 	public void setCity(String city) {
 		City = city;
 	}
+
+	public List<Shop> getShopList() {
+		return ShopList;
+	}
+
+	public void setShopList(List<Shop> shopList) {
+		ShopList = shopList;
+	}
+	
 	
 	
 

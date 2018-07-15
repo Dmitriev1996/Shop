@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,12 +25,12 @@ public class Product implements Serializable {
 	private String NameOfProduct;
 	private String Articul;
 	private Double Price;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TypeProduct_ID", nullable=false)
 	private TypeProduct TypeProduct;
 	private Double Mass;
 	private String Description;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="product_comments", 
 	joinColumns=@JoinColumn(name="Product_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Comment_ID"))

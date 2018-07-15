@@ -12,7 +12,7 @@ import ru.projects.Shop.entity.TypeShop;
 import ru.projects.Shop.interfaces.local.TypeShopLocal;
 
 @Stateless
-@Local(TypeShop.class)
+@Local(TypeShopLocal.class)
 @LocalBean
 public class TypeShopEJB implements TypeShopLocal {
 	@Inject

@@ -12,7 +12,7 @@ import ru.projects.Shop.entity.Shop;
 import ru.projects.Shop.interfaces.local.ShopLocal;
 
 @Stateless
-@Local(Shop.class)
+@Local(ShopLocal.class)
 @LocalBean
 public class ShopEJB implements ShopLocal {
 	@Inject

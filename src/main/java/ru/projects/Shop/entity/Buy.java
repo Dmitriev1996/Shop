@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ public class Buy implements Serializable {
 	@Id @GeneratedValue
 	private Long Buy_ID;
 	private Date DateBuy;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="buy_products", 
 	joinColumns=@JoinColumn(name="Buy_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Product_ID"))
