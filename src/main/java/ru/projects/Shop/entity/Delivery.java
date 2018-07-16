@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,13 +24,13 @@ public class Delivery implements Serializable {
 	@Id @GeneratedValue
 	private Long Delivery_ID;
 	private Date DateOfDelivery;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Provider_ID")
 	private Provider Provider;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Shop_ID")
 	private Shop Shop;
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="delivery_products", 
 	joinColumns=@JoinColumn(name="Delivery_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Product_ID"))
@@ -69,6 +70,15 @@ public class Delivery implements Serializable {
 	public void setShop(Shop shop) {
 		Shop = shop;
 	}
+
+	public List<Product> getProductList() {
+		return ProductList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		ProductList = productList;
+	}
+	
 	
 	
 
