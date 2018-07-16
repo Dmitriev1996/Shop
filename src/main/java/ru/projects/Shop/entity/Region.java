@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,11 +22,17 @@ public class Region implements Serializable {
 	@Id @GeneratedValue
 	private Long Region_ID;
 	private String Region;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinTable(name="region_country", 
+	joinColumns=@JoinColumn(name="Region_ID"), 
+	inverseJoinColumns=@JoinColumn(name="Country_ID"))
+	private Country Country;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="region_city", 
 	joinColumns=@JoinColumn(name="Region_ID"), 
 	inverseJoinColumns=@JoinColumn(name="City_ID"))
 	private List<City> CityList;
+	
 	public Region() {}
 
 	public Long getRegion_ID() {
@@ -51,6 +58,16 @@ public class Region implements Serializable {
 	public void setCityList(List<City> cityList) {
 		CityList = cityList;
 	}
+
+	public Country getCountry() {
+		return Country;
+	}
+
+	public void setCountry(Country country) {
+		Country = country;
+	}
+	
+	
 	
 	
 	

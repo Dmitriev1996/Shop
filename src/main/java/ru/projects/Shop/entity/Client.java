@@ -30,16 +30,21 @@ public class Client implements Serializable {
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Sex_ID", nullable=false)
 	private Sex Sex;
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_buys", 
 	joinColumns=@JoinColumn(name="Client_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Buy_ID"))
 	private List<Buy> BuyList;
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_order", 
 	joinColumns=@JoinColumn(name="Client_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Order_ID"))
 	private List<Order> OrderList;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="client_comments", 
+	joinColumns=@JoinColumn(name="Client_ID"), 
+	inverseJoinColumns=@JoinColumn(name="Comment_ID"))
+	private List<Comment> CommentList;
 	
 	public Client() {}
 
