@@ -33,7 +33,7 @@ public class Order {
 	private List<Product> ProductList;
 	private Double SumOfOrder;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Transportation_ID", nullable=false)
+	@JoinColumn(name="Transportation_ID")
 	private Transportation Transportation;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Status_ID", nullable=false)
