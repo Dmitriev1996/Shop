@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,16 +17,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="forums")
-@NamedQuery(name="findAllFroum", query="SELECT f FROM Forum f"
+@NamedQuery(name="findAllForum", query="SELECT f FROM Forum f"
 		+ " ORDER BY f.Forum_ID DESC")
 public class Forum implements Serializable {
 	@Id @GeneratedValue
 	private Long Forum_ID;
 	private String NameOfForum;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Client_ID", nullable=false)
 	private Client Client;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="forum_messages", 
 	joinColumns=@JoinColumn(name="Forum_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Message_ID"))

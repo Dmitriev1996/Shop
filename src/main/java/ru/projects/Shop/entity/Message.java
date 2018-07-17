@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,10 +20,11 @@ import javax.persistence.Table;
 public class Message implements Serializable {
 	@Id @GeneratedValue
 	private Long Message_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Client_ID", nullable=false)
-	private Client Client_ID;
+	private Client Client;
 	private Date DateOfMessage;
+	private String Message;
 	
 	public Message() {}
 
@@ -34,12 +36,12 @@ public class Message implements Serializable {
 		Message_ID = message_ID;
 	}
 
-	public Client getClient_ID() {
-		return Client_ID;
+	public Client getClient() {
+		return Client;
 	}
 
-	public void setClient_ID(Client client_ID) {
-		Client_ID = client_ID;
+	public void setClient(Client client) {
+		Client = client;
 	}
 
 	public Date getDateOfMessage() {
@@ -48,6 +50,14 @@ public class Message implements Serializable {
 
 	public void setDateOfMessage(Date dateOfMessage) {
 		DateOfMessage = dateOfMessage;
+	}
+
+	public String getMessage() {
+		return Message;
+	}
+
+	public void setMessage(String message) {
+		Message = message;
 	}
 	
 	

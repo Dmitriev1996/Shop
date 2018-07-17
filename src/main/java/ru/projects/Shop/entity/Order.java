@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,20 +22,20 @@ import javax.persistence.Table;
 public class Order {
 	@Id @GeneratedValue
 	private Long Order_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Client_ID", nullable=false)
 	private Client Client;
-	private Date DateOfBirth;
-	@OneToMany
+	private Date DateOfOrder;
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="order_products", 
 	joinColumns=@JoinColumn(name="Order_ID"), 
 	inverseJoinColumns=@JoinColumn(name="Product_ID"))
 	private List<Product> ProductList;
 	private Double SumOfOrder;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Transportation_ID", nullable=false)
 	private Transportation Transportation;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Status_ID", nullable=false)
 	private StatusOfOrder StatusOfOrder;
 	
@@ -56,12 +57,12 @@ public class Order {
 		Client = client;
 	}
 
-	public Date getDateOfBirth() {
-		return DateOfBirth;
+	public Date getDateOfOrder() {
+		return DateOfOrder;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
-		DateOfBirth = dateOfBirth;
+	public void setDateOfOrder(Date dateOfOrder) {
+		DateOfOrder = dateOfOrder;
 	}
 
 	public List<Product> getProductList() {

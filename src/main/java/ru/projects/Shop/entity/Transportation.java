@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,13 +19,13 @@ import javax.persistence.Table;
 public class Transportation implements Serializable {
 	@Id @GeneratedValue
 	private Long Transportation_ID;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Type_ID", nullable=false)
 	private TransportationType TransportationType;
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="Order_ID", nullable=false)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="Order_ID")
 	private Order Order;
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Adress_ID", nullable=false)
 	private Adress Adress;
 	
