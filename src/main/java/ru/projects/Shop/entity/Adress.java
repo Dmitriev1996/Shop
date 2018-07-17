@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="adresses")
@@ -19,19 +20,26 @@ import javax.persistence.Table;
 public class Adress implements Serializable {
 	@Id @GeneratedValue
 	private Long Adress_ID;
+	@NotNull
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Country_ID", nullable=false)
 	private Country Country;
+	@NotNull
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Region_ID")
 	private Region Region;
+	@NotNull
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
+	@NotNull
 	private City City;
+	@NotNull
 	private String Street;
+	@NotNull
 	private int NumberOfHouse;
 	private String Corpus;
 	private int NumberOfEntrance;
+	@NotNull
 	private Long NumberOfAppartament;
 	
 	public Adress() {}
