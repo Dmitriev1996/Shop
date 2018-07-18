@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import ru.projects.Shop.constraints.StringConstraint;
+
 @Entity
 @Table(name="adresses")
 @NamedQuery(name="findAllAdress", query="SELECT a FROM Adress a"
@@ -28,12 +30,12 @@ public class Adress implements Serializable {
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Region_ID")
 	private Region Region;
-	@NotNull
+	@NotNull 
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
 	@NotNull
 	private City City;
-	@NotNull
+	@NotNull @StringConstraint
 	private String Street;
 	@NotNull
 	private int NumberOfHouse;
