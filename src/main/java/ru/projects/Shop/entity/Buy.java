@@ -13,8 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="buys")
 @NamedQuery(name="findAllBuy", query="SELECT b FROM Buy b"
 		+ " ORDER BY b.Buy_ID DESC")

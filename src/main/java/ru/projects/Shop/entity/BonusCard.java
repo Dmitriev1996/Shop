@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="bonus_cards")
 @NamedQuery(name="findAllBonusCard", query="SELECT c FROM BonusCard c"
 		+ " ORDER BY c.Card_ID DESC")

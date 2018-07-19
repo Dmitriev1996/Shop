@@ -15,8 +15,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="clients")
 @NamedQuery(name="findAllClient", query="SELECT c FROM Client c"
 		+ " ORDER BY c.Client_ID DESC")

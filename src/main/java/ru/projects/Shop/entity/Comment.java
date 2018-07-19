@@ -13,8 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="comments")
 @NamedQuery(name="findAllComment", query="SELECT c FROM Comment c"
 		+ " ORDER BY c.Comment_ID DESC")

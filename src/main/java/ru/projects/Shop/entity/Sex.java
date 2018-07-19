@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="sexes")
 @NamedQuery(name="findAllSex", query="SELECT s FROM Sex s"
 		+ " ORDER BY s.Sex_ID DESC")

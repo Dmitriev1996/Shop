@@ -12,8 +12,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
 @Table(name="cities")
 @NamedQuery(name="findAllCity", query="SELECT c FROM City c"
 		+ " ORDER BY c.City_ID DESC")
