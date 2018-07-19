@@ -26,14 +26,9 @@
     <version>6.0.10.Final</version>
     </dependency>
     <dependency>
-    <groupId>org.apache.derby</groupId>
-    <artifactId>derbyclient</artifactId>
-    <version>10.14.2.0</version>
-    </dependency>
-   <dependency>
-    <groupId>org.apache.derby</groupId>
-    <artifactId>derby</artifactId>
-    <version>10.14.2.0</version>
+    <groupId>fish.payara.extras</groupId>
+    <artifactId>payara-embedded-all</artifactId>
+    <version>5.182</version>
     <scope>test</scope>
     </dependency>
      
@@ -42,12 +37,6 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.main.extras</groupId>
-      <artifactId>glassfish-embedded-all</artifactId>
-      <version>4.1.2</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
@@ -63,6 +52,14 @@
      </plugin>
      <plugin>
        <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-war-plugin</artifactId>
+       <version>2.2</version>
+       <configuration>
+         <failOnMissingWebXml>false</failOnMissingWebXml>
+       </configuration>
+     </plugin>
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
        <artifactId>maven-failsafe-plugin</artifactId>
        <version>2.12.4</version>
      <executions>
@@ -74,21 +71,6 @@
          </goals>
        </execution>
      </executions>
-     </plugin>
-     <plugin>
-       <groupId>org.codehaus.mojo</groupId>
-       <artifactId>exec-maven-plugin</artifactId>
-       <version>1.2.1</version>
-       <executions>
-         <execution>
-           <goals>
-             <goal>java</goal>
-           </goals>
-         </execution>
-       </executions>
-       <configuration>
-         <mainClass>ru.projects.Shop.Main</mainClass>
-       </configuration>
      </plugin>
    </plugins>
   </build>
