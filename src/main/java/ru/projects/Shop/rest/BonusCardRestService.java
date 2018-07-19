@@ -25,8 +25,8 @@ import ru.projects.Shop.entity.BonusCard;
 import ru.projects.Shop.entity.BonusCards;
 
 @Path("/bonuscard")
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Stateless
 public class BonusCardRestService {
 	@Inject

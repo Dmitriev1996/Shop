@@ -25,8 +25,8 @@ import ru.projects.Shop.entity.Buy;
 import ru.projects.Shop.entity.Buys;
 
 @Path("/buy")
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Stateless
 public class BuyRestService {
 	@Inject

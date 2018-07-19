@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+	<persistence-unit name="Shop" transaction-type="JTA">
+	<jta-data-source>java:global/jdbc/Shop</jta-data-source>
+	<!--  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+	<class>ru.projects.Shop.entity.Buy</class>
+	<class>ru.projects.Shop.entity.City</class>
+	<class>ru.projects.Shop.entity.Country</class>
+	<class>ru.projects.Shop.entity.Delivery</class>
+	<class>ru.projects.Shop.entity.Product</class>
+	<class>ru.projects.Shop.entity.Provider</class>
+	<class>ru.projects.Shop.entity.Region</class>
+	<class>ru.projects.Shop.entity.Sex</class>
+	<class>ru.projects.Shop.entity.Shop</class>
+	<class>ru.projects.Shop.entity.TypeProduct</class>
+	<class>ru.projects.Shop.entity.TypeShop</class>
+	<class>ru.projects.Shop.entity.Warehouse</class>
+	<class>ru.projects.Shop.entity.Worker</class>
+	<class>ru.projects.Shop.entity.Comment</class>
+	<class>ru.projects.Shop.entity.Client</class>
+	<class>ru.projects.Shop.entity.Forum</class>
+	<class>ru.projects.Shop.entity.Message</class>
+	<class>ru.projects.Shop.entity.Adress</class>
+	<class>ru.projects.Shop.entity.Order</class>
+	<class>ru.projects.Shop.entity.StatusOfOrder</class>
+	<class>ru.projects.Shop.entity.Transportation</class>
+	<class>ru.projects.Shop.entity.TransportationType</class>
+	<class>ru.projects.Shop.entity.BonusCard</class>
+	<properties>
+	  <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="eclipselink.logging.level" value="INFO"/>
+	</properties>
+	</persistence-unit>
+</persistence>

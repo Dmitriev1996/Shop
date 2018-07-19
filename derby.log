@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Thu Jul 19 21:25:55 GMT+05:00 2018:
- РџСЂРѕРёР·РІРѕРґРёС‚СЃСЏ Р·Р°РіСЂСѓР·РєР° Derby РІРµСЂСЃРёРё The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): СЌРєР·РµРјРїР»СЏСЂ a816c00e-0164-b35c-b64c-00000e02d408
-РІ РєР°С‚Р°Р»РѕРіРµ Р±Р°Р·С‹ РґР°РЅРЅС‹С… C:\Projects\Shop\Shop sun.misc.Launcher$AppClassLoader@7ea987ac 
+Fri Jul 20 02:24:44 GMT+05:00 2018:
+ Производится загрузка Derby версии The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): экземпляр a816c00e-0164-b46e-492a-00000e3474a8
+в каталоге базы данных C:\Projects\Shop\Shop sun.misc.Launcher$AppClassLoader@4aa298b7 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
@@ -10,4 +10,4 @@ os.name=Windows 7
 os.arch=amd64
 os.version=6.1
 derby.system.home=null
-Р—Р°РїСѓС‰РµРЅ Р·Р°РіСЂСѓР·С‡РёРє РєР»Р°СЃСЃРѕРІ Р±Р°Р·С‹ РґР°РЅРЅС‹С… - derby.database.classpath=''
+Запущен загрузчик классов базы данных - derby.database.classpath=''

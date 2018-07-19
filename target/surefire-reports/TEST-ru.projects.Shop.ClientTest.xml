@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="ru.projects.Shop.ClientTest" time="7.611" errors="1" skipped="0">
+<testsuite tests="1" failures="0" name="ru.projects.Shop.ClientTest" time="0.094" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin"/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_144\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher integration-test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="ru"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -65,116 +65,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="ru.projects.Shop.ClientTest" name="ru.projects.Shop.ClientTest" time="7.611">
-    <error message="Failed to deploy EJB modules - see log for details" type="javax.ejb.EJBException">javax.ejb.EJBException: Failed to deploy EJB modules - see log for details
-	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:147)
-	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:134)
-	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:127)
-	at ru.projects.Shop.ClientTest.initContainer(ClientTest.java:33)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</error>
-    <system-out>PlainTextActionReporterFAILUREDescription: deploy AdminCommandError occurred during deployment: javax/el/ELManager. Please see server.log for more details.
-    [name=classes
-</system-out>
-    <system-err>июл 14, 2018 4:40:05 PM org.glassfish.ejb.embedded.EJBContainerProviderImpl getValidFile
-SEVERE: EJB6004:Specified application server installation location [C:\Users\Admin\.m2\repository\org\glassfish\extras\glassfish-embedded-all\domains\domain1] does not exist.
-июл 14, 2018 4:40:09 PM com.sun.enterprise.v3.services.impl.GrizzlyService createNetworkProxy
-INFO: Network listener http-listener on port 0 disabled per domain.xml
-июл 14, 2018 4:40:09 PM com.sun.enterprise.v3.services.impl.GrizzlyService createNetworkProxy
-INFO: Network listener https-listener on port 0 disabled per domain.xml
-июл 14, 2018 4:40:09 PM com.sun.enterprise.v3.server.AppServerStartup run
-INFO: GlassFish Server Open Source Edition 3.2-b06 (java_re-private) startup time : Embedded (2 915ms), startup services(890ms), total(3 805ms)
-июл 14, 2018 4:40:09 PM org.glassfish.admin.mbeanserver.JMXStartupService$JMXConnectorsStarterThread run
-INFO: JMX006: JMXStartupService had disabled JMXConnector system
-июл 14, 2018 4:40:09 PM org.glassfish.ejb.embedded.EJBContainerImpl deploy
-INFO: [EJBContainerImpl] Deploying app: target\classes
-июл 14, 2018 4:40:12 PM org.hibernate.validator.internal.util.Version &lt;clinit&gt;
-INFO: HV000001: Hibernate Validator 6.0.10.Final
-июл 14, 2018 4:40:12 PM org.glassfish.deployment.admin.DeployCommand execute
-SEVERE: javax/el/ELManager
-java.lang.ClassNotFoundException: javax.el.ELManager
-	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
-	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:335)
-	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
-	at org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator.buildExpressionFactory(ResourceBundleMessageInterpolator.java:88)
-	at org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator.&lt;init&gt;(ResourceBundleMessageInterpolator.java:47)
-	at org.hibernate.validator.internal.engine.ConfigurationImpl.getDefaultMessageInterpolator(ConfigurationImpl.java:474)
-	at org.hibernate.validator.internal.engine.ConfigurationImpl.getDefaultMessageInterpolatorConfiguredWithClassLoader(ConfigurationImpl.java:650)
-	at org.hibernate.validator.internal.engine.ConfigurationImpl.getMessageInterpolator(ConfigurationImpl.java:397)
-	at org.hibernate.validator.internal.engine.ValidatorFactoryImpl.&lt;init&gt;(ValidatorFactoryImpl.java:183)
-	at org.hibernate.validator.HibernateValidator.buildValidatorFactory(HibernateValidator.java:38)
-	at org.hibernate.validator.internal.engine.ConfigurationImpl.buildValidatorFactory(ConfigurationImpl.java:364)
-	at javax.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.jvnet.hk2.config.WriteableView.&lt;init&gt;(WriteableView.java:104)
-	at org.jvnet.hk2.config.ConfigSupport.getWriteableView(ConfigSupport.java:214)
-	at org.jvnet.hk2.config.Transaction.enroll(Transaction.java:165)
-	at com.sun.enterprise.v3.server.ApplicationLifecycle.prepareAppConfigChanges(ApplicationLifecycle.java:1057)
-	at org.glassfish.deployment.admin.DeployCommand.execute(DeployCommand.java:382)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl$1.execute(CommandRunnerImpl.java:360)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:370)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl.doCommand(CommandRunnerImpl.java:1069)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl.access$1200(CommandRunnerImpl.java:98)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1249)
-	at com.sun.enterprise.v3.admin.CommandRunnerImpl$ExecutionContext.execute(CommandRunnerImpl.java:1237)
-	at com.sun.enterprise.admin.cli.embeddable.CommandExecutorImpl.executeCommand(CommandExecutorImpl.java:147)
-	at com.sun.enterprise.admin.cli.embeddable.DeployerImpl.deploy(DeployerImpl.java:99)
-	at org.glassfish.ejb.embedded.EJBContainerImpl.deploy(EJBContainerImpl.java:139)
-	at org.glassfish.ejb.embedded.EJBContainerProviderImpl.createEJBContainer(EJBContainerProviderImpl.java:134)
-	at javax.ejb.embeddable.EJBContainer.createEJBContainer(EJBContainer.java:127)
-	at ru.projects.Shop.ClientTest.initContainer(ClientTest.java:33)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
-	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-
-июл 14, 2018 4:40:12 PM org.glassfish.ejb.embedded.EJBContainerProviderImpl createEJBContainer
-INFO: [EJBContainerProviderImpl] Cleaning up on failure ...
-июл 14, 2018 4:40:12 PM org.glassfish.admin.mbeanserver.JMXStartupService shutdown
-INFO: JMX001: JMXStartupService and JMXConnectors have been shut down.
-июл 14, 2018 4:40:12 PM com.sun.enterprise.v3.server.AppServerStartup stop
-INFO: Shutdown procedure finished
-июл 14, 2018 4:40:12 PM AppServerStartup run
-INFO: [Thread[GlassFish Kernel Main Thread,5,main]] exiting
-</system-err>
-  </testcase>
+  <testcase classname="ru.projects.Shop.ClientTest" name="shouldClient" time="0.094"/>
 </testsuite>

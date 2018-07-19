@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="1" failures="0" name="ru.projects.Shop.AdressTest" time="0.318" errors="1" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\bin"/>
+    <property name="java.vm.version" value="25.144-b01"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Projects\Shop"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="RU"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\Projects\Shop"/>
+    <property name="java.runtime.version" value="1.8.0_144-b01"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\Admin\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="C:\apache-maven-3.5.2\bin\..\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1251"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_144\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\AMD APP\bin\x86_64;C:\Program Files (x86)\AMD APP\bin\x86;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\MATLAB\R2011a\runtime\win64;C:\Program Files\MATLAB\R2011a\bin;C:\Program Files\Java\jdk1.8.0_131\bin\;C:\Users\Admin\Desktop\Java;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Java\jdk1.8.0_144\bin;%ANDROID_HOME%/tools;C:\Program Files (x86)\Rational\common;C:\Program Files\Git\cmd;C:\apache-maven-3.5.2\bin;."/>
+    <property name="maven.conf" value="C:\apache-maven-3.5.2\bin\../conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="6.1"/>
+    <property name="library.jansi.path" value="C:\apache-maven-3.5.2\bin\..\lib\jansi-native"/>
+    <property name="user.home" value="C:\Users\Admin"/>
+    <property name="user.timezone" value="GMT+05:00"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="Cp1251"/>
+    <property name="user.name" value="Admin"/>
+    <property name="java.class.path" value="C:\apache-maven-3.5.2\bin\..\boot\plexus-classworlds-2.5.2.jar"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_144\jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher package"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="ru"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_144"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_144\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_144\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_144\jre\classes"/>
+    <property name="sun.stderr.encoding" value="cp866"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\apache-maven-3.5.2\bin\.."/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.stdout.encoding" value="cp866"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="ru.projects.Shop.AdressTest" name="shouldAdress" time="0.318">
+    <error type="javax.ejb.EJBException">javax.ejb.EJBException
+	at com.sun.ejb.containers.EJBContainerTransactionManager.processSystemException(EJBContainerTransactionManager.java:750)
+	at com.sun.ejb.containers.EJBContainerTransactionManager.completeNewTx(EJBContainerTransactionManager.java:700)
+	at com.sun.ejb.containers.EJBContainerTransactionManager.postInvokeTx(EJBContainerTransactionManager.java:505)
+	at com.sun.ejb.containers.BaseContainer.postInvokeTx(BaseContainer.java:4647)
+	at com.sun.ejb.containers.BaseContainer.postInvoke(BaseContainer.java:2123)
+	at com.sun.ejb.containers.BaseContainer.postInvoke(BaseContainer.java:2093)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandler.invoke(EJBLocalObjectInvocationHandler.java:220)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandlerDelegate.invoke(EJBLocalObjectInvocationHandlerDelegate.java:90)
+	at com.sun.proxy.$Proxy248.createAdress(Unknown Source)
+	at ru.projects.Shop.ejb.__EJB31_Generated__AdressEJB__Intf____Bean__.createAdress(Unknown Source)
+	at ru.projects.Shop.AdressTest.shouldAdress(AdressTest.java:33)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: javax.validation.ConstraintViolationException: Bean Validation constraint(s) violated while executing Automatic Bean Validation on callback event:&apos;prePersist&apos;. Please refer to embedded ConstraintViolations for details.
+	at org.eclipse.persistence.internal.jpa.metadata.listeners.BeanValidationListener.validateOnCallbackEvent(BeanValidationListener.java:90)
+	at org.eclipse.persistence.internal.jpa.metadata.listeners.BeanValidationListener.prePersist(BeanValidationListener.java:62)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.notifyListener(DescriptorEventManager.java:748)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.notifyEJB30Listeners(DescriptorEventManager.java:691)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.executeEvent(DescriptorEventManager.java:229)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNewObjectClone(UnitOfWorkImpl.java:4310)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNotRegisteredNewObjectForPersist(UnitOfWorkImpl.java:4287)
+	at org.eclipse.persistence.internal.sessions.RepeatableWriteUnitOfWork.registerNotRegisteredNewObjectForPersist(RepeatableWriteUnitOfWork.java:518)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNewObjectForPersist(UnitOfWorkImpl.java:4229)
+	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.persist(EntityManagerImpl.java:496)
+	at com.sun.enterprise.container.common.impl.EntityManagerWrapper.persist(EntityManagerWrapper.java:287)
+	at ru.projects.Shop.ejb.AdressEJB.createAdress(AdressEJB.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.glassfish.ejb.security.application.EJBSecurityManager.runMethod(EJBSecurityManager.java:1081)
+	at org.glassfish.ejb.security.application.EJBSecurityManager.invoke(EJBSecurityManager.java:1153)
+	at com.sun.ejb.containers.BaseContainer.invokeBeanMethod(BaseContainer.java:4867)
+	at com.sun.ejb.EjbInvocation.invokeBeanMethod(EjbInvocation.java:656)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:836)
+	at com.sun.ejb.EjbInvocation.proceed(EjbInvocation.java:608)
+	at com.sun.ejb.containers.interceptors.SystemInterceptorProxy.doCall(SystemInterceptorProxy.java:163)
+	at com.sun.ejb.containers.interceptors.SystemInterceptorProxy.aroundInvoke(SystemInterceptorProxy.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.ejb.containers.interceptors.AroundInvokeInterceptor.intercept(InterceptorManager.java:895)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:835)
+	at com.sun.ejb.EjbInvocation.proceed(EjbInvocation.java:608)
+	at org.jboss.weld.module.ejb.AbstractEJBRequestScopeActivationInterceptor.aroundInvoke(AbstractEJBRequestScopeActivationInterceptor.java:81)
+	at org.jboss.weld.module.ejb.SessionBeanInterceptor.aroundInvoke(SessionBeanInterceptor.java:52)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.ejb.containers.interceptors.AroundInvokeInterceptor.intercept(InterceptorManager.java:895)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:835)
+	at com.sun.ejb.containers.interceptors.InterceptorManager.intercept(InterceptorManager.java:374)
+	at com.sun.ejb.containers.BaseContainer.__intercept(BaseContainer.java:4839)
+	at com.sun.ejb.containers.BaseContainer.intercept(BaseContainer.java:4827)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandler.invoke(EJBLocalObjectInvocationHandler.java:212)
+	... 35 more
+</error>
+    <system-err>июл 20, 2018 1:36:33 AM org.glassfish.ejb.embedded.EJBContainerProviderImpl getValidFile
+WARNING: ejb.embedded.instance_location_not_exists
+июл 20, 2018 1:36:33 AM org.glassfish.ejb.embedded.EJBContainerProviderImpl createContainer
+INFO: [EJBContainerProviderImpl] Using runtime class: class com.sun.enterprise.glassfish.bootstrap.StaticGlassFishRuntime
+июл 20, 2018 1:36:37 AM com.sun.enterprise.v3.server.CommonClassLoaderServiceImpl findH2Client
+INFO: Cannot find h2db client jar file, h2 jdbc driver will not be available by default.
+июл 20, 2018 1:36:40 AM com.sun.enterprise.v3.services.impl.GrizzlyProxy start0
+INFO: Network Listener http-listener started in: 221ms - bound to [/0.0.0.0:8080]
+июл 20, 2018 1:36:40 AM com.sun.enterprise.v3.services.impl.GrizzlyProxy start0
+INFO: Network Listener https-listener started in: 4ms - bound to [/0.0.0.0:8181]
+июл 20, 2018 1:36:40 AM com.sun.enterprise.v3.services.impl.GrizzlyProxy start0
+INFO: Network Listener admin-listener started in: 2ms - bound to [/0.0.0.0:4848]
+июл 20, 2018 1:36:40 AM com.sun.enterprise.v3.services.impl.GrizzlyService postConstruct
+INFO: Grizzly 2.4.3 started in: 2 096ms - bound to [http-listener:8080, https-listener:8181, admin-listener:4848]
+июл 20, 2018 1:36:42 AM org.hibernate.validator.internal.util.Version &lt;clinit&gt;
+INFO: HV000001: Hibernate Validator 6.0.10.Final
+июл 20, 2018 1:36:49 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [development] [3.9.3] Using bind address: /192.168.2.2:4900
+июл 20, 2018 1:36:49 AM com.hazelcast.instance.AddressPicker
+INFO: [LOCAL] [development] [3.9.3] Using public address: /192.168.2.2:4900
+июл 20, 2018 1:36:49 AM com.hazelcast.system
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Hazelcast 3.9.3 (20180216 - 539b124) starting at [192.168.2.2]:4900
+июл 20, 2018 1:36:49 AM com.hazelcast.system
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Copyright (c) 2008-2018, Hazelcast, Inc. All Rights Reserved.
+июл 20, 2018 1:36:49 AM com.hazelcast.system
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Configured Hazelcast Serialization version: 1
+июл 20, 2018 1:36:49 AM com.hazelcast.spi.impl.operationservice.impl.BackpressureRegulator
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Backpressure is disabled
+июл 20, 2018 1:36:51 AM com.hazelcast.instance.Node
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Activating Discovery SPI Joiner
+июл 20, 2018 1:36:57 AM com.hazelcast.spi.impl.operationexecutor.impl.OperationExecutorImpl
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Starting 6 partition threads and 4 generic threads (1 dedicated for priority tasks)
+июл 20, 2018 1:36:57 AM com.hazelcast.internal.diagnostics.Diagnostics
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Diagnostics disabled. To enable add -Dhazelcast.diagnostics.enabled=true to the JVM arguments.
+июл 20, 2018 1:36:57 AM com.hazelcast.core.LifecycleService
+INFO: [192.168.2.2]:4900 [development] [3.9.3] [192.168.2.2]:4900 is STARTING
+июл 20, 2018 1:36:57 AM com.hazelcast.nio.tcp.TcpIpConnector
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Connecting to /192.168.2.2:5900, timeout: 0, bind-any: true
+июл 20, 2018 1:36:58 AM com.hazelcast.nio.tcp.TcpIpConnector
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Could not connect to: /192.168.2.2:5900. Reason: SocketException[Connection refused: connect to address /192.168.2.2:5900]
+июл 20, 2018 1:36:58 AM com.hazelcast.internal.cluster.impl.DiscoveryJoiner
+INFO: [192.168.2.2]:4900 [development] [3.9.3] [192.168.2.2]:5900 is added to the blacklist.
+июл 20, 2018 1:36:59 AM com.hazelcast.system
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Cluster version set to 3.9
+июл 20, 2018 1:36:59 AM com.hazelcast.internal.cluster.ClusterService
+INFO: [192.168.2.2]:4900 [development] [3.9.3] 
+
+Members {size:1, ver:1} [
+	Member [192.168.2.2]:4900 - b18606de-832d-455b-8d63-f58e2f3154ba this
+]
+
+июл 20, 2018 1:36:59 AM com.hazelcast.internal.jmx.ManagementService
+INFO: [192.168.2.2]:4900 [development] [3.9.3] Hazelcast JMX agent enabled.
+июл 20, 2018 1:37:01 AM com.hazelcast.internal.diagnostics.HealthMonitor
+INFO: [192.168.2.2]:4900 [development] [3.9.3] processors=6, physical.memory.total=7,9G, physical.memory.free=834,7M, swap.space.total=15,8G, swap.space.free=5,6G, heap.memory.used=38,7M, heap.memory.free=167,8M, heap.memory.total=206,5M, heap.memory.max=1,8G, heap.memory.used/total=17,85%, heap.memory.used/max=2,05%, minor.gc.count=7, minor.gc.time=165ms, major.gc.count=2, major.gc.time=218ms, load.process=6,60%, load.system=78,33%, load.systemAverage=n/a thread.count=70, thread.peakCount=70, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0,00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+июл 20, 2018 1:37:02 AM com.hazelcast.core.LifecycleService
+INFO: [192.168.2.2]:4900 [development] [3.9.3] [192.168.2.2]:4900 is STARTED
+июл 20, 2018 1:37:02 AM fish.payara.nucleus.hazelcast.HazelcastCore bindToJNDI
+INFO: Hazelcast Instance Bound to JNDI at payara/Hazelcast
+июл 20, 2018 1:37:02 AM fish.payara.nucleus.hazelcast.HazelcastCore bindToJNDI
+INFO: JSR107 Caching Provider Bound to JNDI at payara/CachingProvider
+июл 20, 2018 1:37:02 AM fish.payara.nucleus.hazelcast.HazelcastCore bindToJNDI
+INFO: JSR107 Default Cache Manager Bound to JNDI at payara/CacheManager
+июл 20, 2018 1:37:04 AM com.sun.enterprise.v3.services.impl.GrizzlyProxy start0
+INFO: Network Listener iiop-service started in: 2ms - bound to [/0.0.0.0:3700]
+июл 20, 2018 1:37:04 AM fish.payara.nucleus.cluster.PayaraCluster logClusterStatus
+INFO: Data Grid Status 
+Payara Data Grid State: DG Version: 35 DG Size: 1
+Instances: {
+Address: /192.168.2.2:4900 UUID: b18606de-832d-455b-8d63-f58e2f3154ba Lite: false This: true Name: server Group: server-config
+}
+июл 20, 2018 1:37:04 AM com.sun.enterprise.v3.server.AppServerStartup postStartupJob
+INFO: Undefined Product Name - define product and version info in config/branding  0.0.0  (0) startup time : Embedded (3 935ms), startup services(26 609ms), total(30 544ms)
+июл 20, 2018 1:37:04 AM fish.payara.nucleus.notification.NotificationService bootstrapNotificationService
+INFO: Payara Notification Service bootstrapped with configuration: NotificationExecutionOptions{enabled=true, notifierConfigurationExecutionOptionsList={LOG=LogNotifierConfigurationExecutionOptions{useSeparateLogFile=false} NotifierConfigurationExecutionOptions{notifierType=LOG, enabled=true}}}
+июл 20, 2018 1:37:06 AM com.sun.enterprise.connectors.jms.util.JmsRaUtil getInstalledMqVersion
+WARNING: Check for a new version of MQ installation failed : C:\Users\Admin\AppData\Local\Temp\gfembed96131169192878991tmp\lib\install\applications\jmsra\..\imqjmsra.rar (Не удается найти указанный файл):C:\Users\Admin\AppData\Local\Temp\gfembed96131169192878991tmp\lib\install\applications\jmsra\imqjmsra.rar
+июл 20, 2018 1:37:06 AM com.sun.enterprise.v3.services.impl.GrizzlyProxy start0
+INFO: Network Listener JMS_PROXY_default_JMS_host started in: 5ms - bound to [/0.0.0.0:7676]
+июл 20, 2018 1:37:06 AM org.glassfish.admin.mbeanserver.JMXStartupService$JMXConnectorsStarterThread startConnector
+INFO: JMXStartupService has started JMXConnector on JMXService URL service:jmx:rmi://0.0.0.0:8686/jndi/rmi://0.0.0.0:8686/jmxrmi
+июл 20, 2018 1:37:06 AM org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] Deploying app: target\classes
+июл 20, 2018 1:37:06 AM org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] GlassFish status: STARTED
+июл 20, 2018 1:37:06 AM org.glassfish.ejb.embedded.EJBContainerImpl deploy
+INFO: [EJBContainerImpl] Deploying as a File
+июл 20, 2018 1:37:07 AM org.glassfish.enterprise.iiop.api.GlassFishORBHelper postConstruct
+INFO: GlassFishORBFactory service initialized.
+июл 20, 2018 1:37:08 AM com.sun.enterprise.security.SecurityLifecycle &lt;init&gt;
+INFO: Java security manager is disabled.
+июл 20, 2018 1:37:08 AM com.sun.enterprise.security.SecurityLifecycle onInitialization
+INFO: Entering Security Startup Service.
+июл 20, 2018 1:37:08 AM com.sun.enterprise.security.PolicyLoader loadPolicy
+INFO: Loading policy provider com.sun.enterprise.security.provider.PolicyWrapper.
+июл 20, 2018 1:37:09 AM com.sun.enterprise.security.SecurityLifecycle onInitialization
+INFO: Security Service(s) started successfully.
+июл 20, 2018 1:37:12 AM org.eclipse.persistence.session.file:/C:/Projects/Shop/target/classes/_Shop
+INFO: EclipseLink, version: Eclipse Persistence Services - 2.5.0.v20130507-3faac2b
+июл 20, 2018 1:37:19 AM org.eclipse.persistence.session.file:/C:/Projects/Shop/target/classes/_Shop.connection
+INFO: file:/C:/Projects/Shop/target/classes/_Shop login successful
+июл 20, 2018 1:37:25 AM org.jboss.weld.bootstrap.WeldStartup &lt;clinit&gt;
+INFO: WELD-000900: 3.0.4 (Final)
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB CommentEJB: [java:global/classes/CommentEJB!ru.projects.Shop.ejb.CommentEJB, java:global/classes/CommentEJB!ru.projects.Shop.interfaces.local.CommentLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ProviderEJB: [java:global/classes/ProviderEJB!ru.projects.Shop.ejb.ProviderEJB, java:global/classes/ProviderEJB!ru.projects.Shop.interfaces.local.ProviderLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB StatusOfOrderEJB: [java:global/classes/StatusOfOrderEJB!ru.projects.Shop.interfaces.local.StatusOfOrderLocal, java:global/classes/StatusOfOrderEJB!ru.projects.Shop.ejb.StatusOfOrderEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB RegionEJB: [java:global/classes/RegionEJB!ru.projects.Shop.interfaces.local.RegionLocal, java:global/classes/RegionEJB!ru.projects.Shop.ejb.RegionEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB BonusCardEJB: [java:global/classes/BonusCardEJB!ru.projects.Shop.interfaces.local.BonusCardLocal, java:global/classes/BonusCardEJB!ru.projects.Shop.ejb.BonusCardEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB SexEJB: [java:global/classes/SexEJB!ru.projects.Shop.ejb.SexEJB, java:global/classes/SexEJB!ru.projects.Shop.interfaces.local.SexLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB CityRestService: [java:global/classes/CityRestService, java:global/classes/CityRestService!ru.projects.Shop.rest.CityRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB TransportationEJB: [java:global/classes/TransportationEJB!ru.projects.Shop.interfaces.local.TransportationLocal, java:global/classes/TransportationEJB!ru.projects.Shop.ejb.TransportationEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB OrderEJB: [java:global/classes/OrderEJB!ru.projects.Shop.ejb.OrderEJB, java:global/classes/OrderEJB!ru.projects.Shop.interfaces.local.OrderLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB CommentRestService: [java:global/classes/CommentRestService!ru.projects.Shop.rest.CommentRestService, java:global/classes/CommentRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB TransportationTypeEJB: [java:global/classes/TransportationTypeEJB!ru.projects.Shop.ejb.TransportationTypeEJB, java:global/classes/TransportationTypeEJB!ru.projects.Shop.interfaces.local.TransportationTypeLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB WarehouseEJB: [java:global/classes/WarehouseEJB!ru.projects.Shop.interfaces.local.WarehouseLocal, java:global/classes/WarehouseEJB!ru.projects.Shop.ejb.WarehouseEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB BonusCardRestService: [java:global/classes/BonusCardRestService, java:global/classes/BonusCardRestService!ru.projects.Shop.rest.BonusCardRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ForumEJB: [java:global/classes/ForumEJB!ru.projects.Shop.ejb.ForumEJB, java:global/classes/ForumEJB!ru.projects.Shop.interfaces.local.ForumLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ClientRestService: [java:global/classes/ClientRestService!ru.projects.Shop.rest.ClientRestService, java:global/classes/ClientRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB BuyRestService: [java:global/classes/BuyRestService, java:global/classes/BuyRestService!ru.projects.Shop.rest.BuyRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB AdressEJB: [java:global/classes/AdressEJB!ru.projects.Shop.ejb.AdressEJB, java:global/classes/AdressEJB!ru.projects.Shop.interfaces.local.AdressLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ClientEJB: [java:global/classes/ClientEJB!ru.projects.Shop.ejb.ClientEJB, java:global/classes/ClientEJB!ru.projects.Shop.interfaces.local.ClientLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB TypeShopEJB: [java:global/classes/TypeShopEJB!ru.projects.Shop.interfaces.local.TypeShopLocal, java:global/classes/TypeShopEJB!ru.projects.Shop.ejb.TypeShopEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB DatabasePopulator: [java:global/classes/DatabasePopulator, java:global/classes/DatabasePopulator!ru.projects.Shop.ejb.DatabasePopulator]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB TypeProductEJB: [java:global/classes/TypeProductEJB!ru.projects.Shop.interfaces.local.TypeProductLocal, java:global/classes/TypeProductEJB!ru.projects.Shop.ejb.TypeProductEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB BuyEJB: [java:global/classes/BuyEJB!ru.projects.Shop.ejb.BuyEJB, java:global/classes/BuyEJB!ru.projects.Shop.interfaces.local.BuyLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB WorkerEJB: [java:global/classes/WorkerEJB!ru.projects.Shop.ejb.WorkerEJB, java:global/classes/WorkerEJB!ru.projects.Shop.interfaces.local.WorkerLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB AdressRestService: [java:global/classes/AdressRestService!ru.projects.Shop.rest.AdressRestService, java:global/classes/AdressRestService]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB CityEJB: [java:global/classes/CityEJB!ru.projects.Shop.ejb.CityEJB, java:global/classes/CityEJB!ru.projects.Shop.interfaces.local.CityLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB DeliveryEJB: [java:global/classes/DeliveryEJB!ru.projects.Shop.ejb.DeliveryEJB, java:global/classes/DeliveryEJB!ru.projects.Shop.interfaces.local.DeliveryLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB MessageEJB: [java:global/classes/MessageEJB!ru.projects.Shop.interfaces.local.MessageLocal, java:global/classes/MessageEJB!ru.projects.Shop.ejb.MessageEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ProductEJB: [java:global/classes/ProductEJB!ru.projects.Shop.ejb.ProductEJB, java:global/classes/ProductEJB!ru.projects.Shop.interfaces.local.ProductLocal]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB ShopEJB: [java:global/classes/ShopEJB!ru.projects.Shop.interfaces.local.ShopLocal, java:global/classes/ShopEJB!ru.projects.Shop.ejb.ShopEJB]
+июл 20, 2018 1:37:27 AM com.sun.ejb.containers.BaseContainer initializeHome
+INFO: Portable JNDI names for EJB CountryEJB: [java:global/classes/CountryEJB!ru.projects.Shop.interfaces.local.CountryLocal, java:global/classes/CountryEJB!ru.projects.Shop.ejb.CountryEJB]
+июл 20, 2018 1:37:28 AM org.jboss.weld.event.ExtensionObserverMethodImpl checkRequiredTypeAnnotations
+INFO: WELD-000411: Observer method [BackedAnnotatedMethod] private org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider.processAnnotatedType(@Observes ProcessAnnotatedType) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+июл 20, 2018 1:37:28 AM org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.servlet.internal.CdiExternalRequestScope is deprecated from CDI 1.1!
+июл 20, 2018 1:37:28 AM org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.internal.CdiComponentProvider$JaxRsParamProducer is deprecated from CDI 1.1!
+июл 20, 2018 1:37:29 AM org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.WebAppExceptionHolder is deprecated from CDI 1.1!
+июл 20, 2018 1:37:29 AM org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.WebAppExceptionInterceptor is deprecated from CDI 1.1!
+июл 20, 2018 1:37:29 AM org.jboss.weld.bootstrap.events.BeforeBeanDiscoveryImpl addAnnotatedType
+WARN: WELD-000146: BeforeBeanDiscovery.addAnnotatedType(AnnotatedType&lt;?&gt;) used for class org.glassfish.jersey.ext.cdi1x.transaction.internal.TransactionalExceptionMapper is deprecated from CDI 1.1!
+июл 20, 2018 1:37:30 AM org.glassfish.deployment.admin.DeployCommand execute
+INFO: classes was successfully deployed in 23 618 milliseconds.
+июл 20, 2018 1:37:31 AM com.sun.ejb.containers.BaseContainer postInvoke
+WARNING: A system exception occurred during an invocation on EJB AdressEJB, method: public ru.projects.Shop.entity.Adress ru.projects.Shop.ejb.AdressEJB.createAdress(ru.projects.Shop.entity.Adress)
+июл 20, 2018 1:37:31 AM com.sun.ejb.containers.BaseContainer postInvoke
+WARNING: 
+javax.ejb.EJBException
+	at com.sun.ejb.containers.EJBContainerTransactionManager.processSystemException(EJBContainerTransactionManager.java:750)
+	at com.sun.ejb.containers.EJBContainerTransactionManager.completeNewTx(EJBContainerTransactionManager.java:700)
+	at com.sun.ejb.containers.EJBContainerTransactionManager.postInvokeTx(EJBContainerTransactionManager.java:505)
+	at com.sun.ejb.containers.BaseContainer.postInvokeTx(BaseContainer.java:4647)
+	at com.sun.ejb.containers.BaseContainer.postInvoke(BaseContainer.java:2123)
+	at com.sun.ejb.containers.BaseContainer.postInvoke(BaseContainer.java:2093)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandler.invoke(EJBLocalObjectInvocationHandler.java:220)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandlerDelegate.invoke(EJBLocalObjectInvocationHandlerDelegate.java:90)
+	at com.sun.proxy.$Proxy248.createAdress(Unknown Source)
+	at ru.projects.Shop.ejb.__EJB31_Generated__AdressEJB__Intf____Bean__.createAdress(Unknown Source)
+	at ru.projects.Shop.AdressTest.shouldAdress(AdressTest.java:33)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: javax.validation.ConstraintViolationException: Bean Validation constraint(s) violated while executing Automatic Bean Validation on callback event:&apos;prePersist&apos;. Please refer to embedded ConstraintViolations for details.
+	at org.eclipse.persistence.internal.jpa.metadata.listeners.BeanValidationListener.validateOnCallbackEvent(BeanValidationListener.java:90)
+	at org.eclipse.persistence.internal.jpa.metadata.listeners.BeanValidationListener.prePersist(BeanValidationListener.java:62)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.notifyListener(DescriptorEventManager.java:748)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.notifyEJB30Listeners(DescriptorEventManager.java:691)
+	at org.eclipse.persistence.descriptors.DescriptorEventManager.executeEvent(DescriptorEventManager.java:229)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNewObjectClone(UnitOfWorkImpl.java:4310)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNotRegisteredNewObjectForPersist(UnitOfWorkImpl.java:4287)
+	at org.eclipse.persistence.internal.sessions.RepeatableWriteUnitOfWork.registerNotRegisteredNewObjectForPersist(RepeatableWriteUnitOfWork.java:518)
+	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.registerNewObjectForPersist(UnitOfWorkImpl.java:4229)
+	at org.eclipse.persistence.internal.jpa.EntityManagerImpl.persist(EntityManagerImpl.java:496)
+	at com.sun.enterprise.container.common.impl.EntityManagerWrapper.persist(EntityManagerWrapper.java:287)
+	at ru.projects.Shop.ejb.AdressEJB.createAdress(AdressEJB.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.glassfish.ejb.security.application.EJBSecurityManager.runMethod(EJBSecurityManager.java:1081)
+	at org.glassfish.ejb.security.application.EJBSecurityManager.invoke(EJBSecurityManager.java:1153)
+	at com.sun.ejb.containers.BaseContainer.invokeBeanMethod(BaseContainer.java:4867)
+	at com.sun.ejb.EjbInvocation.invokeBeanMethod(EjbInvocation.java:656)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:836)
+	at com.sun.ejb.EjbInvocation.proceed(EjbInvocation.java:608)
+	at com.sun.ejb.containers.interceptors.SystemInterceptorProxy.doCall(SystemInterceptorProxy.java:163)
+	at com.sun.ejb.containers.interceptors.SystemInterceptorProxy.aroundInvoke(SystemInterceptorProxy.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.ejb.containers.interceptors.AroundInvokeInterceptor.intercept(InterceptorManager.java:895)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:835)
+	at com.sun.ejb.EjbInvocation.proceed(EjbInvocation.java:608)
+	at org.jboss.weld.module.ejb.AbstractEJBRequestScopeActivationInterceptor.aroundInvoke(AbstractEJBRequestScopeActivationInterceptor.java:81)
+	at org.jboss.weld.module.ejb.SessionBeanInterceptor.aroundInvoke(SessionBeanInterceptor.java:52)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.sun.ejb.containers.interceptors.AroundInvokeInterceptor.intercept(InterceptorManager.java:895)
+	at com.sun.ejb.containers.interceptors.AroundInvokeChainImpl.invokeNext(InterceptorManager.java:835)
+	at com.sun.ejb.containers.interceptors.InterceptorManager.intercept(InterceptorManager.java:374)
+	at com.sun.ejb.containers.BaseContainer.__intercept(BaseContainer.java:4839)
+	at com.sun.ejb.containers.BaseContainer.intercept(BaseContainer.java:4827)
+	at com.sun.ejb.containers.EJBLocalObjectInvocationHandler.invoke(EJBLocalObjectInvocationHandler.java:212)
+	... 35 more
+
+</system-err>
+  </testcase>
+</testsuite>
