@@ -24,9 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.entity.Clients;
 
-@Path("client")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/client")
 @Stateless
 public class ClientRestService {
 	@Inject
@@ -34,7 +32,10 @@ public class ClientRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createClient")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createClient(Client client) {
 		if(client.equals(null))
 			throw new BadRequestException();
@@ -45,6 +46,8 @@ public class ClientRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response findClientById(@PathParam("id") Long id) {
 		Client client=em.find(Client.class, id);
@@ -54,13 +57,18 @@ public class ClientRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response findAllClients() {
 		TypedQuery<Client> query=em.createNamedQuery("findAllClient", Client.class);
 		Clients clients=new Clients(query.getResultList());
 		return Response.ok(clients).build();
 	}
 	
+	@Path("/updateClient")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateClient(Client client) {
 		if(client.equals(null))
 			throw new BadRequestException();
@@ -69,6 +77,8 @@ public class ClientRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteClient(@PathParam("id") Long id) {
 		Client client=em.find(Client.class, id);

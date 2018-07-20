@@ -24,9 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Comment;
 import ru.projects.Shop.entity.Comments;
 
-@Path("comment")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/comment")
 @Stateless
 public class CommentRestService {
 	@Inject
@@ -34,7 +32,10 @@ public class CommentRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createComment")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();
@@ -45,7 +46,9 @@ public class CommentRestService {
 	}
 	
 	@GET
-	@Path("{id}")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/{id}")
 	public Response findCommentById(@PathParam("id") Long id) {
 		Comment comment=em.find(Comment.class, id);
 		if(comment.equals(null))
@@ -54,13 +57,18 @@ public class CommentRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response findAllComments() {
 		TypedQuery<Comment> query=em.createNamedQuery("findAllComment", Comment.class);
 		Comments comments=new Comments(query.getResultList());
 		return Response.ok(comments).build();
 	}
 	
+	@Path("/updateComment")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();
@@ -69,6 +77,8 @@ public class CommentRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteComment(@PathParam("id") Long id) {
 		Comment comment=em.find(Comment.class, id);

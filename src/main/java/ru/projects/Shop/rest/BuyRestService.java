@@ -24,9 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Buy;
 import ru.projects.Shop.entity.Buys;
 
-@Path("buy")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/buy")
 @Stateless
 public class BuyRestService {
 	@Inject
@@ -34,7 +32,10 @@ public class BuyRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createBuy")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();
@@ -45,6 +46,8 @@ public class BuyRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response findBuyById(@PathParam("id") Long id) {
 		Buy buy=em.find(Buy.class, id);
@@ -54,13 +57,18 @@ public class BuyRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response findAllBuys() {
 		TypedQuery<Buy> query=em.createNamedQuery("findAllBuy", Buy.class);
 		Buys buys=new Buys(query.getResultList());
 		return Response.ok(buys).build();
 	}
 	
+	@Path("/updateBuy")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();
@@ -69,6 +77,8 @@ public class BuyRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteBuy(@PathParam("id") Long id) {
 		Buy buy=em.find(Buy.class, id);

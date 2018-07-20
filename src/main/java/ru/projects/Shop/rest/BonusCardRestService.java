@@ -24,9 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.BonusCard;
 import ru.projects.Shop.entity.BonusCards;
 
-@Path("bonuscard")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/bonuscard")
 @Stateless
 public class BonusCardRestService {
 	@Inject
@@ -34,7 +32,10 @@ public class BonusCardRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createBonusCard")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();
@@ -45,6 +46,8 @@ public class BonusCardRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response findBonusCardById(@PathParam("id") Long id) {
 		BonusCard bonuscard=em.find(BonusCard.class, id);
@@ -54,13 +57,18 @@ public class BonusCardRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response findAllBonusCards() {
 		TypedQuery<BonusCard> query=em.createNamedQuery("findAllBonusCard", BonusCard.class);
 		BonusCards bonuscards=new BonusCards(query.getResultList());
 		return Response.ok(bonuscards).build();
 	}
 	
+	@Path("/updateBonusCard")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();
@@ -69,6 +77,8 @@ public class BonusCardRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteBonusCard(@PathParam("id") Long id) {
 		BonusCard bonuscard=em.find(BonusCard.class, id);

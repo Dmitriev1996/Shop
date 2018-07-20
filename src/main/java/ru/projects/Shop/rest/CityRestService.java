@@ -23,9 +23,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.entity.Cities;
 import ru.projects.Shop.entity.City;
 
-@Path("city")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/city")
 @Stateless
 public class CityRestService {
 	@Inject
@@ -33,7 +31,10 @@ public class CityRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createCity")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();
@@ -44,6 +45,8 @@ public class CityRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response findCityById(@PathParam("id") Long id) {
 		City city=em.find(City.class, id);
@@ -53,13 +56,18 @@ public class CityRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response findAllCities() {
 		TypedQuery<City> query=em.createNamedQuery("findAllCity", City.class);
 		Cities cities=new Cities(query.getResultList());
 		return Response.ok(cities).build();
 	}
 	
+	@Path("/updateCity")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();
@@ -68,6 +76,8 @@ public class CityRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteCity(@PathParam("id") Long id) {
 		City city=em.find(City.class, id);

@@ -3,8 +3,8 @@ import javax.annotation.sql.DataSourceDefinition;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
-@Singleton
-@Startup
+/*@Singleton
+@Startup*/
 @DataSourceDefinition(
         className = "org.apache.derby.jdbc.EmbeddedDataSource",
         name = "java:global/jdbc/Shop",

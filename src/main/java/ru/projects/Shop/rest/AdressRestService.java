@@ -24,9 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Adresses;
 
 
-@Path("adress")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Path("/adress")
 @Stateless
 public class AdressRestService {
 	@Inject
@@ -34,7 +32,10 @@ public class AdressRestService {
 	@Context
 	private UriInfo uriInfo;
 	
+	@Path("/createAdress")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response createAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();
@@ -45,6 +46,8 @@ public class AdressRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response findAdressById(@PathParam("id") Long id) {
 		Adress adress=em.find(Adress.class, id);
@@ -54,13 +57,18 @@ public class AdressRestService {
 	}
 	
 	@GET
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getAdresses() {
 		TypedQuery<Adress> query=em.createNamedQuery("findAllAdress", Adress.class);
 		Adresses adresses=new Adresses(query.getResultList());
 		return Response.ok(adresses).build();
 	}
 	
+	@Path("/updateAdress")
 	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
 	public Response updateAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();
@@ -69,6 +77,8 @@ public class AdressRestService {
 	}
 	
 	@DELETE
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("{id}")
 	public Response deleteAdress(@PathParam("id") Long id) {
 		Adress adress=em.find(Adress.class, id);
