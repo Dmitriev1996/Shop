@@ -24,7 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Adresses;
 
 
-@Path("/adress")
+@Path("adress")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Stateless

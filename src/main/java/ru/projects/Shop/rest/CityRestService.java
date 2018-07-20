@@ -23,7 +23,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.entity.Cities;
 import ru.projects.Shop.entity.City;
 
-@Path("/city")
+@Path("city")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Stateless

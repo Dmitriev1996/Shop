@@ -24,7 +24,7 @@ import ru.projects.Shop.entity.Adress;
 import ru.projects.Shop.entity.Comment;
 import ru.projects.Shop.entity.Comments;
 
-@Path("/comment")
+@Path("comment")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Stateless
