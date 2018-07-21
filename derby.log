@@ -1,13 +1,10 @@
 ----------------------------------------------------------------
-Sat Jul 21 01:34:03 GMT+05:00 2018:
- Производится загрузка Derby версии The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): экземпляр a816c00e-0164-b966-417f-00000dd13410
-в каталоге базы данных C:\Projects\Shop\Shop sun.misc.Launcher$AppClassLoader@7adf9f5f 
+Sun Jul 22 01:57:43 GMT+05:00 2018:
+ Производится загрузка Derby версии The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): экземпляр a816c00e-0164-bea2-4828-00000fdb7268
+в каталоге базы данных C:\Users\Admin\AppData\Local\Temp\gfembed3703756416969433302tmp\lib\databases\embedded_default  sun.misc.Launcher$AppClassLoader@548c4f57 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_144-b01
 user.dir=C:\Projects\Shop
-os.name=Windows 7
-os.arch=amd64
-os.version=6.1
 derby.system.home=null
 Запущен загрузчик классов базы данных - derby.database.classpath=''

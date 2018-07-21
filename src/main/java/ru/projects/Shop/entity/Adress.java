@@ -32,7 +32,6 @@ public class Adress implements Serializable {
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Region_ID")
 	private Region Region;
-	@NotNull 
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
 	@NotNull

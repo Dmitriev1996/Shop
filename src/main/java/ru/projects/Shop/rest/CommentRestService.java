@@ -48,7 +48,7 @@ public class CommentRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/{id}")
+	@Path("/findCommentById/{id}")
 	public Response findCommentById(@PathParam("id") Long id) {
 		Comment comment=em.find(Comment.class, id);
 		if(comment.equals(null))
@@ -59,6 +59,7 @@ public class CommentRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllComments")
 	public Response findAllComments() {
 		TypedQuery<Comment> query=em.createNamedQuery("findAllComment", Comment.class);
 		Comments comments=new Comments(query.getResultList());
@@ -79,7 +80,7 @@ public class CommentRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteComment/{id}")
 	public Response deleteComment(@PathParam("id") Long id) {
 		Comment comment=em.find(Comment.class, id);
 		if(comment.equals(null))

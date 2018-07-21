@@ -48,7 +48,7 @@ public class ClientRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/findClientById/{id}")
 	public Response findClientById(@PathParam("id") Long id) {
 		Client client=em.find(Client.class, id);
 		if(client.equals(null))
@@ -59,6 +59,7 @@ public class ClientRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllClients")
 	public Response findAllClients() {
 		TypedQuery<Client> query=em.createNamedQuery("findAllClient", Client.class);
 		Clients clients=new Clients(query.getResultList());
@@ -79,7 +80,7 @@ public class ClientRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteClient/{id}")
 	public Response deleteClient(@PathParam("id") Long id) {
 		Client client=em.find(Client.class, id);
 		if(client.equals(null))

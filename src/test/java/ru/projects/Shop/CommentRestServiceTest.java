@@ -46,8 +46,8 @@ public class CommentRestServiceTest {
 	     prop.setPort("http-listener", 8080);
 	     gf = runtime.newGlassFish(prop);
 	     gf.start();
-	     
-	     String result = gf.getDeployer().deploy(new File("target/Shop.war"));
+	     String result = gf.getDeployer().deploy(new File("target/Shop-0.0.1-SNAPSHOT.war"));
+	     System.out.println(gf.getStatus());
 	     if (result == null) {
 	         throw new IllegalStateException("Deployment failed");
 	     }
@@ -139,6 +139,6 @@ public class CommentRestServiceTest {
 	    // GETs a Book with an unknown ID
 	    Response response = client.target(uri).path("invalidID").request().get();
 	    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatusInfo().getStatusCode());
-	  }
+	  } 
 
 }

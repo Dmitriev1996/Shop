@@ -48,7 +48,7 @@ public class AdressRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/findAdressById/{id}")
 	public Response findAdressById(@PathParam("id") Long id) {
 		Adress adress=em.find(Adress.class, id);
 		if(adress.equals(null))
@@ -59,6 +59,7 @@ public class AdressRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllAdresses")
 	public Response getAdresses() {
 		TypedQuery<Adress> query=em.createNamedQuery("findAllAdress", Adress.class);
 		Adresses adresses=new Adresses(query.getResultList());
@@ -79,7 +80,7 @@ public class AdressRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteAdress/{id}")
 	public Response deleteAdress(@PathParam("id") Long id) {
 		Adress adress=em.find(Adress.class, id);
 		if(adress.equals(null))

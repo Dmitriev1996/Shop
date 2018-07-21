@@ -48,7 +48,7 @@ public class BonusCardRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/findBonusCardById/{id}")
 	public Response findBonusCardById(@PathParam("id") Long id) {
 		BonusCard bonuscard=em.find(BonusCard.class, id);
 		if(bonuscard.equals(null))
@@ -59,6 +59,7 @@ public class BonusCardRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllBonusCards")
 	public Response findAllBonusCards() {
 		TypedQuery<BonusCard> query=em.createNamedQuery("findAllBonusCard", BonusCard.class);
 		BonusCards bonuscards=new BonusCards(query.getResultList());
@@ -79,7 +80,7 @@ public class BonusCardRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteBonusCard/{id}")
 	public Response deleteBonusCard(@PathParam("id") Long id) {
 		BonusCard bonuscard=em.find(BonusCard.class, id);
 		if(bonuscard.equals(null))

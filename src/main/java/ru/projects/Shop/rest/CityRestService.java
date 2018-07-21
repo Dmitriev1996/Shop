@@ -47,7 +47,7 @@ public class CityRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/findCityById/{id}")
 	public Response findCityById(@PathParam("id") Long id) {
 		City city=em.find(City.class, id);
 		if(city.equals(null))
@@ -58,6 +58,7 @@ public class CityRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllCities")
 	public Response findAllCities() {
 		TypedQuery<City> query=em.createNamedQuery("findAllCity", City.class);
 		Cities cities=new Cities(query.getResultList());
@@ -78,7 +79,7 @@ public class CityRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteCity/{id}")
 	public Response deleteCity(@PathParam("id") Long id) {
 		City city=em.find(City.class, id);
 		if(city.equals(null))

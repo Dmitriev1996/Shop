@@ -48,7 +48,7 @@ public class BuyRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/findBuyById/{id}")
 	public Response findBuyById(@PathParam("id") Long id) {
 		Buy buy=em.find(Buy.class, id);
 		if(buy.equals(null))
@@ -59,6 +59,7 @@ public class BuyRestService {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Path("/findAllBuys")
 	public Response findAllBuys() {
 		TypedQuery<Buy> query=em.createNamedQuery("findAllBuy", Buy.class);
 		Buys buys=new Buys(query.getResultList());
@@ -79,7 +80,7 @@ public class BuyRestService {
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("{id}")
+	@Path("/deleteBuy/{id}")
 	public Response deleteBuy(@PathParam("id") Long id) {
 		Buy buy=em.find(Buy.class, id);
 		if(buy.equals(null))
