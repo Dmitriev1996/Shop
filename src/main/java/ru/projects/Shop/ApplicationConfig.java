@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+
 import ru.projects.Shop.rest.AdressRestService;
 import ru.projects.Shop.rest.BonusCardRestService;
 import ru.projects.Shop.rest.BuyRestService;
@@ -26,6 +28,7 @@ public class ApplicationConfig extends Application {
 		c.add(CityRestService.class);
 		c.add(ClientRestService.class);
 		c.add(CommentRestService.class);
+		c.add(MOXyJsonProvider.class);
 		classes=Collections.unmodifiableSet(c);
 	}
 	

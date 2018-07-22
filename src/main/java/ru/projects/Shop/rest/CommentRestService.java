@@ -63,7 +63,9 @@ public class CommentRestService {
 	public Response findAllComments() {
 		TypedQuery<Comment> query=em.createNamedQuery("findAllComment", Comment.class);
 		Comments comments=new Comments(query.getResultList());
-		return Response.ok(comments).build();
+		return Response.ok(comments).header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
+				.build();
 	}
 	
 	@Path("/updateComment")

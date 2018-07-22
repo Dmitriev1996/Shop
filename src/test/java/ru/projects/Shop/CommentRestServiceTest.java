@@ -47,7 +47,6 @@ public class CommentRestServiceTest {
 	     gf = runtime.newGlassFish(prop);
 	     gf.start();
 	     String result = gf.getDeployer().deploy(new File("target/Shop-0.0.1-SNAPSHOT.war"));
-	     System.out.println(gf.getStatus());
 	     if (result == null) {
 	         throw new IllegalStateException("Deployment failed");
 	     }
@@ -108,7 +107,8 @@ public class CommentRestServiceTest {
 	    URI commentURI = response.getLocation();
 
 	    // With the location, GETs the Book
-	    response = client.target(uri).path("/1").request().get();
+	    response = client.target(uri).path("/findCommentById/1").request().get();
+	    System.out.println(response.getLocation());
 	    comment = response.readEntity(Comment.class);
 	    assertEquals(Response.Status.OK.getStatusCode(), response.getStatusInfo().getStatusCode());
 	    assertEquals("Привет!", comment.getComment());
@@ -116,11 +116,11 @@ public class CommentRestServiceTest {
 
 	    // Gets the book id and DELETEs it
 	    //String commentId = uri.toString().split("/")[1];
-	    response = client.target(uri).path("/1").request().delete();
+	    response = client.target(uri).path("/deleteComment/1").request().delete();
 	    assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatusInfo().getStatusCode());
 
 	    // GETs the Book and checks it has been deleted
-	    response = client.target(commentURI).request().get();
+	    response = client.target(commentURI).request("/invalidID").get();
 	    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatusInfo().getStatusCode());
 
 	  }
@@ -130,6 +130,7 @@ public class CommentRestServiceTest {
 
 	    // POSTs a Null Book
 	    Response response = client.target(uri).path("/createComment").request().post(Entity.entity(null, MediaType.APPLICATION_XML));
+	    System.out.println(response.getLocation());
 	    assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatusInfo().getStatusCode());
 	  }
 
@@ -137,7 +138,7 @@ public class CommentRestServiceTest {
 	  public void shouldNotFindTheBookID() throws JAXBException {
 
 	    // GETs a Book with an unknown ID
-	    Response response = client.target(uri).path("invalidID").request().get();
+	    Response response = client.target(uri).path("/findCommentById/invalidID").request().get();
 	    assertEquals(Response.Status.NOT_FOUND.getStatusCode(), response.getStatusInfo().getStatusCode());
 	  } 
 
