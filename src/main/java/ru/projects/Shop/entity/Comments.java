@@ -20,7 +20,7 @@ public class Comments extends ArrayList<Comment> {
 	}
 	
 	@XmlElement(name="comment")
-	public List<Comment> getAdress() {
+	public List<Comment> getComments() {
 		return this;
 	}
 	
