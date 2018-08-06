@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,8 +22,10 @@ import javax.persistence.Table;
 public class Message implements Serializable {
 	@Id @GeneratedValue
 	private Long Message_ID;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Client_ID", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="client_messages", 
+	joinColumns=@JoinColumn(name="Message_ID"), 
+	inverseJoinColumns=@JoinColumn(name="Client_ID"))
 	private Client Client;
 	private Date DateOfMessage;
 	private String Message;

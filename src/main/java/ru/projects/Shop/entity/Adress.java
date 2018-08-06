@@ -24,25 +24,19 @@ import ru.projects.Shop.constraints.StringConstraint;
 public class Adress implements Serializable {
 	@Id @GeneratedValue
 	private Long Adress_ID;
-	@NotNull
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Country_ID", nullable=false)
 	private Country Country;
-	@NotNull
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="Region_ID")
 	private Region Region;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="City_ID")
-	@NotNull
 	private City City;
-	@NotNull @StringConstraint
 	private String Street;
-	@NotNull
 	private int NumberOfHouse;
 	private String Corpus;
 	private int NumberOfEntrance;
-	@NotNull
 	private Long NumberOfAppartament;
 	
 	public Adress() {}
