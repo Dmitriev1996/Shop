@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 		+ " ORDER BY t.TypeProduct_ID DESC")
 public class TypeProduct implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="TYPE_PRODUCT_ID")
 	private Long TypeProduct_ID;
+	@Column(name="TYPE_PRODUCT")
 	private String TypeProduct;
 	
 	public TypeProduct() {}

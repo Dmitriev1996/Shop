@@ -3,13 +3,15 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,16 +20,20 @@ import javax.persistence.Table;
 		+ " ORDER BY p.Provider_ID DESC")
 public class Provider implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="PROVIDER_ID")
 	private Long Provider_ID;
+	@Column(name="NAME_OF_PROVIDER")
 	private String NameOfProvider;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Country_ID")
-	private Country Country;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="City_ID")
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="provider_cities", 
+	joinColumns=@JoinColumn(name="PROVIDER_ID"), 
+	inverseJoinColumns=@JoinColumn(name="CITY_ID"))
 	private City City;
+	@Column(name="ADRESS")
 	private String Adress;
+	@Column(name="EMAIL")
 	private String Email;
+	@Column(name="PHONE")
 	private String Phone;
 	
 	public Provider() {}
@@ -46,14 +52,6 @@ public class Provider implements Serializable {
 
 	public void setNameOfProvider(String nameOfProvider) {
 		NameOfProvider = nameOfProvider;
-	}
-
-	public Country getCountry() {
-		return Country;
-	}
-
-	public void setCountry(Country country) {
-		Country = country;
 	}
 
 	public City getCity() {

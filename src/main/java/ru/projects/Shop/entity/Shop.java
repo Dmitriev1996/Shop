@@ -3,11 +3,14 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,21 +21,21 @@ import javax.persistence.Table;
 		+ " ORDER BY s.Shop_ID DESC")
 public class Shop implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="SHOP_ID")
 	private Long Shop_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="TypeShop_ID")
+	@JoinColumn(name="TYPE_SHOP_ID")
 	private TypeShop TypeShop;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Country_ID")
-	private Country Country;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Region_ID")
-	private Region Region;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="City_ID")
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="city_shops", 
+	joinColumns=@JoinColumn(name="SHOP_ID"), 
+	inverseJoinColumns=@JoinColumn(name="CITY_ID"))
 	private City City;
+	@Column(name="ADRESS")
 	private String Adress;
+	@Column(name="PHONE")
 	private String Phone;
+	@Column(name="EMAIL")
 	private String Email;
 	
 	public Shop() {}
@@ -43,14 +46,6 @@ public class Shop implements Serializable {
 
 	public void setShop_ID(Long shop_ID) {
 		Shop_ID = shop_ID;
-	}
-
-	public Country getCountry() {
-		return Country;
-	}
-
-	public void setCountry(Country country) {
-		Country = country;
 	}
 
 	public City getCity() {
@@ -93,13 +88,6 @@ public class Shop implements Serializable {
 		TypeShop = typeShop;
 	}
 
-	public Region getRegion() {
-		return Region;
-	}
-
-	public void setRegion(Region region) {
-		Region = region;
-	}
 	
 	
 	

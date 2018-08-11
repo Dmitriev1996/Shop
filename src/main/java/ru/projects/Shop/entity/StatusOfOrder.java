@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 		+ " ORDER BY s.Status_ID DESC")
 public class StatusOfOrder implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="STATUS_OF_ORDER_ID")
 	private Long Status_ID;
+	@Column(name="STATUS")
 	private String Status;
 	
 	public StatusOfOrder() {}

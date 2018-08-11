@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,13 +21,16 @@ import javax.persistence.Table;
 		+ " ORDER BY m.Message_ID DESC")
 public class Message implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="MESSAGE_ID")
 	private Long Message_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_messages", 
-	joinColumns=@JoinColumn(name="Message_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Client_ID"))
+	joinColumns=@JoinColumn(name="MESSAGE_ID"), 
+	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
 	private Client Client;
+	@Column(name="DATE_OF_MESSAGE")
 	private Date DateOfMessage;
+	@Column(name="MESSAGE")
 	private String Message;
 	
 	public Message() {}

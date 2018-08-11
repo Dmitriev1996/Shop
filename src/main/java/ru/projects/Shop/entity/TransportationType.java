@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,7 +15,9 @@ import javax.persistence.Table;
 		+ " ORDER BY t.Type_ID DESC")
 public class TransportationType implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="TRANSPORTATION_TYPE_ID")
 	private Long Type_ID;
+	@Column(name="TRANSPORTATION_TYPE")
 	private String TransportationType;
 	
 	public TransportationType() {}

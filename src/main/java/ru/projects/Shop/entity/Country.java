@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,12 +20,14 @@ import javax.persistence.Table;
 		+ " ORDER BY c.Country_ID DESC")
 public class Country implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="COUNTRY_ID")
 	private Long Country_ID;
+	@Column(name="COUNTRY")
 	private String Country;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="region_country", 
-	joinColumns=@JoinColumn(name="Country_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Region_ID"))
+	joinColumns=@JoinColumn(name="COUNTRY_ID"), 
+	inverseJoinColumns=@JoinColumn(name="REGION_ID"))
 	private List<Region> RegionList;
 	
 	public Country() {}

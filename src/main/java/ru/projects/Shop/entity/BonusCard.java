@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,10 +21,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 		+ " ORDER BY c.Card_ID DESC")
 public class BonusCard implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="BONUS_CARD_ID")
 	private Long Card_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Client_ID", nullable=false)
+	@JoinColumn(name="CLIENT_ID", nullable=false)
 	private Client Client;
+	@Column(name="SUM_OF_BONUS")
 	private double SumOfBonus;
 	
 	public BonusCard() {}
@@ -51,6 +54,8 @@ public class BonusCard implements Serializable {
 	public void setSumOfBonus(double sumOfBonus) {
 		SumOfBonus = sumOfBonus;
 	}
+	
+	
 	
 	
 

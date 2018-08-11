@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,13 +20,18 @@ import javax.persistence.Table;
 		+ " ORDER BY w.Worker_ID DESC")
 public class Worker implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="WORKER_ID")
 	private Long Worker_ID;
+	@Column(name="SURNAME")
 	private String Surname;
+	@Column(name="NAME")
 	private String Name;
+	@Column(name="PATRONYMIC")
 	private String Patronymic;
+	@Column(name="DATE_OF_BIRTH")
 	private Date DateOfBirth;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Sex_ID", nullable=false)
+	@JoinColumn(name="SEX_ID", nullable=false)
 	private Sex Sex;
 	
 	public Worker() {}

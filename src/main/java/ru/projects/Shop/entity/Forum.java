@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,15 +22,17 @@ import javax.persistence.Table;
 		+ " ORDER BY f.Forum_ID DESC")
 public class Forum implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="FORUM_ID")
 	private Long Forum_ID;
+	@Column(name="NAME_OF_FORUM")
 	private String NameOfForum;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Client_ID", nullable=false)
+	@JoinColumn(name="CLIENT_ID", nullable=false)
 	private Client Client;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="forum_messages", 
-	joinColumns=@JoinColumn(name="Forum_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Message_ID"))
+	joinColumns=@JoinColumn(name="FORUM_ID"), 
+	inverseJoinColumns=@JoinColumn(name="MESSAGE_ID"))
 	private List<Message> MessageList;
 	
 	public Forum() {}

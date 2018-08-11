@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,19 +22,25 @@ import javax.persistence.Table;
 		+ " ORDER BY p.Product_ID DESC")
 public class Product implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="PRODUCT_ID")
 	private Long Product_ID;
+	@Column(name="NAME_OF_PRODUCT")
 	private String NameOfProduct;
+	@Column(name="ARTICUL")
 	private String Articul;
+	@Column(name="PRICE")
 	private Double Price;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="TypeProduct_ID", nullable=false)
+	@JoinColumn(name="TYPE_PRODUCT_ID", nullable=false)
 	private TypeProduct TypeProduct;
+	@Column(name="MASS")
 	private Double Mass;
+	@Column(name="DESCRIPTION")
 	private String Description;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="product_comments", 
-	joinColumns=@JoinColumn(name="Product_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Comment_ID"))
+	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="COMMENT_ID"))
 	private List<Comment> CommentList;
 	
 	public Product() {}

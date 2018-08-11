@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -22,17 +22,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 		+ " ORDER BY c.Comment_ID DESC")
 public class Comment implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="COMMENT_ID")
 	private Long Comment_ID;
+	@Column(name="COMMENT")
 	private String Comment;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_comments", 
-	joinColumns=@JoinColumn(name="Comment_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Client_ID"))
+	joinColumns=@JoinColumn(name="COMMENT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
 	private Client Client;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinTable(name="product_comments", 
-	joinColumns=@JoinColumn(name="Comment_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Product_ID"))
+	joinColumns=@JoinColumn(name="COMMENT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
 	private Product Product;
 	
 	public Comment() {}

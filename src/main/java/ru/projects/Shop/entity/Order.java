@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,24 +23,27 @@ import javax.persistence.Table;
 		+ " ORDER BY o.Order_ID DESC")
 public class Order {
 	@Id @GeneratedValue
+	@Column(name="ORDER_ID")
 	private Long Order_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_orders", 
-	joinColumns=@JoinColumn(name="Order_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Client_ID"))
+	joinColumns=@JoinColumn(name="ORDER_ID"), 
+	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
 	private Client Client;
+	@Column(name="DATE_OF_ORDER")
 	private Date DateOfOrder;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="order_products", 
-	joinColumns=@JoinColumn(name="Order_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Product_ID"))
+	joinColumns=@JoinColumn(name="ORDER_ID"), 
+	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
 	private List<Product> ProductList;
+	@Column(name="SUM_OF_ORDER")
 	private Double SumOfOrder;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Transportation_ID")
+	@JoinColumn(name="TRANSPORTATION_ID")
 	private Transportation Transportation;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Status_ID", nullable=false)
+	@JoinColumn(name="STATUS_OF_ORDER_ID", nullable=false)
 	private StatusOfOrder StatusOfOrder;
 	
 	public Order() {}

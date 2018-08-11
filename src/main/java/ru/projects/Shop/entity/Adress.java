@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,10 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import ru.projects.Shop.constraints.StringConstraint;
 
 @Entity
 @XmlRootElement
@@ -23,20 +21,26 @@ import ru.projects.Shop.constraints.StringConstraint;
 		+ " ORDER BY a.Adress_ID DESC")
 public class Adress implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="ADRESS_ID")
 	private Long Adress_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Country_ID", nullable=false)
+	@JoinColumn(name="COUNTRY_ID", nullable=false)
 	private Country Country;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Region_ID")
+	@JoinColumn(name="REGION_ID")
 	private Region Region;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="City_ID")
+	@JoinColumn(name="CITY_ID")
 	private City City;
+	@Column(name="STREET")
 	private String Street;
+	@Column(name="NUMBER_OF_HOUSE")
 	private int NumberOfHouse;
+	@Column(name="CORPUS")
 	private String Corpus;
+	@Column(name="NUMBER_OF_ENTRANCE")
 	private int NumberOfEntrance;
+	@Column(name="NUMBER_OF_APPARTAMENT")
 	private Long NumberOfAppartament;
 	
 	public Adress() {}
@@ -112,6 +116,8 @@ public class Adress implements Serializable {
 	public void setNumberOfAppartament(Long numberOfAppartament) {
 		NumberOfAppartament = numberOfAppartament;
 	}
+	
+	
 	
 	
 

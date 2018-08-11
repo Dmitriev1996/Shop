@@ -2,6 +2,7 @@ package ru.projects.Shop.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +17,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 		+ " ORDER BY s.Sex_ID DESC")
 public class Sex implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="SEX_ID")
 	private Long Sex_ID;
+	@Column(name="SEX")
 	private String Sex;
 	
 	public Sex() {}

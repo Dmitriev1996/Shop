@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,18 +23,20 @@ import javax.persistence.Table;
 		+ " ORDER BY d.Delivery_ID DESC")
 public class Delivery implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="DELIVERY_ID")
 	private Long Delivery_ID;
+	@Column(name="DATE_OF_DELIVERY")
 	private Date DateOfDelivery;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Provider_ID")
+	@JoinColumn(name="PROVIDER_ID")
 	private Provider Provider;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Shop_ID")
+	@JoinColumn(name="SHOP_ID")
 	private Shop Shop;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="delivery_products", 
-	joinColumns=@JoinColumn(name="Delivery_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Product_ID"))
+	joinColumns=@JoinColumn(name="DELIVERY_ID"), 
+	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
 	private List<Product> ProductList;
 	
 	

@@ -3,6 +3,7 @@ package ru.projects.Shop.entity;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,15 +19,13 @@ import javax.persistence.Table;
 		+ " ORDER BY t.Transportation_ID DESC")
 public class Transportation implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="TRANSPORTATION_ID")
 	private Long Transportation_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Type_ID", nullable=false)
+	@JoinColumn(name="TRANSPORTATION_TYPE_ID", nullable=false)
 	private TransportationType TransportationType;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Order_ID")
-	private Order Order;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Adress_ID", nullable=false)
+	@JoinColumn(name="ADRESS_ID", nullable=false)
 	private Adress Adress;
 	
 	public Transportation() {}
@@ -55,13 +54,6 @@ public class Transportation implements Serializable {
 		Adress = adress;
 	}
 
-	public Order getOrder() {
-		return Order;
-	}
-
-	public void setOrder(Order order) {
-		Order = order;
-	}
 	
 	
 	

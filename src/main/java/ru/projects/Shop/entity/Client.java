@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,28 +25,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 		+ " ORDER BY c.Client_ID DESC")
 public class Client implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="CLIENT_ID")
 	private Long Client_ID;
+	@Column(name="SURNAME")
 	private String Surname;
+	@Column(name="NAME")
 	private String Name;
+	@Column(name="PATRONYMIC")
 	private String Patronymic;
+	@Column(name="DATE_OF_BIRTH")
 	private Date DateOfBirth;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="Sex_ID", nullable=false)
+	@JoinColumn(name="SEX_ID", nullable=false)
 	private Sex Sex;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_buys", 
-	joinColumns=@JoinColumn(name="Client_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Buy_ID"))
+	joinColumns=@JoinColumn(name="CLIENT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="BUY_ID"))
 	private List<Buy> BuyList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_order", 
-	joinColumns=@JoinColumn(name="Client_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Order_ID"))
+	joinColumns=@JoinColumn(name="CLIENT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="ORDER_ID"))
 	private List<Order> OrderList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="client_comments", 
-	joinColumns=@JoinColumn(name="Client_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Comment_ID"))
+	joinColumns=@JoinColumn(name="CLIENT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="COMMENT_ID"))
 	private List<Comment> CommentList;
 	
 	public Client() {}
@@ -112,6 +118,14 @@ public class Client implements Serializable {
 
 	public void setOrderList(List<Order> orderList) {
 		OrderList = orderList;
+	}
+
+	public List<Comment> getCommentList() {
+		return CommentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		CommentList = commentList;
 	}
 	
 	

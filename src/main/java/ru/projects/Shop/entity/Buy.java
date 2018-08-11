@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,13 +23,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 		+ " ORDER BY b.Buy_ID DESC")
 public class Buy implements Serializable {
 	@Id @GeneratedValue
+	@Column(name="BUY_ID")
 	private Long Buy_ID;
+	@Column(name="DATE_BUY")
 	private Date DateBuy;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="buy_products", 
-	joinColumns=@JoinColumn(name="Buy_ID"), 
-	inverseJoinColumns=@JoinColumn(name="Product_ID"))
+	joinColumns=@JoinColumn(name="BUY_ID"), 
+	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
 	private List<Product> ProductList;
+	@Column(name="SUM_BUY")
 	private Double SumBuy;
 	
 	public Buy() {}
@@ -64,6 +68,7 @@ public class Buy implements Serializable {
 	public void setSumBuy(Double sumBuy) {
 		SumBuy = sumBuy;
 	}
+	
 	
 	
 
