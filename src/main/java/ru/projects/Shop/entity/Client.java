@@ -44,7 +44,7 @@ public class Client implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="BUY_ID"))
 	private List<Buy> BuyList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_order", 
+	@JoinTable(name="client_orders", 
 	joinColumns=@JoinColumn(name="CLIENT_ID"), 
 	inverseJoinColumns=@JoinColumn(name="ORDER_ID"))
 	private List<Order> OrderList;

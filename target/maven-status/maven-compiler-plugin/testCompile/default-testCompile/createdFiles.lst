@@ -1,16 +1,12 @@
 ru\projects\Shop\RegionTest.class
 ru\projects\Shop\ParentTest.class
 ru\projects\Shop\TypeProductTest.class
-ru\projects\Shop\WarehouseTest.class
 ru\projects\Shop\AppTest.class
-ru\projects\Shop\CityTest.class
-ru\projects\Shop\ProviderTest.class
 ru\projects\Shop\StatusOfOrderTest.class
 ru\projects\Shop\BuyTest.class
 ru\projects\Shop\CommentRestServiceTest.class
 ru\projects\Shop\DeliveryTest.class
 ru\projects\Shop\BonusCardTest.class
-ru\projects\Shop\ShopTest.class
 ru\projects\Shop\CommentTest.class
 ru\projects\Shop\SexTest.class
 ru\projects\Shop\MessageTest.class

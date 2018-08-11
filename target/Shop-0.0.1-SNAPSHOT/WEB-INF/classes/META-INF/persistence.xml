@@ -4,7 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
              version="2.1">
 	<persistence-unit name="Shop" transaction-type="JTA">
-	<jta-data-source>jdbc/__default</jta-data-source>
+	<jta-data-source>jdbc/shop</jta-data-source>
 	<!--  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 	<class>ru.projects.Shop.entity.Buy</class>
 	<class>ru.projects.Shop.entity.City</class>
@@ -29,8 +29,8 @@
 	<class>ru.projects.Shop.entity.Transportation</class>
 	<class>ru.projects.Shop.entity.TransportationType</class>
 	<class>ru.projects.Shop.entity.BonusCard</class>
+	<class>ru.projects.Shop.entity.ProductUnit</class>
 	<properties>
-	  <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="eclipselink.logging.level" value="INFO"/>
 	</properties>
 	</persistence-unit>
