@@ -11,9 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,8 +30,10 @@ public class Product implements Serializable {
 	private String Articul;
 	@Column(name="PRICE")
 	private Double Price;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="TYPE_PRODUCT_ID", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="type_product_products", 
+	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"))
 	private TypeProduct TypeProduct;
 	@Column(name="MASS")
 	private Double Mass;

@@ -1,6 +1,7 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.ArrayList;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -62,7 +63,11 @@ public class TypeProductRestService {
 	public Response findAllTypeProducts() {
 		TypedQuery<TypeProduct> query=em.createNamedQuery("findAllTypeProduct", TypeProduct.class);
 		TypeProducts typeProducts=new TypeProducts(query.getResultList());
-		return Response.ok(typeProducts).build();
+		Response response=Response.ok(typeProducts).build();
+		ArrayList<Object> list=new ArrayList<Object>();
+	    list.add("*");
+	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
+	    return response;
 	}
 	
 	@Path("/updateTypeProduct")

@@ -1,12 +1,18 @@
 package ru.projects.Shop.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +25,11 @@ public class TypeProduct implements Serializable {
 	private Long TypeProduct_ID;
 	@Column(name="TYPE_PRODUCT")
 	private String TypeProduct;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinTable(name="type_product_products", 
+	joinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"), 
+	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
+	private List<Product> ProductList;
 	
 	public TypeProduct() {}
 
