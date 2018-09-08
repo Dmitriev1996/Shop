@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.SpecialResponse;
 import ru.projects.Shop.entity.Product;
 import ru.projects.Shop.entity.Products;
 
@@ -53,7 +54,8 @@ public class ProductRestService {
 		Product product=em.find(Product.class, id);
 		if(product.equals(null))
 			throw new NotFoundException();
-		return Response.ok(product).build();
+		Response response=SpecialResponse.createResponse(product);
+		return response;
 	}
 	
 	@GET

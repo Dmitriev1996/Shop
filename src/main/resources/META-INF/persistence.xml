@@ -30,6 +30,7 @@
 	<class>ru.projects.Shop.entity.TransportationType</class>
 	<class>ru.projects.Shop.entity.BonusCard</class>
 	<class>ru.projects.Shop.entity.ProductUnit</class>
+	<class>ru.projects.Shop.entity.ProductImport</class>
 	<properties>
       <property name="eclipselink.logging.level" value="INFO"/>
 	</properties>

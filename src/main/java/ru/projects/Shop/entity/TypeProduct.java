@@ -25,7 +25,7 @@ public class TypeProduct implements Serializable {
 	private Long TypeProduct_ID;
 	@Column(name="TYPE_PRODUCT")
 	private String TypeProduct;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="type_product_products", 
 	joinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"), 
 	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
@@ -47,6 +47,14 @@ public class TypeProduct implements Serializable {
 
 	public void setTypeProduct(String typeProduct) {
 		TypeProduct = typeProduct;
+	}
+
+	public List<Product> getProductList() {
+		return ProductList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		ProductList = productList;
 	}
 	
 	

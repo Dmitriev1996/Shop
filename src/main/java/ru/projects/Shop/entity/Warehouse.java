@@ -24,9 +24,10 @@ public class Warehouse implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="WAREHOUSE_ID")
 	private Long Warehouse_ID;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="SHOP_ID")
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
 	private Shop Shop;
+	@OneToMany(mappedBy="Warehouse", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	private List<Delivery> DeliveryList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="warehouse_products", 
 	joinColumns=@JoinColumn(name="WAREHOUSE_ID"), 

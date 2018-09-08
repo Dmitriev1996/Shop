@@ -6,12 +6,10 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,15 +28,17 @@ public class Product implements Serializable {
 	private String Articul;
 	@Column(name="PRICE")
 	private Double Price;
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	/*@ManyToOne(cascade=CascadeType.ALL)
 	@JoinTable(name="type_product_products", 
 	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
 	inverseJoinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"))
-	private TypeProduct TypeProduct;
+	private TypeProduct TypeProduct;*/
 	@Column(name="MASS")
 	private Double Mass;
 	@Column(name="DESCRIPTION")
 	private String Description;
+	@Column(name="IMAGE")
+	private byte[] Picture;
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="product_comments", 
 	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
@@ -79,13 +79,13 @@ public class Product implements Serializable {
 		Price = price;
 	}
 
-	public TypeProduct getTypeProduct() {
+	/*public TypeProduct getTypeProduct() {
 		return TypeProduct;
 	}
 
 	public void setTypeProduct(TypeProduct typeProduct) {
 		TypeProduct = typeProduct;
-	}
+	}*/
 
 	public Double getMass() {
 		return Mass;
@@ -110,6 +110,16 @@ public class Product implements Serializable {
 	public void setCommentList(List<Comment> commentList) {
 		CommentList = commentList;
 	}
+
+	public byte[] getPicture() {
+		return Picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		Picture = picture;
+	}
+
+	
 	
 	
 	

@@ -29,13 +29,12 @@ public class DeliveryTest extends ParentTest {
 		TypeProduct typeproduct;
 		typeproduct=new TypeProduct();
 		typeproduct.setTypeProduct("Мясные полуфабрикаты");
-		product.setTypeProduct(typeproduct);
+		//product.setTypeProduct(typeproduct);
 		productlist.add(product);
 		product=new Product();
 		product.setNameOfProduct("Котлеты");
-		product.setTypeProduct(typeproduct);
+		//product.setTypeProduct(typeproduct);
 		productlist.add(product);
-		delivery.setProductList(productlist);
 		Provider provider=new Provider();
 		provider.setNameOfProvider("Тандер");
 		delivery.setProvider(provider);

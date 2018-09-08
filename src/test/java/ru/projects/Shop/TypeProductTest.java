@@ -2,27 +2,26 @@ package ru.projects.Shop;
 
 import static org.junit.Assert.assertEquals;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import org.junit.Test;
 
 import ru.projects.Shop.ejb.TypeProductEJB;
 import ru.projects.Shop.entity.TypeProduct;
+import ru.projects.Shop.entity.TypeProducts;
 
 public class TypeProductTest extends ParentTest {
 	
+	@Inject
+	private EntityManager em;
+	
 	@Test
 	public void shouldTypeProduct() throws Exception {
-		TypeProduct typeproduct=new TypeProduct();
-		typeproduct.setTypeProduct("Фрукты");
-		TypeProductEJB typeejb=(TypeProductEJB)ctx.lookup("java:global/classes/TypeProductEJB!ru.projects.Shop.ejb.TypeProductEJB");
-		typeejb.createTypeProduct(typeproduct);
-		assertEquals(1, typeejb.findAllTypeProduct().size());
-		TypeProduct controltypeproduct=typeejb.findTypeProductById(1L);
-		controltypeproduct.setTypeProduct("Овощи");
-		typeejb.updateTypeProduct(controltypeproduct);
-		TypeProduct updated=typeejb.findTypeProductById(1L);
-		assertEquals("Овощи", updated.getTypeProduct());
-		typeejb.deleteTypeProduct(updated);
-		assertEquals(0, typeejb.findAllTypeProduct().size());
+		TypedQuery<TypeProduct> query=em.createNamedQuery("findAllTypeProduct", TypeProduct.class);
+		TypeProducts typeProducts=new TypeProducts(query.getResultList());
+		assertEquals(8, typeProducts.size());
 	}
 
 }

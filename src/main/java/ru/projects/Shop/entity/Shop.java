@@ -37,6 +37,9 @@ public class Shop implements Serializable {
 	private String Phone;
 	@Column(name="EMAIL")
 	private String Email;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="WAREHOUSE_ID")
+	private Warehouse Warehouse;
 	
 	public Shop() {}
 
@@ -86,6 +89,14 @@ public class Shop implements Serializable {
 
 	public void setTypeShop(TypeShop typeShop) {
 		TypeShop = typeShop;
+	}
+
+	public Warehouse getWarehouse() {
+		return Warehouse;
+	}
+
+	public void setWarehouse(Warehouse warehouse) {
+		Warehouse = warehouse;
 	}
 
 	

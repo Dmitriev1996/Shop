@@ -31,7 +31,7 @@ public class CommentTest extends ParentTest {
 		Product product=new Product();
 		TypeProduct typeproduct=new TypeProduct();
 		typeproduct.setTypeProduct("Молочные продукты");
-		product.setTypeProduct(typeproduct);
+		//product.setTypeProduct(typeproduct);
 		product.setNameOfProduct("Молоко");
 		comment.setProduct(product);
 		comment.setComment("Очень вкусное молоко!");

@@ -53,7 +53,11 @@ public class TypeProductRestService {
 		TypeProduct typeProduct=em.find(TypeProduct.class, id);
 		if(typeProduct.equals(null))
 			throw new NotFoundException();
-		return Response.ok(typeProduct).build();
+		Response response=Response.ok(typeProduct).build();
+		ArrayList<Object> list=new ArrayList<Object>();
+	    list.add("*");
+	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET

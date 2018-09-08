@@ -24,7 +24,7 @@ public class BuyTest extends ParentTest {
 		product1.setNameOfProduct("Хлеб 'Финский'");
 		TypeProduct typeproduct1=new TypeProduct();
 		typeproduct1.setTypeProduct("Хлебобулочные изделия");
-		product1.setTypeProduct(typeproduct1);
+		//product1.setTypeProduct(typeproduct1);
 		product1.setMass(300.0);
 		product1.setPrice(30.0);
 		product1.setArticul("3443-565656");
@@ -33,7 +33,7 @@ public class BuyTest extends ParentTest {
 		product2.setNameOfProduct("Пельмени 'Фроловские'");
 		TypeProduct typeproduct2=new TypeProduct();
 		typeproduct2.setTypeProduct("Замороженные полуфабрикаты");
-		product2.setTypeProduct(typeproduct2);
+		//product2.setTypeProduct(typeproduct2);
 		product2.setMass(800.0);
 		product2.setPrice(250.0);
 		product2.setArticul("3421-546576");

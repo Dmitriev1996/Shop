@@ -16,7 +16,7 @@ public class ProductTest extends ParentTest {
 		product.setNameOfProduct("Котлеты");
 		TypeProduct typeproduct=new TypeProduct();
 		typeproduct.setTypeProduct("Мясные полуфабрикаты");
-		product.setTypeProduct(typeproduct);
+		//product.setTypeProduct(typeproduct);
 		product.setMass(1000.0);
 		product.setArticul("676-5675765765");
 		product.setDescription("Мясные котлеты");
