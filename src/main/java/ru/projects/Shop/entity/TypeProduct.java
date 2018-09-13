@@ -6,29 +6,31 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="type_products")
 @NamedQuery(name="findAllTypeProduct", query="SELECT t FROM TypeProduct t"
 		+ " ORDER BY t.TypeProduct_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "typeProduct_ID")
 public class TypeProduct implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="TYPE_PRODUCT_ID")
 	private Long TypeProduct_ID;
 	@Column(name="TYPE_PRODUCT")
 	private String TypeProduct;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="type_product_products", 
-	joinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="TypeProduct")
+	@JsonManagedReference
 	private List<Product> ProductList;
 	
 	public TypeProduct() {}

@@ -26,7 +26,7 @@ public class Warehouse implements Serializable {
 	private Long Warehouse_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
 	private Shop Shop;
-	@OneToMany(mappedBy="Warehouse", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
 	private List<Delivery> DeliveryList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="warehouse_products", 

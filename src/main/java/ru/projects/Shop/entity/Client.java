@@ -16,13 +16,18 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@XmlRootElement
 @Table(name="clients")
 @NamedQuery(name="findAllClient", query="SELECT c FROM Client c"
 		+ " ORDER BY c.Client_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "client_ID")
 public class Client implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="CLIENT_ID")
@@ -38,20 +43,17 @@ public class Client implements Serializable {
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="SEX_ID", nullable=false)
 	private Sex Sex;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_buys", 
-	joinColumns=@JoinColumn(name="CLIENT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="BUY_ID"))
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
+	private BonusCard BonusCard;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
 	private List<Buy> BuyList;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_orders", 
-	joinColumns=@JoinColumn(name="CLIENT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="ORDER_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
 	private List<Order> OrderList;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_comments", 
-	joinColumns=@JoinColumn(name="CLIENT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="COMMENT_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
 	private List<Comment> CommentList;
 	
 	public Client() {}
@@ -126,6 +128,14 @@ public class Client implements Serializable {
 
 	public void setCommentList(List<Comment> commentList) {
 		CommentList = commentList;
+	}
+
+	public BonusCard getBonusCard() {
+		return BonusCard;
+	}
+
+	public void setBonusCard(BonusCard bonusCard) {
+		BonusCard = bonusCard;
 	}
 	
 	

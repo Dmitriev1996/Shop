@@ -9,27 +9,33 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="shops")
 @NamedQuery(name="findAllShop", query="SELECT s FROM Shop s"
 		+ " ORDER BY s.Shop_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "shop_ID")
 public class Shop implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="SHOP_ID")
 	private Long Shop_ID;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TYPE_SHOP_ID")
+	@JsonBackReference
 	private TypeShop TypeShop;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="city_shops", 
-	joinColumns=@JoinColumn(name="SHOP_ID"), 
-	inverseJoinColumns=@JoinColumn(name="CITY_ID"))
+	@JoinColumn(name="CITY_ID")
+	@JsonBackReference
 	private City City;
 	@Column(name="ADRESS")
 	private String Adress;

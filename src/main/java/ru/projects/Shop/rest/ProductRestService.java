@@ -2,6 +2,7 @@ package ru.projects.Shop.rest;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -23,7 +24,6 @@ import javax.ws.rs.core.UriInfo;
 
 import ru.projects.Shop.SpecialResponse;
 import ru.projects.Shop.entity.Product;
-import ru.projects.Shop.entity.Products;
 
 @Path("/product")
 @Stateless
@@ -64,7 +64,7 @@ public class ProductRestService {
 	@Path("/findAllProducts")
 	public Response findAllProducts() {
 		TypedQuery<Product> query=em.createNamedQuery("findAllProduct", Product.class);
-	    Products products=new Products(query.getResultList());
+	    List<Product> products=query.getResultList();
 		//return Response.ok(products).header("Access-Control-Allow-Origin", "*").build();
 	    Response response=Response.ok(products).build();
 	    ArrayList<Object> list=new ArrayList<Object>();

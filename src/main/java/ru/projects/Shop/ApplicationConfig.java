@@ -8,6 +8,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+import org.glassfish.jersey.jackson.JacksonFeature;
 
 import ru.projects.Shop.rest.AdressRestService;
 import ru.projects.Shop.rest.BonusCardRestService;
@@ -64,7 +65,8 @@ public class ApplicationConfig extends Application {
 		c.add(TypeShopRestService.class);
 		c.add(WarehouseRestService.class);
 		c.add(WorkerRestService.class);
-		c.add(MOXyJsonProvider.class);
+		//c.add(MOXyJsonProvider.class);
+		c.add(JacksonFeature.class);
 		classes=Collections.unmodifiableSet(c);
 	}
 	

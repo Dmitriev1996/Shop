@@ -14,21 +14,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
-@XmlRootElement
 @Table(name="adresses")
 @NamedQuery(name="findAllAdress", query="SELECT a FROM Adress a"
 		+ " ORDER BY a.Adress_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "adress_ID")
 public class Adress implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="ADRESS_ID")
 	private Long Adress_ID;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="COUNTRY_ID", nullable=false)
-	private Country Country;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="REGION_ID")
-	private Region Region;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CITY_ID")
 	private City City;
@@ -53,21 +52,6 @@ public class Adress implements Serializable {
 		Adress_ID = adress_ID;
 	}
 
-	public Country getCountry() {
-		return Country;
-	}
-
-	public void setCountry(Country country) {
-		Country = country;
-	}
-
-	public Region getRegion() {
-		return Region;
-	}
-
-	public void setRegion(Region region) {
-		Region = region;
-	}
 
 	public City getCity() {
 		return City;

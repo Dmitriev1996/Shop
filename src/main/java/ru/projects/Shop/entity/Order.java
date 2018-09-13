@@ -17,18 +17,24 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="orders")
 @NamedQuery(name="findAllOrder", query="SELECT o FROM Order o"
 		+ " ORDER BY o.Order_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "order_ID")
 public class Order {
 	@Id @GeneratedValue
 	@Column(name="ORDER_ID")
 	private Long Order_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_orders", 
-	joinColumns=@JoinColumn(name="ORDER_ID"), 
-	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
+	@JoinColumn(name="CLIENT_ID")
+	@JsonBackReference
 	private Client Client;
 	@Column(name="DATE_OF_ORDER")
 	private Date DateOfOrder;

@@ -32,9 +32,7 @@ public class Comment implements Serializable {
 	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
 	private Client Client;
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinTable(name="product_comments", 
-	joinColumns=@JoinColumn(name="COMMENT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="PRODUCT_ID"))
+	@JoinColumn(name="PRODUCT_ID")
 	private Product Product;
 	
 	public Comment() {}

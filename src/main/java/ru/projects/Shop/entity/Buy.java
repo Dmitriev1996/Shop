@@ -7,20 +7,27 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@XmlRootElement
 @Table(name="buys")
 @NamedQuery(name="findAllBuy", query="SELECT b FROM Buy b"
 		+ " ORDER BY b.Buy_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "buy_ID")
 public class Buy implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="BUY_ID")
@@ -34,6 +41,10 @@ public class Buy implements Serializable {
 	private List<Product> ProductList;
 	@Column(name="SUM_BUY")
 	private Double SumBuy;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="CLIENT_ID")
+	@JsonBackReference
+	private Client Client;
 	
 	public Buy() {}
 
@@ -67,6 +78,14 @@ public class Buy implements Serializable {
 
 	public void setSumBuy(Double sumBuy) {
 		SumBuy = sumBuy;
+	}
+
+	public Client getClient() {
+		return Client;
+	}
+
+	public void setClient(Client client) {
+		Client = client;
 	}
 	
 	

@@ -2,6 +2,7 @@ package ru.projects.Shop.rest;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -22,7 +23,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import ru.projects.Shop.entity.TypeProduct;
-import ru.projects.Shop.entity.TypeProducts;
 
 @Path("/type_product")
 @Stateless
@@ -66,7 +66,7 @@ public class TypeProductRestService {
 	@Path("/findAllTypeProducts")
 	public Response findAllTypeProducts() {
 		TypedQuery<TypeProduct> query=em.createNamedQuery("findAllTypeProduct", TypeProduct.class);
-		TypeProducts typeProducts=new TypeProducts(query.getResultList());
+		List<TypeProduct> typeProducts=query.getResultList();
 		Response response=Response.ok(typeProducts).build();
 		ArrayList<Object> list=new ArrayList<Object>();
 	    list.add("*");

@@ -10,18 +10,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@XmlRootElement
 @Table(name="cities")
 @NamedQuery(name="findAllCity", query="SELECT c FROM City c"
 		+ " ORDER BY c.City_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "city_ID")
 public class City implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="CITY_ID")
@@ -29,14 +34,11 @@ public class City implements Serializable {
 	@Column(name="CITY")
 	private String City;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="region_cities", 
-	joinColumns=@JoinColumn(name="CITY_ID"), 
-	inverseJoinColumns=@JoinColumn(name="REGION_ID"))
+	@JoinColumn(name="REGION_ID")
+	@JsonBackReference
 	private Region Region;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="city_shops", 
-	joinColumns=@JoinColumn(name="CITY_ID"), 
-	inverseJoinColumns=@JoinColumn(name="SHOP_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="City")
+	@JsonManagedReference
 	private List<Shop> ShopList;
 	public City() {}
 

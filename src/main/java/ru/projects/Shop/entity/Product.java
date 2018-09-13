@@ -6,18 +6,28 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+
 
 @Entity
 @Table(name="products")
 @NamedQuery(name="findAllProduct", query="SELECT p FROM Product p"
 		+ " ORDER BY p.Product_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "product_ID")
 public class Product implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="PRODUCT_ID")
@@ -28,21 +38,17 @@ public class Product implements Serializable {
 	private String Articul;
 	@Column(name="PRICE")
 	private Double Price;
-	/*@ManyToOne(cascade=CascadeType.ALL)
-	@JoinTable(name="type_product_products", 
-	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="TYPE_PRODUCT_ID"))
-	private TypeProduct TypeProduct;*/
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="TYPE_PRODUCT_ID")
+	@JsonBackReference
+	private TypeProduct TypeProduct;
 	@Column(name="MASS")
 	private Double Mass;
 	@Column(name="DESCRIPTION")
 	private String Description;
 	@Column(name="IMAGE")
 	private byte[] Picture;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="product_comments", 
-	joinColumns=@JoinColumn(name="PRODUCT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="COMMENT_ID"))
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="Product")
 	private List<Comment> CommentList;
 	
 	public Product() {}
@@ -79,13 +85,13 @@ public class Product implements Serializable {
 		Price = price;
 	}
 
-	/*public TypeProduct getTypeProduct() {
+	public TypeProduct getTypeProduct() {
 		return TypeProduct;
 	}
 
 	public void setTypeProduct(TypeProduct typeProduct) {
 		TypeProduct = typeProduct;
-	}*/
+	}
 
 	public Double getMass() {
 		return Mass;
