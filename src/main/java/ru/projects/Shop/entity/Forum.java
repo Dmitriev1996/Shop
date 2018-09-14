@@ -10,29 +10,35 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="forums")
 @NamedQuery(name="findAllForum", query="SELECT f FROM Forum f"
 		+ " ORDER BY f.Forum_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "forum_ID")
 public class Forum implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="FORUM_ID")
 	private Long Forum_ID;
 	@Column(name="NAME_OF_FORUM")
 	private String NameOfForum;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID", nullable=false)
+	@JsonBackReference
 	private Client Client;
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="forum_messages", 
-	joinColumns=@JoinColumn(name="FORUM_ID"), 
-	inverseJoinColumns=@JoinColumn(name="MESSAGE_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Forum")
+	@JsonManagedReference
 	private List<Message> MessageList;
 	
 	public Forum() {}

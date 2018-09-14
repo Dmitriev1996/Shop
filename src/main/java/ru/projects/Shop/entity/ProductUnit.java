@@ -9,25 +9,32 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@XmlRootElement
 @Table(name="product_unit")
 @NamedQuery(name="findAllProductUnit", query="SELECT u FROM ProductUnit u"
 		+ " ORDER BY u.ProductUnit_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "productUnit_ID")
 public class ProductUnit implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="PRODUCT_UNIT_ID")
 	private Long ProductUnit_ID;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="WAREHOUSE_ID", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="WAREHOUSE_ID")
+	@JsonBackReference
 	private Warehouse Warehouse;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="PRODUCT_ID", nullable=false)
+	@JoinColumn(name="PRODUCT_ID")
 	private Product Product;
 	@Column(name="VALUE")
 	private int Value;

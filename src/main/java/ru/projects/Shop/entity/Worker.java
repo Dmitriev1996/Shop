@@ -31,8 +31,11 @@ public class Worker implements Serializable {
 	@Column(name="DATE_OF_BIRTH")
 	private Date DateOfBirth;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="SEX_ID", nullable=false)
+	@JoinColumn(name="SEX_ID")
 	private Sex Sex;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="ADRESS_ID")
+	private Adress Adress;
 	
 	public Worker() {}
 
@@ -82,6 +85,14 @@ public class Worker implements Serializable {
 
 	public void setSex(Sex sex) {
 		Sex = sex;
+	}
+
+	public Adress getAdress() {
+		return Adress;
+	}
+
+	public void setAdress(Adress adress) {
+		Adress = adress;
 	}
 	
 	

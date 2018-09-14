@@ -9,29 +9,34 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="warehouses")
 @NamedQuery(name="findAllWarehouse", query="SELECT w FROM Warehouse w"
 		+ " ORDER BY w.Warehouse_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "warehouse_ID")
 public class Warehouse implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="WAREHOUSE_ID")
 	private Long Warehouse_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
+	@JsonManagedReference
 	private Shop Shop;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
+	@JsonManagedReference
 	private List<Delivery> DeliveryList;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="warehouse_products", 
-	joinColumns=@JoinColumn(name="WAREHOUSE_ID"), 
-	inverseJoinColumns=@JoinColumn(name="PRODUCT_UNIT_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
+	@JsonManagedReference
 	private List<ProductUnit> ProductUnitList;
 	
 	public Warehouse() {}
@@ -58,6 +63,14 @@ public class Warehouse implements Serializable {
 
 	public void setShop(Shop shop) {
 		Shop = shop;
+	}
+
+	public List<Delivery> getDeliveryList() {
+		return DeliveryList;
+	}
+
+	public void setDeliveryList(List<Delivery> deliveryList) {
+		DeliveryList = deliveryList;
 	}
 	
 	

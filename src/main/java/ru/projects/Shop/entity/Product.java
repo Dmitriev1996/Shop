@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
@@ -48,7 +49,8 @@ public class Product implements Serializable {
 	private String Description;
 	@Column(name="IMAGE")
 	private byte[] Picture;
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="Product")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Product")
+	@JsonManagedReference
 	private List<Comment> CommentList;
 	
 	public Product() {}

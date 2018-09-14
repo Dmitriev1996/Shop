@@ -15,23 +15,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="messages")
 @NamedQuery(name="findAllMessage", query="SELECT m FROM Message m"
 		+ " ORDER BY m.Message_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "country_ID")
 public class Message implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="MESSAGE_ID")
 	private Long Message_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_messages", 
-	joinColumns=@JoinColumn(name="MESSAGE_ID"), 
-	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
+	@JoinColumn(name="CLIENT_ID")
+	@JsonBackReference
 	private Client Client;
 	@Column(name="DATE_OF_MESSAGE")
 	private Date DateOfMessage;
 	@Column(name="MESSAGE")
 	private String Message;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="FORUM_ID")
+	@JsonBackReference
+	private Forum Forum;
 	
 	public Message() {}
 
@@ -65,6 +75,14 @@ public class Message implements Serializable {
 
 	public void setMessage(String message) {
 		Message = message;
+	}
+
+	public Forum getForum() {
+		return Forum;
+	}
+
+	public void setForum(Forum forum) {
+		Forum = forum;
 	}
 	
 	

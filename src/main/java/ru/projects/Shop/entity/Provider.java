@@ -14,10 +14,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="providers")
 @NamedQuery(name="findAllProvider", query="SELECT p FROM Provider p"
 		+ " ORDER BY p.Provider_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "provider_ID")
 public class Provider implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="PROVIDER_ID")
@@ -25,9 +31,7 @@ public class Provider implements Serializable {
 	@Column(name="NAME_OF_PROVIDER")
 	private String NameOfProvider;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="provider_cities", 
-	joinColumns=@JoinColumn(name="PROVIDER_ID"), 
-	inverseJoinColumns=@JoinColumn(name="CITY_ID"))
+	@JoinColumn(name="CITY_ID")
 	private City City;
 	@Column(name="ADRESS")
 	private String Adress;

@@ -13,20 +13,30 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="transportations")
 @NamedQuery(name="findAllTransportation", query="SELECT t FROM Transportation t"
 		+ " ORDER BY t.Transportation_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "transportation_ID")
 public class Transportation implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="TRANSPORTATION_ID")
 	private Long Transportation_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="TRANSPORTATION_TYPE_ID", nullable=false)
+	@JoinColumn(name="TRANSPORTATION_TYPE_ID")
 	private TransportationType TransportationType;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="ADRESS_ID", nullable=false)
+	@JoinColumn(name="ADRESS_ID")
 	private Adress Adress;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Transportation")
+	@JsonManagedReference
+	private Order Order;
 	
 	public Transportation() {}
 
@@ -52,6 +62,14 @@ public class Transportation implements Serializable {
 
 	public void setAdress(Adress adress) {
 		Adress = adress;
+	}
+
+	public Order getOrder() {
+		return Order;
+	}
+
+	public void setOrder(Order order) {
+		Order = order;
 	}
 
 	

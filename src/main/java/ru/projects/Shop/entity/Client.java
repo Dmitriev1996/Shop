@@ -55,6 +55,12 @@ public class Client implements Serializable {
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
 	@JsonManagedReference
 	private List<Comment> CommentList;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
+	private List<Forum> ForumList;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
+	@JsonManagedReference
+	private List<Message> MessageList;
 	
 	public Client() {}
 
@@ -136,6 +142,22 @@ public class Client implements Serializable {
 
 	public void setBonusCard(BonusCard bonusCard) {
 		BonusCard = bonusCard;
+	}
+
+	public List<Forum> getForumList() {
+		return ForumList;
+	}
+
+	public void setForumList(List<Forum> forumList) {
+		ForumList = forumList;
+	}
+
+	public List<Message> getMessageList() {
+		return MessageList;
+	}
+
+	public void setMessageList(List<Message> messageList) {
+		MessageList = messageList;
 	}
 	
 	

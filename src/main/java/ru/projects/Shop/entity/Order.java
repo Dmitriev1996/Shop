@@ -47,9 +47,11 @@ public class Order {
 	private Double SumOfOrder;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TRANSPORTATION_ID")
+	@JsonBackReference
 	private Transportation Transportation;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="STATUS_OF_ORDER_ID", nullable=false)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="STATUS_OF_ORDER_ID")
+	@JsonBackReference
 	private StatusOfOrder StatusOfOrder;
 	
 	public Order() {}

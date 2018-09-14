@@ -42,7 +42,6 @@ public class DeliveryTest extends ParentTest {
 		TypeShop typeshop=new TypeShop();
 		typeshop.setTypeShop("Гипермаркет");
 		shop.setTypeShop(typeshop);
-		delivery.setShop(shop);
 		DeliveryEJB deliveryejb=(DeliveryEJB)ctx.lookup("java:global/classes/DeliveryEJB!ru.projects.Shop.ejb.DeliveryEJB");
 		deliveryejb.createDelivery(delivery);
 		assertEquals(1, deliveryejb.findAllDelivery().size());

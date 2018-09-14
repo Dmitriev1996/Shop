@@ -12,12 +12,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import ru.projects.Shop.listener.ProductUnitCreater;
 
@@ -26,25 +29,25 @@ import ru.projects.Shop.listener.ProductUnitCreater;
 @Table(name="deliveries")
 @NamedQuery(name="findAllDelivery", query="SELECT d FROM Delivery d"
 		+ " ORDER BY d.Delivery_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "delivery_ID")
 public class Delivery implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="DELIVERY_ID")
 	private Long Delivery_ID;
 	@Column(name="DATE_OF_DELIVERY")
 	private Date DateOfDelivery;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="PROVIDER_ID")
+	@JsonBackReference
 	private Provider Provider;
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="SHOP_ID")
-	private Shop Shop;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="WAREHOUSE_ID")
+	@JsonBackReference
 	private Warehouse Warehouse;
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="delivery_product_import", 
-	joinColumns=@JoinColumn(name="DELIVERY_ID"), 
-	inverseJoinColumns=@JoinColumn(name="PRODUCT_IMPORT_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Delivery")
+	@JsonManagedReference
 	private List<ProductImport> ProductImportList;
 	
 	
@@ -74,13 +77,6 @@ public class Delivery implements Serializable {
 		Provider = provider;
 	}
 
-	public Shop getShop() {
-		return Shop;
-	}
-
-	public void setShop(Shop shop) {
-		Shop = shop;
-	}
 
 	public List<ProductImport> getProductImportList() {
 		return ProductImportList;

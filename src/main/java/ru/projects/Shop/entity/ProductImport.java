@@ -9,14 +9,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="product_imports")
 @NamedQuery(name="findAllProductImport", query="SELECT i FROM ProductImport i"
 		+ " ORDER BY i.ProductImport_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "productImport_ID")
 public class ProductImport implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="PRODUCT_IMPORT_ID")
@@ -26,6 +34,10 @@ public class ProductImport implements Serializable {
 	private Product Product;
 	@Column(name="VALUE")
 	private int Value;
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="DELIVERY_ID")
+	@JsonBackReference
+	private Delivery Delivery;
 	
 	public ProductImport() {}
 
@@ -51,6 +63,14 @@ public class ProductImport implements Serializable {
 
 	public void setValue(int value) {
 		Value = value;
+	}
+
+	public Delivery getDelivery() {
+		return Delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		Delivery = delivery;
 	}
 	
 	

@@ -9,17 +9,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @XmlRootElement
 @Table(name="comments")
 @NamedQuery(name="findAllComment", query="SELECT c FROM Comment c"
 		+ " ORDER BY c.Comment_ID DESC")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "comment_ID")
 public class Comment implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="COMMENT_ID")
@@ -27,12 +33,12 @@ public class Comment implements Serializable {
 	@Column(name="COMMENT")
 	private String Comment;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinTable(name="client_comments", 
-	joinColumns=@JoinColumn(name="COMMENT_ID"), 
-	inverseJoinColumns=@JoinColumn(name="CLIENT_ID"))
+	@JoinColumn(name="CLIENT_ID")
+	@JsonBackReference
 	private Client Client;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="PRODUCT_ID")
+	@JsonBackReference
 	private Product Product;
 	
 	public Comment() {}
