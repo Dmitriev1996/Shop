@@ -61,6 +61,9 @@ public class Client implements Serializable {
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
 	@JsonManagedReference
 	private List<Message> MessageList;
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="CREDENTIAL_ID")
+	private Credential Credential;
 	
 	public Client() {}
 
@@ -158,6 +161,14 @@ public class Client implements Serializable {
 
 	public void setMessageList(List<Message> messageList) {
 		MessageList = messageList;
+	}
+
+	public Credential getCredential() {
+		return Credential;
+	}
+
+	public void setCredential(Credential credential) {
+		Credential = credential;
 	}
 	
 	
