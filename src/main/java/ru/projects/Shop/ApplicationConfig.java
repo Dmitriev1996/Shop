@@ -17,6 +17,7 @@ import ru.projects.Shop.rest.CityRestService;
 import ru.projects.Shop.rest.ClientRestService;
 import ru.projects.Shop.rest.CommentRestService;
 import ru.projects.Shop.rest.CountryRestService;
+import ru.projects.Shop.rest.CredentialRestService;
 import ru.projects.Shop.rest.DeliveryRestService;
 import ru.projects.Shop.rest.ForumRestService;
 import ru.projects.Shop.rest.MessageRestService;
@@ -65,6 +66,7 @@ public class ApplicationConfig extends Application {
 		c.add(TypeShopRestService.class);
 		c.add(WarehouseRestService.class);
 		c.add(WorkerRestService.class);
+		c.add(CredentialRestService.class);
 		//c.add(MOXyJsonProvider.class);
 		c.add(JacksonFeature.class);
 		classes=Collections.unmodifiableSet(c);

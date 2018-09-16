@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import ru.projects.Shop.entity.Credential;
 import ru.projects.Shop.interfaces.local.CredentialLocal;
@@ -47,6 +48,20 @@ public class CredentialEJB implements CredentialLocal {
 		// TODO Auto-generated method stub
 		em.persist(credential);
 		return credential;
+	}
+
+	@Override
+	public boolean checkUser(Credential credential) {
+		// TODO Auto-generated method stub
+		boolean check=false;
+		TypedQuery<Credential> query=em.createNamedQuery("checkUser", Credential.class);
+		query.setParameter("login", credential.getLogin());
+		query.setParameter("password", credential.getPassword());
+		List<Credential> list=query.getResultList();
+		if(list.size()==1) {
+			check=true;
+		}
+		return check;
 	}
 
 }

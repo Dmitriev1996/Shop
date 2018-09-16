@@ -8,14 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="credentials")
-@NamedQuery(name="findAllCredential", query="SELECT c FROM Credential c"
-		+ " ORDER BY c.Credential_ID DESC")
+@NamedQueries({
+	@NamedQuery(name="findAllCredential", query="SELECT c FROM Credential c"
+			+ " ORDER BY c.Credential_ID DESC"),
+	@NamedQuery(name="checkUser", query="SELECT c FROM Credential c"
+			+ " WHERE c.Login = :login AND c.Password = :password")
+})
 public class Credential implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="CREDENTIAL_ID")
