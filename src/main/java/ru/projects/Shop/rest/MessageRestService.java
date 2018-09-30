@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.MessageEJB;
 import ru.projects.Shop.entity.Message;
 import ru.projects.Shop.entity.Messages;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.Messages;
 @Stateless
 public class MessageRestService {
 	@Inject
-	private EntityManager em;
+	private MessageEJB messageEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class MessageRestService {
 	public Response createMessage(Message message) {
 		if(message.equals(null))
 			throw new BadRequestException();
-		em.persist(message);
+		messageEJB.createMessage(message);
 		URI messageUri=uriInfo.getAbsolutePathBuilder()
 				.path(message.getMessage_ID().toString()).build();
-		return Response.created(messageUri).build();
+		Response response=Response.created(messageUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +51,12 @@ public class MessageRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findMessageById/{id}")
 	public Response findMessageById(@PathParam("id") Long id) {
-		Message message=em.find(Message.class, id);
+		Message message=messageEJB.findMessageById(id);
 		if(message.equals(null))
 			throw new NotFoundException();
-		return Response.ok(message).build();
+		Response response=Response.ok(message).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +64,10 @@ public class MessageRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllMessages")
 	public Response findAllMessages() {
-		TypedQuery<Message> query=em.createNamedQuery("findAllMessage", Message.class);
-		Messages messages=new Messages(query.getResultList());
-		return Response.ok(messages).build();
+		List<Message> messages=messageEJB.findAllMesage();
+		Response response=Response.ok(messages).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateMessage")
@@ -72,20 +77,23 @@ public class MessageRestService {
 	public Response updateMessage(Message message) {
 		if(message.equals(null))
 			throw new BadRequestException();
-		em.merge(message);
-		return Response.ok(message).build();
+		Message updated=messageEJB.updateMessage(message);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteMessage/{id}")
-	public Response deleteMessage(@PathParam("id") Long id) {
-		Message message=em.find(Message.class, id);
+	@Path("/deleteMessage")
+	public Response deleteMessage(Message message) {
 		if(message.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(message));
-		return Response.noContent().build();
+		messageEJB.deleteMessage(message);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

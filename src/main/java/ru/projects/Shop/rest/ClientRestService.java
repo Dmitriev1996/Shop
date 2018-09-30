@@ -1,6 +1,7 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,15 +21,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import ru.projects.Shop.entity.Adress;
+import ru.projects.Shop.ejb.ClientEJB;
 import ru.projects.Shop.entity.Client;
-import ru.projects.Shop.entity.Clients;
 
 @Path("/client")
 @Stateless
 public class ClientRestService {
 	@Inject
-	private EntityManager em;
+	private ClientEJB clientEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -39,10 +39,27 @@ public class ClientRestService {
 	public Response createClient(Client client) {
 		if(client.equals(null))
 			throw new BadRequestException();
-		em.persist(client);
+		clientEJB.createClient(client);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(client.getClient_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
+	}
+	
+	@Path("/findClientByToken")
+	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response findClientByToken(String value) {
+		Client client;
+		if(value.equals(null)) {
+			throw new BadRequestException();
+		}
+		client=clientEJB.findClientByToken(value);
+		Response response=Response.ok(client).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,10 +67,12 @@ public class ClientRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findClientById/{id}")
 	public Response findClientById(@PathParam("id") Long id) {
-		Client client=em.find(Client.class, id);
+		Client client=clientEJB.findClientById(id);
 		if(client.equals(null))
 			throw new NotFoundException();
-		return Response.ok(client).build();
+		Response response=Response.ok(client).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -61,9 +80,10 @@ public class ClientRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllClients")
 	public Response findAllClients() {
-		TypedQuery<Client> query=em.createNamedQuery("findAllClient", Client.class);
-		Clients clients=new Clients(query.getResultList());
-		return Response.ok(clients).build();
+		List<Client> clients=clientEJB.findAllClient();
+		Response response=Response.ok(clients).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateClient")
@@ -73,20 +93,22 @@ public class ClientRestService {
 	public Response updateClient(Client client) {
 		if(client.equals(null))
 			throw new BadRequestException();
-		em.merge(client);
-		return Response.ok(client).build();
+		Client updated=clientEJB.updateClient(client);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteClient/{id}")
-	public Response deleteClient(@PathParam("id") Long id) {
-		Client client=em.find(Client.class, id);
+	@Path("/deleteClient")
+	public Response deleteClient(Client client) {
 		if(client.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(client));
-		return Response.noContent().build();
+		clientEJB.deleteClient(client);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
-
 }

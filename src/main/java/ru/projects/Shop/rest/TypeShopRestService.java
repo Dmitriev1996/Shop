@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.TypeShopEJB;
 import ru.projects.Shop.entity.TypeShop;
-import ru.projects.Shop.entity.TypeShops;
 
 @Path("/type_shop")
 @Stateless
 public class TypeShopRestService {
 	@Inject
-	private EntityManager em;
+	private TypeShopEJB typeShopEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class TypeShopRestService {
 	public Response createTypeShop(TypeShop typeShop) {
 		if(typeShop.equals(null))
 			throw new BadRequestException();
-		em.persist(typeShop);
+		typeShopEJB.createTypeShop(typeShop);
 		URI typeShopUri=uriInfo.getAbsolutePathBuilder()
 				.path(typeShop.getTypeShop_ID().toString()).build();
-		return Response.created(typeShopUri).build();
+		Response response=Response.created(typeShopUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class TypeShopRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findTypeShopById/{id}")
 	public Response findTypeShopById(@PathParam("id") Long id) {
-		TypeShop typeShop=em.find(TypeShop.class, id);
+		TypeShop typeShop=typeShopEJB.findTypeShopById(id);
 		if(typeShop.equals(null))
 			throw new NotFoundException();
-		return Response.ok(typeShop).build();
+		Response response=Response.ok(typeShop).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class TypeShopRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllTypeShops")
 	public Response findAllTypeShops() {
-		TypedQuery<TypeShop> query=em.createNamedQuery("findAllTypeShop", TypeShop.class);
-		TypeShops typeShops=new TypeShops(query.getResultList());
-		return Response.ok(typeShops).build();
+		List<TypeShop> typeShops=typeShopEJB.findAllTypeShop();
+		Response response=Response.ok(typeShops).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateTypeShop")
@@ -72,20 +76,23 @@ public class TypeShopRestService {
 	public Response updateTypeShop(TypeShop typeShop) {
 		if(typeShop.equals(null))
 			throw new BadRequestException();
-		em.merge(typeShop);
-		return Response.ok(typeShop).build();
+		TypeShop updated=typeShopEJB.updateTypeShop(typeShop);
+		Response response=Response.ok(typeShop).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteTypeShop/{id}")
-	public Response deleteTypeShop(@PathParam("id") Long id) {
-		TypeShop typeShop=em.find(TypeShop.class, id);
+	@Path("/deleteTypeShop")
+	public Response deleteTypeShop(TypeShop typeShop) {
 		if(typeShop.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(typeShop));
-		return Response.noContent().build();
+		typeShopEJB.deleteTypeShop(typeShop);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

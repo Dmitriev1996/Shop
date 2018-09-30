@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.OrderEJB;
 import ru.projects.Shop.entity.Order;
-import ru.projects.Shop.entity.Orders;
 
 @Path("/order")
 @Stateless
 public class OrderRestService {
 	@Inject
-	private EntityManager em;
+	private OrderEJB orderEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class OrderRestService {
 	public Response createOrder(Order order) {
 		if(order.equals(null))
 			throw new BadRequestException();
-		em.persist(order);
+		orderEJB.createOrder(order);
 		URI orderUri=uriInfo.getAbsolutePathBuilder()
 				.path(order.getOrder_ID().toString()).build();
-		return Response.created(orderUri).build();
+		Response response=Response.created(orderUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class OrderRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findOrderById/{id}")
 	public Response findOrderById(@PathParam("id") Long id) {
-		Order order=em.find(Order.class, id);
+		Order order=orderEJB.findOrderById(id);
 		if(order.equals(null))
 			throw new NotFoundException();
-		return Response.ok(order).build();
+		Response response=Response.ok(order).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class OrderRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllOrders")
 	public Response findAllOrders() {
-		TypedQuery<Order> query=em.createNamedQuery("findAllOrder", Order.class);
-		Orders orders=new Orders(query.getResultList());
-		return Response.ok(orders).build();
+		List<Order> orders=orderEJB.findAllOrder();
+		Response response=Response.ok(orders).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateOrder")
@@ -72,20 +76,23 @@ public class OrderRestService {
 	public Response updateOrder(Order order) {
 		if(order.equals(null))
 			throw new BadRequestException();
-		em.merge(order);
-		return Response.ok(order).build();
+		Order updated=orderEJB.updateOrder(order);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteOrder/{id}")
-	public Response deleteOrder(@PathParam("id") Long id) {
-		Order order=em.find(Order.class, id);
+	@Path("/deleteOrder")
+	public Response deleteOrder(Order order) {
 		if(order.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(order));
-		return Response.noContent().build();
+		orderEJB.deleteOrder(order);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

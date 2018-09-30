@@ -16,8 +16,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import ru.projects.Shop.TokenFactory;
+import ru.projects.Shop.ejb.ClientEJB;
 import ru.projects.Shop.ejb.CredentialEJB;
 import ru.projects.Shop.ejb.TokenEJB;
+import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.entity.Credential;
 import ru.projects.Shop.entity.Token;
 
@@ -28,6 +30,8 @@ public class CredentialRestService {
 	private CredentialEJB credentialEJB;
 	@Inject
 	private TokenEJB tokenEJB;
+	@Inject
+	private ClientEJB clientEJB;
 	@Context
 	private UriInfo uriInfo;
 	@Context
@@ -48,8 +52,6 @@ public class CredentialRestService {
 			message="Ошибка!";
 		}
 		Response response=Response.ok(message).build();
-		ArrayList<Object> list=new ArrayList<Object>();
-	    list.add("*");
 	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
@@ -68,13 +70,33 @@ public class CredentialRestService {
 		boolean check=credentialEJB.checkUser(credential);
 		if(check==true) {
 			token=TokenFactory.createToken(credential);
-			response=Response.ok(token).build();
+			response=Response.ok().build();
+			response.getHeaders().add("Token", token.getToken());
+			response.getHeaders().add("Role", token.getCredential().getRole());
 		} else {
-			response=Response.ok(null).build();
+			response=Response.ok().build();
 		}
-		ArrayList<Object> list=new ArrayList<Object>();
-	    list.add("*");
 	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
+	}
+	
+	@Path("/Auth")
+	@POST
+	@Produces(MediaType.APPLICATION_XML)
+	@Consumes(MediaType.APPLICATION_XML)
+	public Response Authentication(String value) {
+		boolean auth=false;
+		Response response;
+		if(value.equals(null)) {
+			throw new BadRequestException();
+		}
+		Token token=tokenEJB.findTokenByValue(value);
+		if(token!=null) {
+			auth=true;
+		}
+		response=Response.ok().build();
+		response.getHeaders().add("Authenticated", auth);
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -82,11 +104,13 @@ public class CredentialRestService {
 	@POST
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_XML)
-	public Response Exit() {
-		String auth=httpHeaders.getRequestHeader("Token").toString();
-		Token token=tokenEJB.findTokenById(Long.parseLong(auth));
+	public Response Exit(String value) {
+		Response response;
+		Token token=tokenEJB.findTokenByValue(value);
 		tokenEJB.deleteToken(token);
-		return Response.ok().build();
+		response=Response.ok().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

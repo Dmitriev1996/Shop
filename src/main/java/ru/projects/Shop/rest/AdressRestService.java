@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,15 +19,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.AdressEJB;
 import ru.projects.Shop.entity.Adress;
-import ru.projects.Shop.entity.Adresses;
 
 
 @Path("/adress")
 @Stateless
 public class AdressRestService {
 	@Inject
-	private EntityManager em;
+	private AdressEJB adressEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -39,10 +38,12 @@ public class AdressRestService {
 	public Response createAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();
-		em.persist(adress);
+		adressEJB.createAdress(adress);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(adress.getAdress_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,20 +51,23 @@ public class AdressRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAdressById/{id}")
 	public Response findAdressById(@PathParam("id") Long id) {
-		Adress adress=em.find(Adress.class, id);
+		Adress adress=adressEJB.findAdressById(id);
 		if(adress.equals(null))
 			throw new NotFoundException();
-		return Response.ok(adress).build();
+		Response response=Response.ok(adress).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllAdresses")
-	public Response getAdresses() {
-		TypedQuery<Adress> query=em.createNamedQuery("findAllAdress", Adress.class);
-		Adresses adresses=new Adresses(query.getResultList());
-		return Response.ok(adresses).build();
+	public Response findAllAdresses() {
+		List<Adress> adresses=adressEJB.findAllAdress();
+		Response response=Response.ok(adresses).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateAdress")
@@ -73,20 +77,21 @@ public class AdressRestService {
 	public Response updateAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();
-		em.merge(adress);
-		return Response.ok(adress).build();
+		Adress updated=adressEJB.updateAdress(adress);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteAdress/{id}")
-	public Response deleteAdress(@PathParam("id") Long id) {
-		Adress adress=em.find(Adress.class, id);
-		if(adress.equals(null))
-			throw new NotFoundException();
-		em.remove(em.merge(adress));
-		return Response.noContent().build();
+	@Path("/deleteAdress")
+	public Response deleteAdress(Adress adress) {
+		adressEJB.deleteAdress(adress);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	

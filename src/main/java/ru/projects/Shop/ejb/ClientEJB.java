@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import ru.projects.Shop.entity.Client;
+import ru.projects.Shop.entity.Token;
 import ru.projects.Shop.interfaces.local.ClientLocal;
 
 
@@ -18,6 +19,9 @@ import ru.projects.Shop.interfaces.local.ClientLocal;
 public class ClientEJB implements ClientLocal {
 	@Inject
 	private EntityManager em;
+	
+	@Inject
+	private TokenEJB tokenEJB;
 	
 
 	public List<Client> findAllClient() {
@@ -42,6 +46,13 @@ public class ClientEJB implements ClientLocal {
 	public void deleteClient(Client client) {
 		// TODO Auto-generated method stub
 		em.remove(em.merge(client));
+	}
+
+	@Override
+	public Client findClientByToken(String value) {
+		// TODO Auto-generated method stub
+		Token token=tokenEJB.findTokenByValue(value);
+		return token.getCredential().getClient();
 	}
 
 

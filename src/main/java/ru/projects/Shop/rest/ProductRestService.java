@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
@@ -23,13 +22,14 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import ru.projects.Shop.SpecialResponse;
+import ru.projects.Shop.ejb.ProductEJB;
 import ru.projects.Shop.entity.Product;
 
 @Path("/product")
 @Stateless
 public class ProductRestService {
 	@Inject
-	private EntityManager em;
+	private ProductEJB productEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -40,10 +40,12 @@ public class ProductRestService {
 	public Response createProduct(Product product) {
 		if(product.equals(null))
 			throw new BadRequestException();
-		em.persist(product);
+		productEJB.createProduct(product);
 		URI productUri=uriInfo.getAbsolutePathBuilder()
 				.path(product.getProduct_ID().toString()).build();
-		return Response.created(productUri).build();
+		Response response=Response.created(productUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -51,7 +53,7 @@ public class ProductRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findProductById/{id}")
 	public Response findProductById(@PathParam("id") Long id) {
-		Product product=em.find(Product.class, id);
+		Product product=productEJB.findProductById(id);
 		if(product.equals(null))
 			throw new NotFoundException();
 		Response response=SpecialResponse.createResponse(product);
@@ -63,12 +65,8 @@ public class ProductRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllProducts")
 	public Response findAllProducts() {
-		TypedQuery<Product> query=em.createNamedQuery("findAllProduct", Product.class);
-	    List<Product> products=query.getResultList();
-		//return Response.ok(products).header("Access-Control-Allow-Origin", "*").build();
+	    List<Product> products=productEJB.findAllProduct();
 	    Response response=Response.ok(products).build();
-	    ArrayList<Object> list=new ArrayList<Object>();
-	    list.add("*");
 	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
@@ -80,20 +78,22 @@ public class ProductRestService {
 	public Response updateProduct(Product product) {
 		if(product.equals(null))
 			throw new BadRequestException();
-		em.merge(product);
-		return Response.ok(product).build();
+		Product updated=productEJB.updateProduct(product);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteProduct/{id}")
-	public Response deleteProduct(@PathParam("id") Long id) {
-		Product product=em.find(Product.class, id);
+	@Path("/deleteProduct")
+	public Response deleteProduct(Product product) {
 		if(product.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(product));
-		return Response.noContent().build();
+		productEJB.deleteProduct(product);
+		Response response=Response.noContent().build();
+		return response;
 	}
 
 }

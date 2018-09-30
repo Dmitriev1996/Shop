@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.TransportationTypeEJB;
 import ru.projects.Shop.entity.TransportationType;
-import ru.projects.Shop.entity.TransportationTypes;
 
 @Path("/transportation_type")
 @Stateless
 public class TransportationTypeRestService {
 	@Inject
-	private EntityManager em;
+	private TransportationTypeEJB transportationTypeEJB;;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class TransportationTypeRestService {
 	public Response createTransportationType(TransportationType transType) {
 		if(transType.equals(null))
 			throw new BadRequestException();
-		em.persist(transType);
+		transportationTypeEJB.createTransportationType(transType);
 		URI transTypeUri=uriInfo.getAbsolutePathBuilder()
 				.path(transType.getType_ID().toString()).build();
-		return Response.created(transTypeUri).build();
+		Response response=Response.created(transTypeUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class TransportationTypeRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findTransportationTypeById/{id}")
 	public Response findTransportationTypeById(@PathParam("id") Long id) {
-		TransportationType transType=em.find(TransportationType.class, id);
+		TransportationType transType=transportationTypeEJB.findTransportationTypeById(id);
 		if(transType.equals(null))
 			throw new NotFoundException();
-		return Response.ok(transType).build();
+		Response response=Response.ok(transType).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class TransportationTypeRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllTransportationTypes")
 	public Response findAllTransportationTypes() {
-		TypedQuery<TransportationType> query=em.createNamedQuery("findAllTransportationType", TransportationType.class);
-		TransportationTypes transTypes=new TransportationTypes(query.getResultList());
-		return Response.ok(transTypes).build();
+		List<TransportationType> transTypes=transportationTypeEJB.findAllTransportationType();
+		Response response=Response.ok(transTypes).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateTransportationType")
@@ -72,20 +76,24 @@ public class TransportationTypeRestService {
 	public Response updateTransportationType(TransportationType transType) {
 		if(transType.equals(null))
 			throw new BadRequestException();
-		em.merge(transType);
-		return Response.ok(transType).build();
+		TransportationType updated=transportationTypeEJB
+				.updateTransportationType(transType);
+		Response response=Response.ok(transType).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteTransportationType/{id}")
-	public Response deleteTransportationType(@PathParam("id") Long id) {
-		TransportationType transType=em.find(TransportationType.class, id);
+	@Path("/deleteTransportationType")
+	public Response deleteTransportationType(TransportationType transType) {
 		if(transType.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(transType));
-		return Response.noContent().build();
+		transportationTypeEJB.deleteTransportationType(transType);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

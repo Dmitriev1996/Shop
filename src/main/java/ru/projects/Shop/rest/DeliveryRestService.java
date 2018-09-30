@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.DeliveryEJB;
 import ru.projects.Shop.entity.Deliveries;
 import ru.projects.Shop.entity.Delivery;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.Delivery;
 @Stateless
 public class DeliveryRestService {
 	@Inject
-	private EntityManager em;
+	private DeliveryEJB deliveryEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class DeliveryRestService {
 	public Response createDelivery(Delivery delivery) {
 		if(delivery.equals(null))
 			throw new BadRequestException();
-		em.persist(delivery);
+		deliveryEJB.createDelivery(delivery);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(delivery.getDelivery_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +51,12 @@ public class DeliveryRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findDeliveryById/{id}")
 	public Response findDeliveryById(@PathParam("id") Long id) {
-		Delivery delivery=em.find(Delivery.class, id);
+		Delivery delivery=deliveryEJB.findDeliveryById(id);
 		if(delivery.equals(null))
 			throw new NotFoundException();
-		return Response.ok(delivery).build();
+		Response response=Response.ok(delivery).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +64,10 @@ public class DeliveryRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllDeliveries")
 	public Response findAllDeliveries() {
-		TypedQuery<Delivery> query=em.createNamedQuery("findAllDelivery", Delivery.class);
-		Deliveries deliveries=new Deliveries(query.getResultList());
-		return Response.ok(deliveries).build();
+		List<Delivery> deliveries=deliveryEJB.findAllDelivery();
+		Response response=Response.ok(deliveries).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateDelivery")
@@ -72,20 +77,23 @@ public class DeliveryRestService {
 	public Response updateDelivery(Delivery delivery) {
 		if(delivery.equals(null))
 			throw new BadRequestException();
-		em.merge(delivery);
-		return Response.ok(delivery).build();
+		Delivery updated=deliveryEJB.updateDelivery(delivery);
+		Response response=Response.ok(delivery).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteDelivery/{id}")
-	public Response deleteDelivery(@PathParam("id") Long id) {
-		Delivery delivery=em.find(Delivery.class, id);
+	@Path("/deleteDelivery")
+	public Response deleteDelivery(Delivery delivery) {
 		if(delivery.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(delivery));
-		return Response.noContent().build();
+		deliveryEJB.deleteDelivery(delivery);
+	    Response response=Response.noContent().build();
+	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
+	    return response;
 	}
 
 }

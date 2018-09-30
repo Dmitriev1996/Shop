@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.ShopEJB;
 import ru.projects.Shop.entity.Shop;
-import ru.projects.Shop.entity.Shops;
 
 @Path("/shop")
 @Stateless
 public class ShopRestService {
 	@Inject
-	private EntityManager em;
+	private ShopEJB shopEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class ShopRestService {
 	public Response createShop(Shop shop) {
 		if(shop.equals(null))
 			throw new BadRequestException();
-		em.persist(shop);
+		shopEJB.createShop(shop);
 		URI shopUri=uriInfo.getAbsolutePathBuilder()
 				.path(shop.getShop_ID().toString()).build();
-		return Response.created(shopUri).build();
+		Response response=Response.created(shopUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class ShopRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findShopById/{id}")
 	public Response findShopById(@PathParam("id") Long id) {
-		Shop shop=em.find(Shop.class, id);
+		Shop shop=shopEJB.findShopById(id);
 		if(shop.equals(null))
 			throw new NotFoundException();
-		return Response.ok(shop).build();
+		Response response=Response.ok(shop).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class ShopRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllShops")
 	public Response findAllShops() {
-		TypedQuery<Shop> query=em.createNamedQuery("findAllShop", Shop.class);
-		Shops shops=new Shops(query.getResultList());
-		return Response.ok(shops).build();
+		List<Shop> shops=shopEJB.findAllShop();
+		Response response=Response.ok(shops).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateShop")
@@ -72,20 +76,23 @@ public class ShopRestService {
 	public Response updateShop(Shop shop) {
 		if(shop.equals(null))
 			throw new BadRequestException();
-		em.merge(shop);
-		return Response.ok(shop).build();
+		Shop updated=shopEJB.updateShop(shop);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteShop/{id}")
-	public Response deleteShop(@PathParam("id") Long id) {
-		Shop shop=em.find(Shop.class, id);
+	@Path("/deleteShop")
+	public Response deleteShop(Shop shop) {
 		if(shop.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(shop));
-		return Response.noContent().build();
+		shopEJB.deleteShop(shop);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

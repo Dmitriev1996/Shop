@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import ru.projects.Shop.entity.Adress;
+import ru.projects.Shop.ejb.CommentEJB;
 import ru.projects.Shop.entity.Comment;
 import ru.projects.Shop.entity.Comments;
 
@@ -28,7 +27,7 @@ import ru.projects.Shop.entity.Comments;
 @Stateless
 public class CommentRestService {
 	@Inject
-	private EntityManager em;
+	private CommentEJB commentEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -39,10 +38,12 @@ public class CommentRestService {
 	public Response createComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();
-		em.persist(comment);
+		commentEJB.createComment(comment);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(comment.getComment_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,10 +51,12 @@ public class CommentRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findCommentById/{id}")
 	public Response findCommentById(@PathParam("id") Long id) {
-		Comment comment=em.find(Comment.class, id);
+		Comment comment=commentEJB.findCommentById(id);
 		if(comment.equals(null))
 			throw new NotFoundException();
-		return Response.ok(comment).build();
+		Response response=Response.ok(comment).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -61,11 +64,10 @@ public class CommentRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllComments")
 	public Response findAllComments() {
-		TypedQuery<Comment> query=em.createNamedQuery("findAllComment", Comment.class);
-		Comments comments=new Comments(query.getResultList());
-		return Response.ok(comments).header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.build();
+		List<Comment> comments=commentEJB.findAllComment();
+		Response response=Response.ok(comments).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateComment")
@@ -75,20 +77,23 @@ public class CommentRestService {
 	public Response updateComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();
-		em.merge(comment);
-		return Response.ok(comment).build();
+		Comment updated=commentEJB.updateComment(comment);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteComment/{id}")
-	public Response deleteComment(@PathParam("id") Long id) {
-		Comment comment=em.find(Comment.class, id);
+	@Path("/deleteComment")
+	public Response deleteComment(Comment comment) {
 		if(comment.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(comment));
-		return Response.noContent().build();
+		commentEJB.deleteComment(comment);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 

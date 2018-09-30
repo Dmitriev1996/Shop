@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.ProviderEJB;
 import ru.projects.Shop.entity.Provider;
 import ru.projects.Shop.entity.Providers;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.Providers;
 @Stateless
 public class ProviderRestService {
 	@Inject
-	private EntityManager em;
+	private ProviderEJB providerEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class ProviderRestService {
 	public Response createProvider(Provider provider) {
 		if(provider.equals(null))
 			throw new BadRequestException();
-		em.persist(provider);
+		providerEJB.createProvider(provider);
 		URI providerUri=uriInfo.getAbsolutePathBuilder()
 				.path(provider.getProvider_ID().toString()).build();
-		return Response.created(providerUri).build();
+		Response response=Response.created(providerUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +51,12 @@ public class ProviderRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findProviderById/{id}")
 	public Response findProviderById(@PathParam("id") Long id) {
-		Provider provider=em.find(Provider.class, id);
+		Provider provider=providerEJB.findProviderById(id);
 		if(provider.equals(null))
 			throw new NotFoundException();
-		return Response.ok(provider).build();
+		Response response=Response.ok(provider).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +64,10 @@ public class ProviderRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllProviders")
 	public Response findAllProviders() {
-		TypedQuery<Provider> query=em.createNamedQuery("findAllProvider", Provider.class);
-		Providers providers=new Providers(query.getResultList());
-		return Response.ok(providers).build();
+		List<Provider> providers=providerEJB.findAllProvider();
+		Response response=Response.ok(providers).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateProvider")
@@ -72,20 +77,23 @@ public class ProviderRestService {
 	public Response updateProvider(Provider provider) {
 		if(provider.equals(null))
 			throw new BadRequestException();
-		em.merge(provider);
-		return Response.ok(provider).build();
+		Provider updated=providerEJB.updateProvider(provider);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteProvider/{id}")
-	public Response deleteProvider(@PathParam("id") Long id) {
-		Provider provider=em.find(Provider.class, id);
+	@Path("/deleteProvider")
+	public Response deleteProvider(Provider provider) {
 		if(provider.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(provider));
-		return Response.noContent().build();
+		providerEJB.deleteProvider(provider);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

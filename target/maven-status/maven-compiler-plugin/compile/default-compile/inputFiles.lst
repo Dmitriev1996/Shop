@@ -1,10 +1,12 @@
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\CommentRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\TransportationTypeLocal.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\CredentialI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\TypeShopEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\ShopEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\ForumRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Forums.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\CountryEJB.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\TokenI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\DeliveryLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\TypeShops.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Warehouse.java
@@ -15,10 +17,12 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\l
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\CommentLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\BuyEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\SexLocal.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\TokenLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\constraints\StringConstraint.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\TypeShopI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\BonusCardI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Region.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Token.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\TransportationLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\CityRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\WorkerEJB.java
@@ -79,6 +83,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Comme
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Sex.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\OrderI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\ShopI.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\TokenEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\CommentEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\AdressEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\ClientEJB.java
@@ -87,6 +92,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Provi
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\BonusCardEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\ProductEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\WarehouseRestService.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Credential.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\CommentI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\TransportationEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\TypeProductLocal.java
@@ -102,6 +108,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\g
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\TransportationTypeEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\RegionI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\TypeProducts.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\CredentialEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\MessageEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Messages.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\ClientI.java
@@ -113,9 +120,12 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\g
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\City.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Provider.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Message.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\CredentialLocal.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\TokenFactory.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\MessageLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\DatabaseProducer.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Clients.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\CredentialRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\StatusOfOrderLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\CountryLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\App.java

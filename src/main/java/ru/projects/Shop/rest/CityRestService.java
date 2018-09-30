@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.CityEJB;
 import ru.projects.Shop.entity.Cities;
 import ru.projects.Shop.entity.City;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.City;
 @Stateless
 public class CityRestService {
 	@Inject
-	private EntityManager em;
+	private CityEJB cityEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class CityRestService {
 	public Response createCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();
-		em.persist(city);
+		cityEJB.createCity(city);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(city.getCity_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +51,12 @@ public class CityRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findCityById/{id}")
 	public Response findCityById(@PathParam("id") Long id) {
-		City city=em.find(City.class, id);
+		City city=cityEJB.findCityById(id);
 		if(city.equals(null))
 			throw new NotFoundException();
-		return Response.ok(city).build();
+		Response response=Response.ok(city).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +64,10 @@ public class CityRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllCities")
 	public Response findAllCities() {
-		TypedQuery<City> query=em.createNamedQuery("findAllCity", City.class);
-		Cities cities=new Cities(query.getResultList());
-		return Response.ok(cities).build();
+		List<City> cities=cityEJB.findAllCity();
+		Response response=Response.ok(cities).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateCity")
@@ -72,20 +77,23 @@ public class CityRestService {
 	public Response updateCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();
-		em.merge(city);
-		return Response.ok(city).build();
+		City updated=cityEJB.updateCity(city);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/deleteCity/{id}")
-	public Response deleteCity(@PathParam("id") Long id) {
-		City city=em.find(City.class, id);
+	public Response deleteCity(City city) {
 		if(city.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(city));
-		return Response.noContent().build();
+		cityEJB.deleteCity(city);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

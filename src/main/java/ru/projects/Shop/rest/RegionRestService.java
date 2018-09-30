@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.RegionEJB;
 import ru.projects.Shop.entity.Region;
-import ru.projects.Shop.entity.Regions;
 
 @Path("/region")
 @Stateless
 public class RegionRestService {
 	@Inject
-	private EntityManager em;
+	private RegionEJB regionEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class RegionRestService {
 	public Response createRegion(Region region) {
 		if(region.equals(null))
 			throw new BadRequestException();
-		em.persist(region);
+		regionEJB.createRegion(region);
 		URI regionUri=uriInfo.getAbsolutePathBuilder()
 				.path(region.getRegion_ID().toString()).build();
-		return Response.created(regionUri).build();
+		Response response=Response.created(regionUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class RegionRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findRegionById/{id}")
 	public Response findRegionById(@PathParam("id") Long id) {
-		Region region=em.find(Region.class, id);
+		Region region=regionEJB.findRegionById(id);
 		if(region.equals(null))
 			throw new NotFoundException();
-		return Response.ok(region).build();
+		Response response=Response.ok(region).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class RegionRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllRegions")
 	public Response findAllRegions() {
-		TypedQuery<Region> query=em.createNamedQuery("findAllRegion", Region.class);
-		Regions regions=new Regions(query.getResultList());
-		return Response.ok(regions).build();
+		List<Region> regions=regionEJB.findAllRegion();
+		Response response=Response.ok(regions).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateRegion")
@@ -72,20 +76,23 @@ public class RegionRestService {
 	public Response updateRegion(Region region) {
 		if(region.equals(null))
 			throw new BadRequestException();
-		em.merge(region);
-		return Response.ok(region).build();
+		Region updated=regionEJB.updateRegion(region);
+		Response response=Response.ok(region).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteRegion/{id}")
-	public Response deleteRegion(@PathParam("id") Long id) {
-		Region region=em.find(Region.class, id);
+	@Path("/deleteRegion")
+	public Response deleteRegion(Region region) {
 		if(region.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(region));
-		return Response.noContent().build();
+		regionEJB.deleteRegion(region);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

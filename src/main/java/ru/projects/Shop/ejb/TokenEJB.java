@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import ru.projects.Shop.entity.Token;
 import ru.projects.Shop.interfaces.local.TokenLocal;
@@ -47,6 +48,15 @@ public class TokenEJB implements TokenLocal {
 	public void deleteToken(Token token) {
 		// TODO Auto-generated method stub
 		em.remove(em.merge(token));
+	}
+
+	@Override
+	public Token findTokenByValue(String value) {
+		// TODO Auto-generated method stub
+		TypedQuery<Token> query=em.createNamedQuery("findTokenByValue", Token.class);
+		query.setParameter("value", value);
+		Token token=query.getSingleResult();
+		return token;
 	}
 
 }

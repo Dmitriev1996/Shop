@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.SexEJB;
 import ru.projects.Shop.entity.Sex;
-import ru.projects.Shop.entity.Sexes;
 
 @Path("/sex")
 @Stateless
 public class SexRestService {
 	@Inject
-	private EntityManager em;
+	private SexEJB sexEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class SexRestService {
 	public Response createSex(Sex sex) {
 		if(sex.equals(null))
 			throw new BadRequestException();
-		em.persist(sex);
+		sexEJB.createSex(sex);
 		URI sexUri=uriInfo.getAbsolutePathBuilder()
 				.path(sex.getSex_ID().toString()).build();
-		return Response.created(sexUri).build();
+		Response response=Response.created(sexUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class SexRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findSexById/{id}")
 	public Response findSexById(@PathParam("id") Long id) {
-		Sex sex=em.find(Sex.class, id);
+		Sex sex=sexEJB.findSexById(id);
 		if(sex.equals(null))
 			throw new NotFoundException();
-		return Response.ok(sex).build();
+		Response response=Response.ok(sex).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class SexRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllSexes")
 	public Response findAllSexes() {
-		TypedQuery<Sex> query=em.createNamedQuery("findAllSex", Sex.class);
-		Sexes sexes=new Sexes(query.getResultList());
-		return Response.ok(sexes).build();
+		List<Sex> sexes=sexEJB.findAllSex();
+		Response response=Response.ok(sexes).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateSex")
@@ -72,20 +76,23 @@ public class SexRestService {
 	public Response updateSex(Sex sex) {
 		if(sex.equals(null))
 			throw new BadRequestException();
-		em.merge(sex);
-		return Response.ok(sex).build();
+		Sex updated=sexEJB.updateSex(sex);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteSex/{id}")
-	public Response deleteSex(@PathParam("id") Long id) {
-		Sex sex=em.find(Sex.class, id);
+	@Path("/deleteSex")
+	public Response deleteSex(Sex sex) {
 		if(sex.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(sex));
-		return Response.noContent().build();
+		sexEJB.deleteSex(sex);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

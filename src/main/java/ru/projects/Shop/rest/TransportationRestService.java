@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.TransportationEJB;
 import ru.projects.Shop.entity.Transportation;
-import ru.projects.Shop.entity.Transportations;
 
 @Path("/transportation")
 @Stateless
 public class TransportationRestService {
 	@Inject
-	private EntityManager em;
+	private TransportationEJB transportationEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class TransportationRestService {
 	public Response createTransportation(Transportation transportation) {
 		if(transportation.equals(null))
 			throw new BadRequestException();
-		em.persist(transportation);
+		transportationEJB.createTransportation(transportation);
 		URI transportationUri=uriInfo.getAbsolutePathBuilder()
 				.path(transportation.getTransportation_ID().toString()).build();
-		return Response.created(transportationUri).build();
+		Response response=Response.created(transportationUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class TransportationRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findTransportationById/{id}")
 	public Response findTransportationById(@PathParam("id") Long id) {
-		Transportation transportation=em.find(Transportation.class, id);
+		Transportation transportation=transportationEJB.findTransportationById(id);
 		if(transportation.equals(null))
 			throw new NotFoundException();
-		return Response.ok(transportation).build();
+		Response response=Response.ok(transportation).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class TransportationRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllTransportations")
 	public Response findAllTransportations() {
-		TypedQuery<Transportation> query=em.createNamedQuery("findAllTransportation", Transportation.class);
-		Transportations transportations=new Transportations(query.getResultList());
-		return Response.ok(transportations).build();
+		List<Transportation> transportations=transportationEJB.findAllTransportation();
+		Response response=Response.ok(transportations).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateTransportation")
@@ -72,20 +76,23 @@ public class TransportationRestService {
 	public Response updateTransportation(Transportation transportation) {
 		if(transportation.equals(null))
 			throw new BadRequestException();
-		em.merge(transportation);
-		return Response.ok(transportation).build();
+		Transportation updated=transportationEJB.updateTransportation(transportation);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteTransportation/{id}")
-	public Response deleteTransportation(@PathParam("id") Long id) {
-		Transportation transportation=em.find(Transportation.class, id);
+	@Path("/deleteTransportation")
+	public Response deleteTransportation(Transportation transportation) {
 		if(transportation.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(transportation));
-		return Response.noContent().build();
+		transportationEJB.deleteTransportation(transportation);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

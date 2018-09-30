@@ -4,7 +4,6 @@ import java.net.URI;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,13 +18,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.ForumEJB;
 import ru.projects.Shop.entity.Forum;
 
 @Path("/forum")
 @Stateless
 public class ForumRestService {
 	@Inject
-	private EntityManager em;
+	private ForumEJB forumEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -36,10 +36,12 @@ public class ForumRestService {
 	public Response createForum(Forum forum) {
 		if(forum.equals(null))
 			throw new BadRequestException();
-		em.persist(forum);
+		forumEJB.createForum(forum);
 		URI forumUri=uriInfo.getAbsolutePathBuilder()
 				.path(forum.getForum_ID().toString()).build();
-		return Response.created(forumUri).build();
+		Response response=Response.created(forumUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -47,10 +49,12 @@ public class ForumRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findForumById/{id}")
 	public Response findForumById(@PathParam("id") Long id) {
-		Forum forum=em.find(Forum.class, id);
+		Forum forum=forumEJB.findForumById(id);
 		if(forum.equals(null))
 			throw new NotFoundException();
-		return Response.ok(forum).build();
+		Response response=Response.ok(forum).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateForum")
@@ -60,20 +64,23 @@ public class ForumRestService {
 	public Response updateForum(Forum forum) {
 		if(forum.equals(null))
 			throw new BadRequestException();
-		em.merge(forum);
-		return Response.ok(forum).build();
+		Forum updated=forumEJB.updateForum(forum);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteForum/{id}")
-	public Response deleteForum(@PathParam("id") Long id) {
-		Forum forum=em.find(Forum.class, id);
+	@Path("/deleteForum")
+	public Response deleteForum(Forum forum) {
 		if(forum.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(forum));
-		return Response.noContent().build();
+		forumEJB.deleteForum(forum);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.WorkerEJB;
 import ru.projects.Shop.entity.Worker;
 import ru.projects.Shop.entity.Workers;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.Workers;
 @Stateless
 public class WorkerRestService {
 	@Inject
-	private EntityManager em;
+	private WorkerEJB workerEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class WorkerRestService {
 	public Response createWorker(Worker worker) {
 		if(worker.equals(null))
 			throw new BadRequestException();
-		em.persist(worker);
+		workerEJB.createWorker(worker);
 		URI workerUri=uriInfo.getAbsolutePathBuilder()
 				.path(worker.getWorker_ID().toString()).build();
-		return Response.created(workerUri).build();
+		Response response=Response.created(workerUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +51,12 @@ public class WorkerRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findWorkerById/{id}")
 	public Response findWorkerById(@PathParam("id") Long id) {
-		Worker worker=em.find(Worker.class, id);
+		Worker worker=workerEJB.findWorkerById(id);
 		if(worker.equals(null))
 			throw new NotFoundException();
-		return Response.ok(worker).build();
+		Response response=Response.ok(worker).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +64,10 @@ public class WorkerRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllWorkers")
 	public Response findAllWorkers() {
-		TypedQuery<Worker> query=em.createNamedQuery("findAllWorker", Worker.class);
-		Workers workers=new Workers(query.getResultList());
-		return Response.ok(workers).build();
+		List<Worker> workers=workerEJB.findAllWorker();
+		Response response=Response.ok(workers).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateWorker")
@@ -72,20 +77,23 @@ public class WorkerRestService {
 	public Response updateWorker(Worker worker) {
 		if(worker.equals(null))
 			throw new BadRequestException();
-		em.merge(worker);
-		return Response.ok(worker).build();
+		Worker updated=workerEJB.updateWorker(worker);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteWorker/{id}")
-	public Response deleteWorker(@PathParam("id") Long id) {
-		Worker worker=em.find(Worker.class, id);
+	@Path("/deleteWorker")
+	public Response deleteWorker(Worker worker) {
 		if(worker.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(worker));
-		return Response.noContent().build();
+		workerEJB.deleteWorker(worker);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

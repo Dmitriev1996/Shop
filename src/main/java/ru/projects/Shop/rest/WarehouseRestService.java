@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.WarehouseEJB;
 import ru.projects.Shop.entity.Warehouse;
 import ru.projects.Shop.entity.Warehouses;
 
@@ -27,7 +27,7 @@ import ru.projects.Shop.entity.Warehouses;
 @Stateless
 public class WarehouseRestService {
 	@Inject
-	private EntityManager em;
+	private WarehouseEJB warehouseEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +38,12 @@ public class WarehouseRestService {
 	public Response createWarehouse(Warehouse warehouse) {
 		if(warehouse.equals(null))
 			throw new BadRequestException();
-		em.persist(warehouse);
+		warehouseEJB.createWarehouse(warehouse);
 		URI warehouseUri=uriInfo.getAbsolutePathBuilder()
 				.path(warehouse.getWarehouse_ID().toString()).build();
-		return Response.created(warehouseUri).build();
+		Response response=Response.created(warehouseUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,7 +51,7 @@ public class WarehouseRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findWarehouseById/{id}")
 	public Response findWarehouseById(@PathParam("id") Long id) {
-		Warehouse warehouse=em.find(Warehouse.class, id);
+		Warehouse warehouse=warehouseEJB.findWarehouseById(id);
 		if(warehouse.equals(null))
 			throw new NotFoundException();
 		return Response.ok(warehouse).build();
@@ -60,9 +62,10 @@ public class WarehouseRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllWarehouses")
 	public Response findAllWarehouses() {
-		TypedQuery<Warehouse> query=em.createNamedQuery("findAllWarehouse", Warehouse.class);
-		Warehouses warehouses=new Warehouses(query.getResultList());
-		return Response.ok(warehouses).build();
+		List<Warehouse> warehouses=warehouseEJB.findAllWarehouse();
+		Response response=Response.ok(warehouses).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateWarehouse")
@@ -72,20 +75,23 @@ public class WarehouseRestService {
 	public Response updateWarehouse(Warehouse warehouse) {
 		if(warehouse.equals(null))
 			throw new BadRequestException();
-		em.merge(warehouse);
-		return Response.ok(warehouse).build();
+		Warehouse updated=warehouseEJB.updateWarehouse(warehouse);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteWarehouse/{id}")
-	public Response deleteWarehouse(@PathParam("id") Long id) {
-		Warehouse warehouse=em.find(Warehouse.class, id);
+	@Path("/deleteWarehouse")
+	public Response deleteWarehouse(Warehouse warehouse) {
 		if(warehouse.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(warehouse));
-		return Response.noContent().build();
+		warehouseEJB.deleteWarehouse(warehouse);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,14 +19,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.ProductUnitEJB;
 import ru.projects.Shop.entity.ProductUnit;
-import ru.projects.Shop.entity.ProductUnits;
 
 @Path("/product_unit")
 @Stateless
 public class ProductUnitRestService {
 	@Inject
-	private EntityManager em;
+	private ProductUnitEJB productUnitEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -38,10 +37,12 @@ public class ProductUnitRestService {
 	public Response createProductUnit(ProductUnit productUnit) {
 		if(productUnit.equals(null))
 			throw new BadRequestException();
-		em.persist(productUnit);
+		productUnitEJB.createProductUnit(productUnit);
 		URI productUri=uriInfo.getAbsolutePathBuilder()
 				.path(productUnit.getProductUnit_ID().toString()).build();
-		return Response.created(productUri).build();
+		Response response=Response.created(productUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -49,10 +50,12 @@ public class ProductUnitRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findProductUnitById/{id}")
 	public Response findProductUnitById(@PathParam("id") Long id) {
-		ProductUnit productUnit=em.find(ProductUnit.class, id);
+		ProductUnit productUnit=productUnitEJB.findProductUnitById(id);
 		if(productUnit.equals(null))
 			throw new NotFoundException();
-		return Response.ok(productUnit).build();
+		Response response=Response.ok(productUnit).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -60,9 +63,10 @@ public class ProductUnitRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllProductUnits")
 	public Response findAllProductUnits() {
-		TypedQuery<ProductUnit> query=em.createNamedQuery("findAllProductUnit", ProductUnit.class);
-		ProductUnits productUnits=new ProductUnits(query.getResultList());
-		return Response.ok(productUnits).build();
+		List<ProductUnit> productUnits=productUnitEJB.findAllProductUnits();
+		Response response=Response.ok(productUnits).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateProductUnit")
@@ -72,20 +76,23 @@ public class ProductUnitRestService {
 	public Response updateProductUnit(ProductUnit productUnit) {
 		if(productUnit.equals(null))
 			throw new BadRequestException();
-		em.merge(productUnit);
-		return Response.ok(productUnit).build();
+	    ProductUnit updated=productUnitEJB.updateProductUnit(productUnit);
+	    Response response=Response.ok(productUnit).build();
+	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
+	    return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteProductUnit/{id}")
-	public Response deleteProductUnit(@PathParam("id") Long id) {
-		ProductUnit productUnit=em.find(ProductUnit.class, id);
+	@Path("/deleteProductUnit")
+	public Response deleteProductUnit(ProductUnit productUnit) {
 		if(productUnit.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(productUnit));
-		return Response.noContent().build();
+		productUnitEJB.deleteProductUnit(productUnit);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.net.URI;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,13 +17,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.CountryEJB;
 import ru.projects.Shop.entity.Country;
 
 @Path("/country")
 @Stateless
 public class CountryRestService {
 	@Inject
-	private EntityManager em;
+	private CountryEJB countryEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -35,10 +35,12 @@ public class CountryRestService {
 	public Response createCountry(Country country) {
 		if(country.equals(null))
 			throw new BadRequestException();
-		em.persist(country);
+		countryEJB.createCountry(country);
 		URI countryUri=uriInfo.getAbsolutePathBuilder()
 				.path(country.getCountry_ID().toString()).build();
-		return Response.created(countryUri).build();
+		Response response=Response.created(countryUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -46,10 +48,12 @@ public class CountryRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findCountryById/{id}")
 	public Response findCountryById(@PathParam("id") Long id) {
-		Country country=em.find(Country.class, id);
+		Country country=countryEJB.findCountryById(id);
 		if(country.equals(null))
 			throw new NotFoundException();
-		return Response.ok(country).build();
+		Response response=Response.ok(country).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateCountry")
@@ -59,8 +63,10 @@ public class CountryRestService {
 	public Response updateCountry(Country country) {
 		if(country.equals(null))
 			throw new BadRequestException();
-		em.merge(country);
-		return Response.ok(country).build();
+		Country updated=countryEJB.updateCountry(country);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	

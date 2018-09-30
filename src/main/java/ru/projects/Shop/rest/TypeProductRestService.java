@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
@@ -22,27 +21,30 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ru.projects.Shop.ejb.TypeProductEJB;
 import ru.projects.Shop.entity.TypeProduct;
 
 @Path("/type_product")
 @Stateless
 public class TypeProductRestService {
 	@Inject
-	private EntityManager em;
+	private TypeProductEJB typeProductEJB;
 	@Context
 	private UriInfo uriInfo;
 	
-	@Path("/createPTypeProduct")
+	@Path("/createTypeProduct")
 	@POST
 	@Produces(MediaType.APPLICATION_XML)
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response createTypeProduct(TypeProduct typeProduct) {
 		if(typeProduct.equals(null))
 			throw new BadRequestException();
-		em.persist(typeProduct);
+		typeProductEJB.createTypeProduct(typeProduct);
 		URI typeProductUri=uriInfo.getAbsolutePathBuilder()
 				.path(typeProduct.getTypeProduct_ID().toString()).build();
-		return Response.created(typeProductUri).build();
+		Response response=Response.created(typeProductUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,12 +52,10 @@ public class TypeProductRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findTypeProductById/{id}")
 	public Response findTypeProductById(@PathParam("id") Long id) {
-		TypeProduct typeProduct=em.find(TypeProduct.class, id);
+		TypeProduct typeProduct=typeProductEJB.findTypeProductById(id);
 		if(typeProduct.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(typeProduct).build();
-		ArrayList<Object> list=new ArrayList<Object>();
-	    list.add("*");
 	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
@@ -65,11 +65,8 @@ public class TypeProductRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllTypeProducts")
 	public Response findAllTypeProducts() {
-		TypedQuery<TypeProduct> query=em.createNamedQuery("findAllTypeProduct", TypeProduct.class);
-		List<TypeProduct> typeProducts=query.getResultList();
+		List<TypeProduct> typeProducts=typeProductEJB.findAllTypeProduct();
 		Response response=Response.ok(typeProducts).build();
-		ArrayList<Object> list=new ArrayList<Object>();
-	    list.add("*");
 	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
@@ -81,20 +78,23 @@ public class TypeProductRestService {
 	public Response updateTypeProduct(TypeProduct typeProduct) {
 		if(typeProduct.equals(null))
 			throw new BadRequestException();
-		em.merge(typeProduct);
-		return Response.ok(typeProduct).build();
+		TypeProduct updated=typeProductEJB.updateTypeProduct(typeProduct);
+		Response response=Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteTypeProduct/{id}")
-	public Response deleteTypeProduct(@PathParam("id") Long id) {
-		TypeProduct typeProduct=em.find(TypeProduct.class, id);
+	@Path("/deleteTypeProduct")
+	public Response deleteTypeProduct(TypeProduct typeProduct) {
 		if(typeProduct.equals(null))
 			throw new NotFoundException();
-		em.remove(em.merge(typeProduct));
-		return Response.noContent().build();
+		typeProductEJB.deleteTypeProduct(typeProduct);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

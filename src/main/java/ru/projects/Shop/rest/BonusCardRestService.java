@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,15 +19,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import ru.projects.Shop.entity.Adress;
+import ru.projects.Shop.ejb.BonusCardEJB;
 import ru.projects.Shop.entity.BonusCard;
 import ru.projects.Shop.entity.BonusCards;
 
-@Path("/bonuscard")
+@Path("/bonusCard")
 @Stateless
 public class BonusCardRestService {
 	@Inject
-	private EntityManager em;
+	private BonusCardEJB bonusCardEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -39,10 +38,12 @@ public class BonusCardRestService {
 	public Response createBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();
-		em.persist(bonuscard);
+		bonusCardEJB.createBonusCard(bonuscard);
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(bonuscard.getCard_ID().toString()).build();
-		return Response.created(adressUri).build();
+		Response response=Response.created(adressUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,10 +51,12 @@ public class BonusCardRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findBonusCardById/{id}")
 	public Response findBonusCardById(@PathParam("id") Long id) {
-		BonusCard bonuscard=em.find(BonusCard.class, id);
+		BonusCard bonuscard=bonusCardEJB.findBonusCardById(id);
 		if(bonuscard.equals(null))
 			throw new NotFoundException();
-		return Response.ok(bonuscard).build();
+		Response response=Response.ok(bonuscard).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -61,9 +64,10 @@ public class BonusCardRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllBonusCards")
 	public Response findAllBonusCards() {
-		TypedQuery<BonusCard> query=em.createNamedQuery("findAllBonusCard", BonusCard.class);
-		BonusCards bonuscards=new BonusCards(query.getResultList());
-		return Response.ok(bonuscards).build();
+		List<BonusCard> bonuscards=bonusCardEJB.findAllBonusCard();
+		Response response=Response.ok(bonuscards).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateBonusCard")
@@ -73,20 +77,21 @@ public class BonusCardRestService {
 	public Response updateBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();
-		em.merge(bonuscard);
-		return Response.ok(bonuscard).build();
+		BonusCard updated=bonusCardEJB.updateBonusCard(bonuscard);
+		Response response=Response.ok(bonuscard).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteBonusCard/{id}")
-	public Response deleteBonusCard(@PathParam("id") Long id) {
-		BonusCard bonuscard=em.find(BonusCard.class, id);
-		if(bonuscard.equals(null))
-			throw new NotFoundException();
-		em.remove(em.merge(bonuscard));
-		return Response.noContent().build();
+	@Path("/deleteBonusCard")
+	public Response deleteBonusCard(BonusCard bonusCard) {
+		bonusCardEJB.deleteBonusCard(bonusCard);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 
 }

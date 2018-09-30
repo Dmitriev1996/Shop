@@ -1,11 +1,10 @@
 package ru.projects.Shop.rest;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -20,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import ru.projects.Shop.entity.Adress;
+import ru.projects.Shop.ejb.BuyEJB;
 import ru.projects.Shop.entity.Buy;
 import ru.projects.Shop.entity.Buys;
 
@@ -28,7 +27,7 @@ import ru.projects.Shop.entity.Buys;
 @Stateless
 public class BuyRestService {
 	@Inject
-	private EntityManager em;
+	private BuyEJB buyEJB;
 	@Context
 	private UriInfo uriInfo;
 	
@@ -39,10 +38,12 @@ public class BuyRestService {
 	public Response createBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();
-		em.persist(buy);
+		buyEJB.createBuy(buy);
 		URI buyUri=uriInfo.getAbsolutePathBuilder()
 				.path(buy.getBuy_ID().toString()).build();
-		return Response.created(buyUri).build();
+		Response response=Response.created(buyUri).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -50,10 +51,12 @@ public class BuyRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findBuyById/{id}")
 	public Response findBuyById(@PathParam("id") Long id) {
-		Buy buy=em.find(Buy.class, id);
+		Buy buy=buyEJB.findBuyById(id);
 		if(buy.equals(null))
 			throw new NotFoundException();
-		return Response.ok(buy).build();
+		Response response=Response.ok(buy).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@GET
@@ -61,9 +64,10 @@ public class BuyRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllBuys")
 	public Response findAllBuys() {
-		TypedQuery<Buy> query=em.createNamedQuery("findAllBuy", Buy.class);
-		Buys buys=new Buys(query.getResultList());
-		return Response.ok(buys).build();
+		List<Buy> buys=buyEJB.findAllBuy();
+		Response response=Response.ok(buys).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@Path("/updateBuy")
@@ -73,20 +77,21 @@ public class BuyRestService {
 	public Response updateBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();
-		em.merge(buy);
-		return Response.ok(buy).build();
+		Buy updated=buyEJB.updateBuy(buy);
+		Response response= Response.ok(updated).build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteBuy/{id}")
-	public Response deleteBuy(@PathParam("id") Long id) {
-		Buy buy=em.find(Buy.class, id);
-		if(buy.equals(null))
-			throw new NotFoundException();
-		em.remove(em.merge(buy));
-		return Response.noContent().build();
+	@Path("/deleteBuy")
+	public Response deleteBuy(Buy buy) {
+		buyEJB.deleteBuy(buy);
+		Response response=Response.noContent().build();
+		response.getHeaders().add("Access-Control-Allow-Origin", "*");
+		return response;
 	}
 	
 

@@ -25,6 +25,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name="clients")
 @NamedQuery(name="findAllClient", query="SELECT c FROM Client c"
 		+ " ORDER BY c.Client_ID DESC")
+
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "client_ID")
