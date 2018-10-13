@@ -40,14 +40,14 @@ public class Delivery implements Serializable {
 	private Date DateOfDelivery;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="PROVIDER_ID")
-	@JsonBackReference
+	@JsonBackReference("Provider")
 	private Provider Provider;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="WAREHOUSE_ID")
-	@JsonBackReference
+	@JsonBackReference("Warehouse")
 	private Warehouse Warehouse;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Delivery")
-	@JsonManagedReference
+	@JsonManagedReference("Delivery")
 	private List<ProductImport> ProductImportList;
 	
 	

@@ -42,7 +42,6 @@ public class MessageRestService {
 		URI messageUri=uriInfo.getAbsolutePathBuilder()
 				.path(message.getMessage_ID().toString()).build();
 		Response response=Response.created(messageUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class MessageRestService {
 		if(message.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(message).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class MessageRestService {
 	public Response findAllMessages() {
 		List<Message> messages=messageEJB.findAllMesage();
 		Response response=Response.ok(messages).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class MessageRestService {
 			throw new BadRequestException();
 		Message updated=messageEJB.updateMessage(message);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -92,7 +88,6 @@ public class MessageRestService {
 			throw new NotFoundException();
 		messageEJB.deleteMessage(message);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

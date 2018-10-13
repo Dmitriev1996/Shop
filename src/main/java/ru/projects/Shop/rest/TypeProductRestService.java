@@ -3,6 +3,8 @@ package ru.projects.Shop.rest;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -24,7 +26,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.ejb.TypeProductEJB;
 import ru.projects.Shop.entity.TypeProduct;
 
-@Path("/type_product")
+@Path("/typeProduct")
 @Stateless
 public class TypeProductRestService {
 	@Inject
@@ -65,9 +67,9 @@ public class TypeProductRestService {
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Path("/findAllTypeProducts")
 	public Response findAllTypeProducts() {
+		Logger.getLogger(ClientRestService.class.getName()).log(Level.SEVERE, null, "Метод запроса вызван!");
 		List<TypeProduct> typeProducts=typeProductEJB.findAllTypeProduct();
 		Response response=Response.ok(typeProducts).build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
 	
@@ -80,7 +82,6 @@ public class TypeProductRestService {
 			throw new BadRequestException();
 		TypeProduct updated=typeProductEJB.updateTypeProduct(typeProduct);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -93,7 +94,6 @@ public class TypeProductRestService {
 			throw new NotFoundException();
 		typeProductEJB.deleteTypeProduct(typeProduct);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

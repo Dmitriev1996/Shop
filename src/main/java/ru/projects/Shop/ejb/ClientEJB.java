@@ -2,6 +2,9 @@ package ru.projects.Shop.ejb;
 
 import java.util.List;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -34,7 +37,13 @@ public class ClientEJB implements ClientLocal {
 
 	public Client createClient(Client client) {
 		// TODO Auto-generated method stub
-		em.persist(client);
+		Logger.getLogger(ClientEJB.class.getName()).log(Level.SEVERE, null, "Метод вызван!");
+		try {
+			em.persist(client);
+		} catch(Exception ex) {
+			Logger.getLogger(ClientEJB.class.getName()).log(Level.SEVERE,null, ex);
+		}
+		
 		return client;
 	}
 

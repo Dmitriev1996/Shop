@@ -35,7 +35,7 @@ public class Transportation implements Serializable {
 	@JoinColumn(name="ADRESS_ID")
 	private Adress Adress;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Transportation")
-	@JsonManagedReference
+	@JsonManagedReference("Transportation")
 	private Order Order;
 	
 	public Transportation() {}

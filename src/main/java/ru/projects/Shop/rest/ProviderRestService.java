@@ -42,7 +42,6 @@ public class ProviderRestService {
 		URI providerUri=uriInfo.getAbsolutePathBuilder()
 				.path(provider.getProvider_ID().toString()).build();
 		Response response=Response.created(providerUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class ProviderRestService {
 		if(provider.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(provider).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class ProviderRestService {
 	public Response findAllProviders() {
 		List<Provider> providers=providerEJB.findAllProvider();
 		Response response=Response.ok(providers).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class ProviderRestService {
 			throw new BadRequestException();
 		Provider updated=providerEJB.updateProvider(provider);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -92,7 +88,6 @@ public class ProviderRestService {
 			throw new NotFoundException();
 		providerEJB.deleteProvider(provider);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

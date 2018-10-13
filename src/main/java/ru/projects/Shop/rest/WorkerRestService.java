@@ -42,7 +42,6 @@ public class WorkerRestService {
 		URI workerUri=uriInfo.getAbsolutePathBuilder()
 				.path(worker.getWorker_ID().toString()).build();
 		Response response=Response.created(workerUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class WorkerRestService {
 		if(worker.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(worker).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class WorkerRestService {
 	public Response findAllWorkers() {
 		List<Worker> workers=workerEJB.findAllWorker();
 		Response response=Response.ok(workers).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class WorkerRestService {
 			throw new BadRequestException();
 		Worker updated=workerEJB.updateWorker(worker);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -92,7 +88,6 @@ public class WorkerRestService {
 			throw new NotFoundException();
 		workerEJB.deleteWorker(worker);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

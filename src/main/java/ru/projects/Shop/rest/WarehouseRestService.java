@@ -42,7 +42,6 @@ public class WarehouseRestService {
 		URI warehouseUri=uriInfo.getAbsolutePathBuilder()
 				.path(warehouse.getWarehouse_ID().toString()).build();
 		Response response=Response.created(warehouseUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -64,7 +63,6 @@ public class WarehouseRestService {
 	public Response findAllWarehouses() {
 		List<Warehouse> warehouses=warehouseEJB.findAllWarehouse();
 		Response response=Response.ok(warehouses).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -77,7 +75,6 @@ public class WarehouseRestService {
 			throw new BadRequestException();
 		Warehouse updated=warehouseEJB.updateWarehouse(warehouse);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -90,7 +87,6 @@ public class WarehouseRestService {
 			throw new NotFoundException();
 		warehouseEJB.deleteWarehouse(warehouse);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.ejb.ProductUnitEJB;
 import ru.projects.Shop.entity.ProductUnit;
 
-@Path("/product_unit")
+@Path("/productUnit")
 @Stateless
 public class ProductUnitRestService {
 	@Inject
@@ -41,7 +41,6 @@ public class ProductUnitRestService {
 		URI productUri=uriInfo.getAbsolutePathBuilder()
 				.path(productUnit.getProductUnit_ID().toString()).build();
 		Response response=Response.created(productUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class ProductUnitRestService {
 		if(productUnit.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(productUnit).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class ProductUnitRestService {
 	public Response findAllProductUnits() {
 		List<ProductUnit> productUnits=productUnitEJB.findAllProductUnits();
 		Response response=Response.ok(productUnits).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class ProductUnitRestService {
 			throw new BadRequestException();
 	    ProductUnit updated=productUnitEJB.updateProductUnit(productUnit);
 	    Response response=Response.ok(productUnit).build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
 	
@@ -91,7 +87,6 @@ public class ProductUnitRestService {
 			throw new NotFoundException();
 		productUnitEJB.deleteProductUnit(productUnit);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

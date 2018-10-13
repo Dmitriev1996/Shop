@@ -34,11 +34,11 @@ public class Comment implements Serializable {
 	private String Comment;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID")
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="PRODUCT_ID")
-	@JsonBackReference
+	@JsonBackReference("Product")
 	private Product Product;
 	
 	public Comment() {}

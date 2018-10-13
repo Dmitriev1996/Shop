@@ -30,7 +30,7 @@ public class TypeProduct implements Serializable {
 	@Column(name="TYPE_PRODUCT")
 	private String TypeProduct;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="TypeProduct")
-	@JsonManagedReference
+	@JsonManagedReference("TypeProduct")
 	private List<Product> ProductList;
 	
 	public TypeProduct() {}

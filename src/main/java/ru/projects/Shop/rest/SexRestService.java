@@ -41,7 +41,6 @@ public class SexRestService {
 		URI sexUri=uriInfo.getAbsolutePathBuilder()
 				.path(sex.getSex_ID().toString()).build();
 		Response response=Response.created(sexUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class SexRestService {
 		if(sex.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(sex).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class SexRestService {
 	public Response findAllSexes() {
 		List<Sex> sexes=sexEJB.findAllSex();
 		Response response=Response.ok(sexes).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class SexRestService {
 			throw new BadRequestException();
 		Sex updated=sexEJB.updateSex(sex);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class SexRestService {
 			throw new NotFoundException();
 		sexEJB.deleteSex(sex);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

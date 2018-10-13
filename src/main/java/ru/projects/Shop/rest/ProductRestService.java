@@ -44,7 +44,6 @@ public class ProductRestService {
 		URI productUri=uriInfo.getAbsolutePathBuilder()
 				.path(product.getProduct_ID().toString()).build();
 		Response response=Response.created(productUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -67,7 +66,6 @@ public class ProductRestService {
 	public Response findAllProducts() {
 	    List<Product> products=productEJB.findAllProduct();
 	    Response response=Response.ok(products).build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
 	
@@ -80,7 +78,6 @@ public class ProductRestService {
 			throw new BadRequestException();
 		Product updated=productEJB.updateProduct(product);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	

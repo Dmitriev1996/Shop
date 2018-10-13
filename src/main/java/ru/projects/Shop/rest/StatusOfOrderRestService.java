@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.ejb.StatusOfOrderEJB;
 import ru.projects.Shop.entity.StatusOfOrder;
 
-@Path("/status_of_order")
+@Path("/statusOfOrder")
 @Stateless
 public class StatusOfOrderRestService {
 	@Inject
@@ -41,7 +41,6 @@ public class StatusOfOrderRestService {
 		URI statusOfOrderUri=uriInfo.getAbsolutePathBuilder()
 				.path(statusOfOrder.getStatus_ID().toString()).build();
 		Response response=Response.created(statusOfOrderUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class StatusOfOrderRestService {
 		if(statusOfOrder.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(statusOfOrder).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class StatusOfOrderRestService {
 	public Response findAllStatusOfOrders() {
 		List<StatusOfOrder> statusOfOrders=statusOfOrderEJB.findAllStatusOfOrder();
 		Response response=Response.ok(statusOfOrders).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class StatusOfOrderRestService {
 			throw new BadRequestException();
 		StatusOfOrder updated=statusOfOrderEJB.updateStatusOfOrder(statusOfOrder);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class StatusOfOrderRestService {
 			throw new NotFoundException();
 		statusOfOrderEJB.deleteStatusOfOrder(statusOfOrder);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

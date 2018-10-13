@@ -41,7 +41,7 @@ public class Product implements Serializable {
 	private Double Price;
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="TYPE_PRODUCT_ID")
-	@JsonBackReference
+	@JsonBackReference("TypeProduct")
 	private TypeProduct TypeProduct;
 	@Column(name="MASS")
 	private Double Mass;
@@ -50,7 +50,7 @@ public class Product implements Serializable {
 	@Column(name="IMAGE")
 	private byte[] Picture;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Product")
-	@JsonManagedReference
+	@JsonManagedReference("Product")
 	private List<Comment> CommentList;
 	
 	public Product() {}

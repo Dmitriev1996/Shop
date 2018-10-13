@@ -31,7 +31,7 @@ public class ProductUnit implements Serializable {
 	private Long ProductUnit_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="WAREHOUSE_ID")
-	@JsonBackReference
+	@JsonBackReference("Warehouse")
 	private Warehouse Warehouse;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="PRODUCT_ID")

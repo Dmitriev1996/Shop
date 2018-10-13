@@ -41,7 +41,6 @@ public class OrderRestService {
 		URI orderUri=uriInfo.getAbsolutePathBuilder()
 				.path(order.getOrder_ID().toString()).build();
 		Response response=Response.created(orderUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class OrderRestService {
 		if(order.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(order).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class OrderRestService {
 	public Response findAllOrders() {
 		List<Order> orders=orderEJB.findAllOrder();
 		Response response=Response.ok(orders).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class OrderRestService {
 			throw new BadRequestException();
 		Order updated=orderEJB.updateOrder(order);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class OrderRestService {
 			throw new NotFoundException();
 		orderEJB.deleteOrder(order);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

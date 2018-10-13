@@ -30,13 +30,13 @@ public class Warehouse implements Serializable {
 	@Column(name="WAREHOUSE_ID")
 	private Long Warehouse_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
-	@JsonManagedReference
+	@JsonManagedReference("Warehouse")
 	private Shop Shop;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
-	@JsonManagedReference
+	@JsonManagedReference("Warehouse")
 	private List<Delivery> DeliveryList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Warehouse")
-	@JsonManagedReference
+	@JsonManagedReference("Warehouse")
 	private List<ProductUnit> ProductUnitList;
 	
 	public Warehouse() {}

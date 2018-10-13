@@ -41,7 +41,6 @@ public class RegionRestService {
 		URI regionUri=uriInfo.getAbsolutePathBuilder()
 				.path(region.getRegion_ID().toString()).build();
 		Response response=Response.created(regionUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class RegionRestService {
 		if(region.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(region).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class RegionRestService {
 	public Response findAllRegions() {
 		List<Region> regions=regionEJB.findAllRegion();
 		Response response=Response.ok(regions).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class RegionRestService {
 			throw new BadRequestException();
 		Region updated=regionEJB.updateRegion(region);
 		Response response=Response.ok(region).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class RegionRestService {
 			throw new NotFoundException();
 		regionEJB.deleteRegion(region);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

@@ -45,22 +45,22 @@ public class Client implements Serializable {
 	@JoinColumn(name="SEX_ID", nullable=false)
 	private Sex Sex;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private BonusCard BonusCard;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private List<Buy> BuyList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private List<Order> OrderList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private List<Comment> CommentList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private List<Forum> ForumList;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Client")
-	@JsonManagedReference
+	@JsonManagedReference("Client")
 	private List<Message> MessageList;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CREDENTIAL_ID")

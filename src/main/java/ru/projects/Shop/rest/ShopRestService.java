@@ -41,7 +41,6 @@ public class ShopRestService {
 		URI shopUri=uriInfo.getAbsolutePathBuilder()
 				.path(shop.getShop_ID().toString()).build();
 		Response response=Response.created(shopUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class ShopRestService {
 		if(shop.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(shop).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class ShopRestService {
 	public Response findAllShops() {
 		List<Shop> shops=shopEJB.findAllShop();
 		Response response=Response.ok(shops).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class ShopRestService {
 			throw new BadRequestException();
 		Shop updated=shopEJB.updateShop(shop);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class ShopRestService {
 			throw new NotFoundException();
 		shopEJB.deleteShop(shop);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

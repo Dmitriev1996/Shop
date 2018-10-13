@@ -43,7 +43,7 @@ public class Buy implements Serializable {
 	private Double SumBuy;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID")
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
 	
 	public Buy() {}

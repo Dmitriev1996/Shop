@@ -42,7 +42,6 @@ public class DeliveryRestService {
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(delivery.getDelivery_ID().toString()).build();
 		Response response=Response.created(adressUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class DeliveryRestService {
 		if(delivery.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(delivery).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class DeliveryRestService {
 	public Response findAllDeliveries() {
 		List<Delivery> deliveries=deliveryEJB.findAllDelivery();
 		Response response=Response.ok(deliveries).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class DeliveryRestService {
 			throw new BadRequestException();
 		Delivery updated=deliveryEJB.updateDelivery(delivery);
 		Response response=Response.ok(delivery).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -92,7 +88,6 @@ public class DeliveryRestService {
 			throw new NotFoundException();
 		deliveryEJB.deleteDelivery(delivery);
 	    Response response=Response.noContent().build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 	    return response;
 	}
 

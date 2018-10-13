@@ -39,7 +39,6 @@ public class CountryRestService {
 		URI countryUri=uriInfo.getAbsolutePathBuilder()
 				.path(country.getCountry_ID().toString()).build();
 		Response response=Response.created(countryUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -52,7 +51,6 @@ public class CountryRestService {
 		if(country.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(country).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class CountryRestService {
 			throw new BadRequestException();
 		Country updated=countryEJB.updateCountry(country);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	

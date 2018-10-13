@@ -35,10 +35,10 @@ public class Region implements Serializable {
 	private String Region;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="COUNTRY_ID")
-	@JsonBackReference
+	@JsonBackReference("Country")
 	private Country Country;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Region")
-	@JsonManagedReference
+	@JsonManagedReference("Region")
 	private List<City> CityList;
 	
 	public Region() {}

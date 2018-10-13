@@ -31,7 +31,7 @@ public class StatusOfOrder implements Serializable {
 	@Column(name="STATUS")
 	private String Status;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="StatusOfOrder")
-	@JsonManagedReference
+	@JsonManagedReference("StatusOfOrder")
 	private List<Order> OrderList;
 	
 	public StatusOfOrder() {}

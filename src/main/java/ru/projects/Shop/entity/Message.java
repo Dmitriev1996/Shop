@@ -25,14 +25,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		+ " ORDER BY m.Message_ID DESC")
 @JsonIdentityInfo(
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "country_ID")
+		  property = "message_ID")
 public class Message implements Serializable {
 	@Id @GeneratedValue
 	@Column(name="MESSAGE_ID")
 	private Long Message_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID")
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
 	@Column(name="DATE_OF_MESSAGE")
 	private Date DateOfMessage;
@@ -40,7 +40,7 @@ public class Message implements Serializable {
 	private String Message;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="FORUM_ID")
-	@JsonBackReference
+	@JsonBackReference("Forum")
 	private Forum Forum;
 	
 	public Message() {}

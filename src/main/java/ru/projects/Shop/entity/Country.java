@@ -31,7 +31,7 @@ public class Country implements Serializable {
 	@Column(name="COUNTRY")
 	private String Country;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Country")
-	@JsonManagedReference
+	@JsonManagedReference("Country")
 	private List<Region> RegionList;
 	
 	public Country() {}

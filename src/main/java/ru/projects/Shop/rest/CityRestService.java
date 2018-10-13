@@ -42,7 +42,6 @@ public class CityRestService {
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(city.getCity_ID().toString()).build();
 		Response response=Response.created(adressUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class CityRestService {
 		if(city.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(city).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class CityRestService {
 	public Response findAllCities() {
 		List<City> cities=cityEJB.findAllCity();
 		Response response=Response.ok(cities).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,20 +76,18 @@ public class CityRestService {
 			throw new BadRequestException();
 		City updated=cityEJB.updateCity(city);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
 	@DELETE
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	@Path("/deleteCity/{id}")
+	@Path("/deleteCity")
 	public Response deleteCity(City city) {
 		if(city.equals(null))
 			throw new NotFoundException();
 		cityEJB.deleteCity(city);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

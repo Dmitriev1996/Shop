@@ -35,10 +35,10 @@ public class Forum implements Serializable {
 	private String NameOfForum;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID", nullable=false)
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="Forum")
-	@JsonManagedReference
+	@JsonManagedReference("Forum")
 	private List<Message> MessageList;
 	
 	public Forum() {}

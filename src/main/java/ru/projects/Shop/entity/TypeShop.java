@@ -31,7 +31,7 @@ public class TypeShop implements Serializable {
 	@Column(name="TYPE_SHOP")
 	private String TypeShop;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="TypeShop")
-	@JsonManagedReference
+	@JsonManagedReference("TypeShop")
 	private List<Shop> ShopList;
 	
 	public TypeShop() {}

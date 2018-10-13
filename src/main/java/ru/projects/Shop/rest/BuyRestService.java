@@ -42,7 +42,6 @@ public class BuyRestService {
 		URI buyUri=uriInfo.getAbsolutePathBuilder()
 				.path(buy.getBuy_ID().toString()).build();
 		Response response=Response.created(buyUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class BuyRestService {
 		if(buy.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(buy).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class BuyRestService {
 	public Response findAllBuys() {
 		List<Buy> buys=buyEJB.findAllBuy();
 		Response response=Response.ok(buys).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class BuyRestService {
 			throw new BadRequestException();
 		Buy updated=buyEJB.updateBuy(buy);
 		Response response= Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -90,7 +86,6 @@ public class BuyRestService {
 	public Response deleteBuy(Buy buy) {
 		buyEJB.deleteBuy(buy);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	

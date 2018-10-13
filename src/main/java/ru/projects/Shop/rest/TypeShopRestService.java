@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.ejb.TypeShopEJB;
 import ru.projects.Shop.entity.TypeShop;
 
-@Path("/type_shop")
+@Path("/typeShop")
 @Stateless
 public class TypeShopRestService {
 	@Inject
@@ -41,7 +41,6 @@ public class TypeShopRestService {
 		URI typeShopUri=uriInfo.getAbsolutePathBuilder()
 				.path(typeShop.getTypeShop_ID().toString()).build();
 		Response response=Response.created(typeShopUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class TypeShopRestService {
 		if(typeShop.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(typeShop).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class TypeShopRestService {
 	public Response findAllTypeShops() {
 		List<TypeShop> typeShops=typeShopEJB.findAllTypeShop();
 		Response response=Response.ok(typeShops).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class TypeShopRestService {
 			throw new BadRequestException();
 		TypeShop updated=typeShopEJB.updateTypeShop(typeShop);
 		Response response=Response.ok(typeShop).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class TypeShopRestService {
 			throw new NotFoundException();
 		typeShopEJB.deleteTypeShop(typeShop);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

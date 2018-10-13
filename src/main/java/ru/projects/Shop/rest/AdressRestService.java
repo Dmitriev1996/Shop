@@ -42,7 +42,6 @@ public class AdressRestService {
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(adress.getAdress_ID().toString()).build();
 		Response response=Response.created(adressUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class AdressRestService {
 		if(adress.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(adress).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class AdressRestService {
 	public Response findAllAdresses() {
 		List<Adress> adresses=adressEJB.findAllAdress();
 		Response response=Response.ok(adresses).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class AdressRestService {
 			throw new BadRequestException();
 		Adress updated=adressEJB.updateAdress(adress);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -90,7 +86,6 @@ public class AdressRestService {
 	public Response deleteAdress(Adress adress) {
 		adressEJB.deleteAdress(adress);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	

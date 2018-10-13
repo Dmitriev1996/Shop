@@ -41,7 +41,6 @@ public class TransportationRestService {
 		URI transportationUri=uriInfo.getAbsolutePathBuilder()
 				.path(transportation.getTransportation_ID().toString()).build();
 		Response response=Response.created(transportationUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class TransportationRestService {
 		if(transportation.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(transportation).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class TransportationRestService {
 	public Response findAllTransportations() {
 		List<Transportation> transportations=transportationEJB.findAllTransportation();
 		Response response=Response.ok(transportations).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -78,7 +75,6 @@ public class TransportationRestService {
 			throw new BadRequestException();
 		Transportation updated=transportationEJB.updateTransportation(transportation);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -91,7 +87,6 @@ public class TransportationRestService {
 			throw new NotFoundException();
 		transportationEJB.deleteTransportation(transportation);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

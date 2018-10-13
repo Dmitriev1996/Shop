@@ -42,7 +42,6 @@ public class BonusCardRestService {
 		URI adressUri=uriInfo.getAbsolutePathBuilder()
 				.path(bonuscard.getCard_ID().toString()).build();
 		Response response=Response.created(adressUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -55,7 +54,6 @@ public class BonusCardRestService {
 		if(bonuscard.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(bonuscard).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class BonusCardRestService {
 	public Response findAllBonusCards() {
 		List<BonusCard> bonuscards=bonusCardEJB.findAllBonusCard();
 		Response response=Response.ok(bonuscards).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class BonusCardRestService {
 			throw new BadRequestException();
 		BonusCard updated=bonusCardEJB.updateBonusCard(bonuscard);
 		Response response=Response.ok(bonuscard).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -90,7 +86,6 @@ public class BonusCardRestService {
 	public Response deleteBonusCard(BonusCard bonusCard) {
 		bonusCardEJB.deleteBonusCard(bonusCard);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

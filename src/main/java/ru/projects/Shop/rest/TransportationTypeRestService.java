@@ -22,7 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import ru.projects.Shop.ejb.TransportationTypeEJB;
 import ru.projects.Shop.entity.TransportationType;
 
-@Path("/transportation_type")
+@Path("/transportationType")
 @Stateless
 public class TransportationTypeRestService {
 	@Inject
@@ -41,7 +41,6 @@ public class TransportationTypeRestService {
 		URI transTypeUri=uriInfo.getAbsolutePathBuilder()
 				.path(transType.getType_ID().toString()).build();
 		Response response=Response.created(transTypeUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -54,7 +53,6 @@ public class TransportationTypeRestService {
 		if(transType.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(transType).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -65,7 +63,6 @@ public class TransportationTypeRestService {
 	public Response findAllTransportationTypes() {
 		List<TransportationType> transTypes=transportationTypeEJB.findAllTransportationType();
 		Response response=Response.ok(transTypes).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class TransportationTypeRestService {
 		TransportationType updated=transportationTypeEJB
 				.updateTransportationType(transType);
 		Response response=Response.ok(transType).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -92,7 +88,6 @@ public class TransportationTypeRestService {
 			throw new NotFoundException();
 		transportationTypeEJB.deleteTransportationType(transType);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

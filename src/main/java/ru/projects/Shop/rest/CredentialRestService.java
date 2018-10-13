@@ -23,7 +23,7 @@ import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.entity.Credential;
 import ru.projects.Shop.entity.Token;
 
-@Path("/Credential")
+@Path("/сredential")
 @Stateless
 public class CredentialRestService {
 	@Inject
@@ -52,7 +52,6 @@ public class CredentialRestService {
 			message="Ошибка!";
 		}
 		Response response=Response.ok(message).build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -76,7 +75,6 @@ public class CredentialRestService {
 		} else {
 			response=Response.ok().build();
 		}
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -96,7 +94,6 @@ public class CredentialRestService {
 		}
 		response=Response.ok().build();
 		response.getHeaders().add("Authenticated", auth);
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -109,7 +106,6 @@ public class CredentialRestService {
 		Token token=tokenEJB.findTokenByValue(value);
 		tokenEJB.deleteToken(token);
 		response=Response.ok().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

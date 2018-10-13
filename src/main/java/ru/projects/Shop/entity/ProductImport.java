@@ -36,7 +36,7 @@ public class ProductImport implements Serializable {
 	private int Value;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="DELIVERY_ID")
-	@JsonBackReference
+	@JsonBackReference("Delivery")
 	private Delivery Delivery;
 	
 	public ProductImport() {}

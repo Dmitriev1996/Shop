@@ -10,6 +10,8 @@ import javax.ws.rs.core.Application;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.glassfish.jersey.jackson.JacksonFeature;
 
+import ru.projects.Shop.filters.RESTRequestFilter;
+import ru.projects.Shop.filters.RESTResponseFilter;
 import ru.projects.Shop.rest.AdressRestService;
 import ru.projects.Shop.rest.BonusCardRestService;
 import ru.projects.Shop.rest.BuyRestService;
@@ -67,6 +69,8 @@ public class ApplicationConfig extends Application {
 		c.add(WarehouseRestService.class);
 		c.add(WorkerRestService.class);
 		c.add(CredentialRestService.class);
+		c.add(RESTRequestFilter.class);
+		c.add(RESTResponseFilter.class);
 		//c.add(MOXyJsonProvider.class);
 		c.add(JacksonFeature.class);
 		classes=Collections.unmodifiableSet(c);

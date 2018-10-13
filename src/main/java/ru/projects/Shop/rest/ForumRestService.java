@@ -40,7 +40,6 @@ public class ForumRestService {
 		URI forumUri=uriInfo.getAbsolutePathBuilder()
 				.path(forum.getForum_ID().toString()).build();
 		Response response=Response.created(forumUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -53,7 +52,6 @@ public class ForumRestService {
 		if(forum.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(forum).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -66,7 +64,6 @@ public class ForumRestService {
 			throw new BadRequestException();
 		Forum updated=forumEJB.updateForum(forum);
 		Response response=Response.ok(updated).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -79,7 +76,6 @@ public class ForumRestService {
 			throw new NotFoundException();
 		forumEJB.deleteForum(forum);
 		Response response=Response.noContent().build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 

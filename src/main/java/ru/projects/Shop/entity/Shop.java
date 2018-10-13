@@ -31,11 +31,11 @@ public class Shop implements Serializable {
 	private Long Shop_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TYPE_SHOP_ID")
-	@JsonBackReference
+	@JsonBackReference("TypeShop")
 	private TypeShop TypeShop;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CITY_ID")
-	@JsonBackReference
+	@JsonBackReference("City")
 	private City City;
 	@Column(name="ADRESS")
 	private String Adress;
@@ -45,6 +45,7 @@ public class Shop implements Serializable {
 	private String Email;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="WAREHOUSE_ID")
+	@JsonBackReference("Warehouse")
 	private Warehouse Warehouse;
 	
 	public Shop() {}

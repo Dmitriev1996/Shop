@@ -98,6 +98,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\Transpor
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\TypeProductLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\DeliveryI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\StatusOfOrderI.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\filters\RESTResponseFilter.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\ForumLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\ProviderLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Regions.java
@@ -126,6 +127,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\l
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\DatabaseProducer.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Clients.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\CredentialRestService.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\ProductUnitLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\StatusOfOrderLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\CountryLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\App.java
@@ -140,11 +142,14 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\Transpo
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\BonusCardRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\AdressI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\RegionEJB.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\ProductUnitI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\MessageRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Adress.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\TypeShop.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\WarehouseEJB.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\filters\RESTRequestFilter.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Warehouses.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\ProductUnitEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Sexes.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\DeliveryRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Orders.java

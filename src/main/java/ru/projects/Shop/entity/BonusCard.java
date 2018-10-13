@@ -30,7 +30,7 @@ public class BonusCard implements Serializable {
 	private Long Card_ID;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID")
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
 	@Column(name="SUM_OF_BONUS")
 	private double SumOfBonus;

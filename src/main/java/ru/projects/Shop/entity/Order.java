@@ -34,7 +34,7 @@ public class Order {
 	private Long Order_ID;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="CLIENT_ID")
-	@JsonBackReference
+	@JsonBackReference("Client")
 	private Client Client;
 	@Column(name="DATE_OF_ORDER")
 	private Date DateOfOrder;
@@ -47,11 +47,11 @@ public class Order {
 	private Double SumOfOrder;
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="TRANSPORTATION_ID")
-	@JsonBackReference
+	@JsonBackReference("Transportation")
 	private Transportation Transportation;
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="STATUS_OF_ORDER_ID")
-	@JsonBackReference
+	@JsonBackReference("StatusOfOrder")
 	private StatusOfOrder StatusOfOrder;
 	
 	public Order() {}
