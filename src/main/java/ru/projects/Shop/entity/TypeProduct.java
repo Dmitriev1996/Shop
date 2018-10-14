@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,7 +25,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "typeProduct_ID")
 public class TypeProduct implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="TYPE_PRODUCT_ID")
 	private Long TypeProduct_ID;
 	@Column(name="TYPE_PRODUCT")

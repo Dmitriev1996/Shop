@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,7 +26,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "country_ID")
 public class Country implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="COUNTRY_ID")
 	private Long Country_ID;
 	@Column(name="COUNTRY")

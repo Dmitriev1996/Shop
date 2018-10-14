@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 @NamedQuery(name="findAllWorker", query="SELECT w FROM Worker w"
 		+ " ORDER BY w.Worker_ID DESC")
 public class Worker implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="WORKER_ID")
 	private Long Worker_ID;
 	@Column(name="SURNAME")

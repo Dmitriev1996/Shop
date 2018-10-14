@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +34,7 @@ import ru.projects.Shop.listener.ProductUnitCreater;
 		  generator = ObjectIdGenerators.PropertyGenerator.class, 
 		  property = "delivery_ID")
 public class Delivery implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="DELIVERY_ID")
 	private Long Delivery_ID;
 	@Column(name="DATE_OF_DELIVERY")

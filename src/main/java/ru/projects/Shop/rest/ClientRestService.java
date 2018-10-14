@@ -45,19 +45,19 @@ public class ClientRestService {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createClient(String json) {
-		Client client=null;
 			try {
-				client = mapper.readValue(json, Client.class);
+				Client client = mapper.readValue(json, Client.class);
+				clientEJB.createClient(client);
+				URI adressUri=uriInfo.getAbsolutePathBuilder()
+						.path(client.getSurname()).build();
+				Response response=Response.created(adressUri).build();
+				return response;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				throw new BadRequestException();
 			}
-		clientEJB.createClient(client);
-		URI adressUri=uriInfo.getAbsolutePathBuilder()
-				.path(client.getClient_ID().toString()).build();
-		Response response=Response.created(adressUri).build();
-		return response;
+		
 		
 	}
 	

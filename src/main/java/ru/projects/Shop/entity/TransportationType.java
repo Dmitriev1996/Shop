@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 @NamedQuery(name="findAllTransportationType", query="SELECT t FROM TransportationType t"
 		+ " ORDER BY t.Type_ID DESC")
 public class TransportationType implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="TRANSPORTATION_TYPE_ID")
 	private Long Type_ID;
 	@Column(name="TRANSPORTATION_TYPE")

@@ -37,14 +37,8 @@ public class ClientEJB implements ClientLocal {
 
 	public Client createClient(Client client) {
 		// TODO Auto-generated method stub
-		Logger.getLogger(ClientEJB.class.getName()).log(Level.SEVERE, null, "Метод вызван!");
-		try {
 			em.persist(client);
-		} catch(Exception ex) {
-			Logger.getLogger(ClientEJB.class.getName()).log(Level.SEVERE,null, ex);
-		}
-		
-		return client;
+		    return client;
 	}
 
 	public Client updateClient(Client client) {

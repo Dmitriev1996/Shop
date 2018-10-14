@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQuery(name="findAllSex", query="SELECT s FROM Sex s"
 		+ " ORDER BY s.Sex_ID DESC")
 public class Sex implements Serializable {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="SEX_ID")
 	private Long Sex_ID;
 	@Column(name="SEX")
