@@ -33,8 +33,8 @@ public class BonusCardRestService {
 	
 	@Path("/createBonusCard")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class BonusCardRestService {
 	
 	@Path("/updateBonusCard")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateBonusCard(BonusCard bonuscard) {
 		if(bonuscard.equals(null))
 			throw new BadRequestException();

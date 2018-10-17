@@ -31,8 +31,8 @@ public class ForumRestService {
 	
 	@Path("/createForum")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createForum(Forum forum) {
 		if(forum.equals(null))
 			throw new BadRequestException();
@@ -57,8 +57,8 @@ public class ForumRestService {
 	
 	@Path("/updateForum")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateForum(Forum forum) {
 		if(forum.equals(null))
 			throw new BadRequestException();

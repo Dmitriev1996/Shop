@@ -10,6 +10,6 @@ public interface CredentialI {
 	Credential findCredentialById(Long id);
 	Credential updateCredential(Credential credential);
 	void deleteCredential(Credential credential);
-	boolean checkUser(Credential credential);
+	Credential checkUser(Credential credential);
 
 }

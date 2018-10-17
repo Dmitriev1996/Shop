@@ -33,8 +33,8 @@ public class CommentRestService {
 	
 	@Path("/createComment")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class CommentRestService {
 	
 	@Path("/updateComment")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateComment(Comment comment) {
 		if(comment.equals(null))
 			throw new BadRequestException();

@@ -32,8 +32,8 @@ public class ShopRestService {
 	
 	@Path("/createShop")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createShop(Shop shop) {
 		if(shop.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class ShopRestService {
 	
 	@Path("/updateShop")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateShop(Shop shop) {
 		if(shop.equals(null))
 			throw new BadRequestException();

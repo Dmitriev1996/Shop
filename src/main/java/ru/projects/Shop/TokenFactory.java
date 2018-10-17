@@ -11,9 +11,9 @@ import ru.projects.Shop.entity.Token;
 
 @Stateless
 public class TokenFactory {
-	@Inject
-	private static TokenEJB tokenEJB;
-	public static Token createToken(Credential credential) {
+	/*@Inject
+	private TokenEJB tokenEJB=new TokenEJB();
+	public Token createToken(Credential credential) {
 		Token token=new Token();
 		SecureRandom random = new SecureRandom();
 		byte bytes[] = new byte[20];
@@ -21,7 +21,8 @@ public class TokenFactory {
 		String token_number = bytes.toString();
 		token.setToken(token_number);
 		token.setCredential(credential);
-		return tokenEJB.createToken(token);
-	}
+		tokenEJB.createToken(token);
+		return token;
+	}*/
 
 }

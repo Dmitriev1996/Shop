@@ -33,8 +33,8 @@ public class DeliveryRestService {
 	
 	@Path("/createDelivery")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createDelivery(Delivery delivery) {
 		if(delivery.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class DeliveryRestService {
 	
 	@Path("/updateDelivery")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateDelivery(Delivery delivery) {
 		if(delivery.equals(null))
 			throw new BadRequestException();

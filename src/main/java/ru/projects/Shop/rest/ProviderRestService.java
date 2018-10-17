@@ -33,8 +33,8 @@ public class ProviderRestService {
 	
 	@Path("/createProvider")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createProvider(Provider provider) {
 		if(provider.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class ProviderRestService {
 	
 	@Path("/updateProvider")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateProvider(Provider provider) {
 		if(provider.equals(null))
 			throw new BadRequestException();

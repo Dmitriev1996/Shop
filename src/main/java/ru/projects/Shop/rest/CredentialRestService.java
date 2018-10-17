@@ -1,5 +1,6 @@
 package ru.projects.Shop.rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
@@ -15,15 +16,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import ru.projects.Shop.TokenFactory;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import ru.projects.Shop.ejb.ClientEJB;
 import ru.projects.Shop.ejb.CredentialEJB;
 import ru.projects.Shop.ejb.TokenEJB;
-import ru.projects.Shop.entity.Client;
 import ru.projects.Shop.entity.Credential;
+import ru.projects.Shop.entity.ServerError;
+import ru.projects.Shop.entity.Status;
 import ru.projects.Shop.entity.Token;
 
-@Path("/сredential")
+@Path("/auth")
 @Stateless
 public class CredentialRestService {
 	@Inject
@@ -37,10 +42,12 @@ public class CredentialRestService {
 	@Context
 	private HttpHeaders httpHeaders;
 	
+	private ObjectMapper mapper=new ObjectMapper();
+	
 	@Path("/Registration")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response Registration(Credential credential) {
 		String message="";
 		if(credential.equals(null))
@@ -55,33 +62,79 @@ public class CredentialRestService {
 		return response;
 	}
 	
-	@Path("/Login")
+	@Path("/login")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
-	public Response Authorisation(Credential credential) {
-		Token token;
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response Authorisation(String json) {
+		Status status=new Status();
+		String clientError="";
+		int countError=0;
+		ServerError serverError;
+		ArrayList<ServerError> serverErrorList=new ArrayList<ServerError>();
 		Response response;
-		if(credential.equals(null))
-			throw new BadRequestException();
-		String login=credential.getLogin();
-		String password=credential.getPassword();
-		boolean check=credentialEJB.checkUser(credential);
-		if(check==true) {
-			token=TokenFactory.createToken(credential);
-			response=Response.ok().build();
-			response.getHeaders().add("Token", token.getToken());
-			response.getHeaders().add("Role", token.getCredential().getRole());
-		} else {
-			response=Response.ok().build();
-		}
-		return response;
+		Token token=null;
+			try {
+				Credential credential;
+			    credential = mapper.readValue(json, Credential.class);
+				Credential check=null;
+				try {
+				   check=credentialEJB.checkUser(credential);
+				} catch (Exception e) {
+					countError++;
+					clientError="Неверный логин или пароль!";
+					serverError=new ServerError();
+					serverError.setException(e.getCause().toString());
+					serverError.setMessage(e.getMessage());
+					serverErrorList.add(serverError);
+				}
+				if(check!=null) {
+					token=tokenEJB.createToken(check);
+					status.setToken(token.getToken());
+					status.setRole(token.getCredential().getRole());
+				}
+				} catch (JsonParseException e) {
+					// TODO Auto-generated catch block
+					countError++;
+					e.printStackTrace();
+					clientError="На сервере произошла ошибка, обратитесь к разработчикам!";
+					serverError=new ServerError();
+					serverError.setException(e.getCause().toString());
+					serverError.setMessage(e.getMessage());
+					serverErrorList.add(serverError);
+				} catch (JsonMappingException e) {
+					// TODO Auto-generated catch block
+					countError++;
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					countError++;
+					e.printStackTrace();
+			} finally {
+				status.setServerErrorList(serverErrorList);
+				status.setClientError(clientError);
+				if(countError==0) {
+					status.setStatusCode(200);
+					response=Response.ok(status).build();
+					if(token!=null) {
+						response.getHeaders().add("Token", token.getToken());
+						response.getHeaders().add("Role", token.getCredential().getRole());
+					}
+				} else {
+					status.setStatusCode(400);
+					response=Response.ok(status).build();
+				}
+				return response;
+			}
+			
+	
+		
 	}
 	
 	@Path("/Auth")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response Authentication(String value) {
 		boolean auth=false;
 		Response response;
@@ -99,8 +152,8 @@ public class CredentialRestService {
 	
 	@Path("/Exit")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response Exit(String value) {
 		Response response;
 		Token token=tokenEJB.findTokenByValue(value);

@@ -5,8 +5,10 @@ import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionRolledbackLocalException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import ru.projects.Shop.entity.Credential;
@@ -51,17 +53,14 @@ public class CredentialEJB implements CredentialLocal {
 	}
 
 	@Override
-	public boolean checkUser(Credential credential) {
+	public Credential checkUser(Credential credential) throws NoResultException,TransactionRolledbackLocalException {
 		// TODO Auto-generated method stub
-		boolean check=false;
 		TypedQuery<Credential> query=em.createNamedQuery("checkUser", Credential.class);
 		query.setParameter("login", credential.getLogin());
 		query.setParameter("password", credential.getPassword());
-		List<Credential> list=query.getResultList();
-		if(list.size()==1) {
-			check=true;
-		}
-		return check;
+	    Credential result=query.getSingleResult();
+		return result;
+	    
 	}
 
 }

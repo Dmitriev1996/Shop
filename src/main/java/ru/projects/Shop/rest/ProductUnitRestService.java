@@ -32,8 +32,8 @@ public class ProductUnitRestService {
 	
 	@Path("/createProductUnit")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createProductUnit(ProductUnit productUnit) {
 		if(productUnit.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class ProductUnitRestService {
 	
 	@Path("/updateProductUnit")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateProductUnit(ProductUnit productUnit) {
 		if(productUnit.equals(null))
 			throw new BadRequestException();

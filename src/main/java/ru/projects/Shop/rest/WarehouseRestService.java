@@ -33,8 +33,8 @@ public class WarehouseRestService {
 	
 	@Path("/createWarehouse")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createWarehouse(Warehouse warehouse) {
 		if(warehouse.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class WarehouseRestService {
 	
 	@Path("/updateWarehouse")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateWarehouse(Warehouse warehouse) {
 		if(warehouse.equals(null))
 			throw new BadRequestException();

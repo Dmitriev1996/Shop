@@ -32,8 +32,8 @@ public class SexRestService {
 	
 	@Path("/createSex")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createSex(Sex sex) {
 		if(sex.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class SexRestService {
 	
 	@Path("/updateSex")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateSex(Sex sex) {
 		if(sex.equals(null))
 			throw new BadRequestException();

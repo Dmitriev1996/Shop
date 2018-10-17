@@ -32,8 +32,8 @@ public class OrderRestService {
 	
 	@Path("/createOrder")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createOrder(Order order) {
 		if(order.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class OrderRestService {
 	
 	@Path("/updateOrder")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateOrder(Order order) {
 		if(order.equals(null))
 			throw new BadRequestException();

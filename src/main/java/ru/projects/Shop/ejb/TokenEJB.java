@@ -1,5 +1,6 @@
 package ru.projects.Shop.ejb;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import ru.projects.Shop.entity.Credential;
 import ru.projects.Shop.entity.Token;
 import ru.projects.Shop.interfaces.local.TokenLocal;
 
@@ -32,8 +34,15 @@ public class TokenEJB implements TokenLocal {
 	}
 
 	@Override
-	public Token createToken(Token token) {
+	public Token createToken(Credential credential) {
 		// TODO Auto-generated method stub
+		Token token=new Token();
+		SecureRandom random = new SecureRandom();
+		byte bytes[] = new byte[20];
+		random.nextBytes(bytes);
+		String token_number = bytes.toString();
+		token.setToken(token_number);
+		token.setCredential(credential);
 		em.persist(token);
 		return token;
 	}
@@ -54,7 +63,7 @@ public class TokenEJB implements TokenLocal {
 	public Token findTokenByValue(String value) {
 		// TODO Auto-generated method stub
 		TypedQuery<Token> query=em.createNamedQuery("findTokenByValue", Token.class);
-		query.setParameter("value", value);
+		query.setParameter("token", value);
 		Token token=query.getSingleResult();
 		return token;
 	}

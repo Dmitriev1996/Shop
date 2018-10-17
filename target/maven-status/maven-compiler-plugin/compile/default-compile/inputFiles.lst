@@ -51,6 +51,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\Delivery
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\TypeProductEJB.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\RegionLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\SexEJB.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\ServerError.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\generic\TransportationTypeI.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\rest\SexRestService.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Order.java
@@ -123,6 +124,7 @@ C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Provi
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Message.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\CredentialLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\TokenFactory.java
+C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Status.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\interfaces\local\MessageLocal.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\ejb\DatabaseProducer.java
 C:\Users\Admin\Documents\GitHub\Shop\src\main\java\ru\projects\Shop\entity\Clients.java

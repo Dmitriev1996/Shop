@@ -32,8 +32,8 @@ public class RegionRestService {
 	
 	@Path("/createRegion")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createRegion(Region region) {
 		if(region.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class RegionRestService {
 	
 	@Path("/updateRegion")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateRegion(Region region) {
 		if(region.equals(null))
 			throw new BadRequestException();

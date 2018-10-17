@@ -36,8 +36,8 @@ public class TypeProductRestService {
 	
 	@Path("/createTypeProduct")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createTypeProduct(TypeProduct typeProduct) {
 		if(typeProduct.equals(null))
 			throw new BadRequestException();
@@ -45,7 +45,6 @@ public class TypeProductRestService {
 		URI typeProductUri=uriInfo.getAbsolutePathBuilder()
 				.path(typeProduct.getTypeProduct_ID().toString()).build();
 		Response response=Response.created(typeProductUri).build();
-		response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -58,7 +57,6 @@ public class TypeProductRestService {
 		if(typeProduct.equals(null))
 			throw new NotFoundException();
 		Response response=Response.ok(typeProduct).build();
-	    response.getHeaders().add("Access-Control-Allow-Origin", "*");
 		return response;
 	}
 	
@@ -75,8 +73,8 @@ public class TypeProductRestService {
 	
 	@Path("/updateTypeProduct")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateTypeProduct(TypeProduct typeProduct) {
 		if(typeProduct.equals(null))
 			throw new BadRequestException();

@@ -31,6 +31,9 @@
 	<class>ru.projects.Shop.entity.BonusCard</class>
 	<class>ru.projects.Shop.entity.ProductUnit</class>
 	<class>ru.projects.Shop.entity.ProductImport</class>
+	<class>ru.projects.Shop.entity.Token</class>
+	<class>ru.projects.Shop.entity.Credential</class>
+	<exclude-unlisted-classes>false</exclude-unlisted-classes>
 	<properties>
       <property name="eclipselink.logging.level" value="INFO"/>
 	</properties>

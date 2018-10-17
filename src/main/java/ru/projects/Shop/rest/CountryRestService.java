@@ -30,8 +30,8 @@ public class CountryRestService {
 	
 	@Path("/createCountry")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createCountry(Country country) {
 		if(country.equals(null))
 			throw new BadRequestException();
@@ -56,8 +56,8 @@ public class CountryRestService {
 	
 	@Path("/updateCountry")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateCountry(Country country) {
 		if(country.equals(null))
 			throw new BadRequestException();

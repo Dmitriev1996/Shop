@@ -35,8 +35,8 @@ public class ProductRestService {
 	
 	@Path("/createProduct")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createProduct(Product product) {
 		if(product.equals(null))
 			throw new BadRequestException();
@@ -55,7 +55,7 @@ public class ProductRestService {
 		Product product=productEJB.findProductById(id);
 		if(product.equals(null))
 			throw new NotFoundException();
-		Response response=SpecialResponse.createResponse(product);
+		Response response=Response.ok(product).build();
 		return response;
 	}
 	
@@ -71,8 +71,8 @@ public class ProductRestService {
 	
 	@Path("/updateProduct")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateProduct(Product product) {
 		if(product.equals(null))
 			throw new BadRequestException();

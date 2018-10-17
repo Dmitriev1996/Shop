@@ -63,8 +63,8 @@ public class ClientRestService {
 	
 	@Path("/findClientByToken")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
 	public Response findClientByToken(String value) {
 		Client client;
 		if(value.equals(null)) {
@@ -99,8 +99,8 @@ public class ClientRestService {
 	
 	@Path("/updateClient")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateClient(Client client) {
 		if(client.equals(null))
 			throw new BadRequestException();

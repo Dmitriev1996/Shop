@@ -33,8 +33,8 @@ public class BuyRestService {
 	
 	@Path("/createBuy")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class BuyRestService {
 	
 	@Path("/updateBuy")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateBuy(Buy buy) {
 		if(buy.equals(null))
 			throw new BadRequestException();

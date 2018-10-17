@@ -32,8 +32,8 @@ public class TransportationTypeRestService {
 	
 	@Path("/createTransportationType")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createTransportationType(TransportationType transType) {
 		if(transType.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class TransportationTypeRestService {
 	
 	@Path("/updateTransportationType")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateTransportationType(TransportationType transType) {
 		if(transType.equals(null))
 			throw new BadRequestException();

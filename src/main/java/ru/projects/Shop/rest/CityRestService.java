@@ -33,8 +33,8 @@ public class CityRestService {
 	
 	@Path("/createCity")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class CityRestService {
 	
 	@Path("/updateCity")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateCity(City city) {
 		if(city.equals(null))
 			throw new BadRequestException();

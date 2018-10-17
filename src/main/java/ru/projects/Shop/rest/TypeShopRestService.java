@@ -32,8 +32,8 @@ public class TypeShopRestService {
 	
 	@Path("/createTypePShop")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createTypeShop(TypeShop typeShop) {
 		if(typeShop.equals(null))
 			throw new BadRequestException();
@@ -68,8 +68,8 @@ public class TypeShopRestService {
 	
 	@Path("/updateTypeShop")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateTypeShop(TypeShop typeShop) {
 		if(typeShop.equals(null))
 			throw new BadRequestException();

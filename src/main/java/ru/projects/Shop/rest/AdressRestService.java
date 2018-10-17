@@ -33,8 +33,8 @@ public class AdressRestService {
 	
 	@Path("/createAdress")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class AdressRestService {
 	
 	@Path("/updateAdress")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateAdress(Adress adress) {
 		if(adress.equals(null))
 			throw new BadRequestException();

@@ -33,8 +33,8 @@ public class MessageRestService {
 	
 	@Path("/createMessage")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createMessage(Message message) {
 		if(message.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class MessageRestService {
 	
 	@Path("/updateMessage")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateMessage(Message message) {
 		if(message.equals(null))
 			throw new BadRequestException();

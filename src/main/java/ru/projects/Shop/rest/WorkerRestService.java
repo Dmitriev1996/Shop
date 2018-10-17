@@ -33,8 +33,8 @@ public class WorkerRestService {
 	
 	@Path("/createWorker")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createWorker(Worker worker) {
 		if(worker.equals(null))
 			throw new BadRequestException();
@@ -69,8 +69,8 @@ public class WorkerRestService {
 	
 	@Path("/updateWorker")
 	@POST
-	@Produces(MediaType.APPLICATION_XML)
-	@Consumes(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response updateWorker(Worker worker) {
 		if(worker.equals(null))
 			throw new BadRequestException();
